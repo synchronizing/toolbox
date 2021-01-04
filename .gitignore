@@ -7,4 +7,4 @@ docs/build/
 
 # PyTest + Coverage
 .pytest_cache
-.coveragerc
+.coverage
