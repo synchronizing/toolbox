@@ -143,6 +143,8 @@ print(d1) # >>> {'hello': 'world'}
 Creates a nested `namedtuple` for easy object access.
 
 ```python
+from toolbox import nestednamedtuple
+
 nt = nestednamedtuple({"hello": {"ola": "mundo"}})
 print(nt) # >>> namedtupled(hello=namedtupled(ola='mundo'))
 print(nt.hello.ola) # >>> mundo
@@ -153,6 +155,8 @@ print(nt.hello.ola) # >>> mundo
 Forces `nestednamedtuple` to not convert `dict` to `namedtuple`. 
 
 ```python
+from toolbox import nestednamedtuple
+
 d = {"hello": "world"}
 nt = nestednamedtuple({"forced": fdict(d), "notforced": d})
 
