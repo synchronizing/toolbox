@@ -10,5 +10,4 @@ property
 
     from toolbox.builtins import property
 
-.. automodule:: toolbox.builtins.property
-    :members:
+.. autoclass:: toolbox.builtins.property.classproperty()
