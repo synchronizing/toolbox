@@ -80,7 +80,7 @@ Check out documentation for function definitions and more details.
 
 #### [`async to_thread`](https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.to_thread)
 
-Asynchronously run function func in a separate thread.
+Runs passed function in a new thread to ensure non-blocking IO during asynchronous programming.
 
 ```python
 from toolbox import to_thread
@@ -99,7 +99,7 @@ asyncio.run(main())
 
 #### [`awaitable`](https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.awaitable)
 
-Decorator that converts a synchronous function into an asynchronous function by leveraging `to_thread` and sending function to a new thread on execution.
+Decorator that converts synchronous function into an asynchronous function. Leverages the `to_thread` function above.
 
 ```python
 from toolbox import awaitable
@@ -121,7 +121,7 @@ asyncio.run(func())
 
 #### [`classproperty`](https://synchronizing.github.io/toolbox/module/builtins.html#toolbox.builtins.property.classproperty)
 
-Combines a property and a classmethod into one, creating a class property. Allows access to computed class attributes.
+Combines a `property` and a `classmethod` into one, creating a class property. Allows access to computed class attributes.
 
 ```python
 from toolbox import classproperty
@@ -160,7 +160,7 @@ print(d.hello) # >>> 'world'
 
 #### [`OverloadedDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.OverloadedDict)
 
-Dictionary that can be added or subtracted.
+Dictionary that can be added or subtracted to.
 
 ```python
 from toolbox import OverloadedDict
@@ -177,12 +177,17 @@ print(d1) # >>> {'hello': 'world'}
 
 #### [`nestednamedtuple`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.nestednamedtuple)
 
+Creates a nested `namedtuple` for easy object access.
+
 ```python
 nt = nestednamedtuple({"hello": {"ola": "mundo"}})
 print(nt) # >>> namedtupled(hello=namedtupled(ola='mundo'))
+print(nt.hello.ola) # >>> mundo
 ```
 
 #### [`fdict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.fdict)
+
+Forces `nestednamedtuple` to not convert `dict` to `namedtuple`. 
 
 ```python
 d = {"hello": "world"}
@@ -196,7 +201,7 @@ print(nt.forced)       # >>> {'hello': 'world'}
 
 #### [`make_config`](https://synchronizing.github.io/toolbox/module/config.html#toolbox.config.globalconfig.make_config)
 
-Creates global configuration.
+Creates a global configuration that can be accessed by other portions of the code via `conf` or `config` function calls. Minimizes the need to create `Config` objects and pass them around different modules, classes, functions, etc.
 
 ```python
 from toolbox import make_config
@@ -206,7 +211,7 @@ make_config(hello="world")
 
 #### [`conf`](https://synchronizing.github.io/toolbox/module/config.html#toolbox.config.globalconfig.conf)
 
-Access global configuration as a nestednamedtuple.
+Access global configuration as a `nestednamedtuple`.
 
 ```python
 from toolbox import conf
@@ -228,7 +233,7 @@ print(config()['hello']) # >>> 'world'
 
 #### [`timeout`](https://synchronizing.github.io/toolbox/module/functools.html#toolbox.functools.timeout.timeout)
 
-Wait for time before quitting func run and returning None.
+Decorator that adds support for synchronous and asynchronous function timeout. Quits function after an amount of time passes.
 
 ```python
 from toolbox import timeout
@@ -242,9 +247,11 @@ func()
 
 ### `experimental`
 
+All tools marked as experimental are not meant to be used in production.
+
 #### [`asyncdispatch`](https://synchronizing.github.io/toolbox/module/experimental.html#toolbox.experimental.asyncdispatch.asyncdispatch)
 
-Decorator for adding dispatch functionality between async and sync functions.
+Decorator for adding dispatch functionality between async and sync functions. Allows calling the same function name, one as a normal function and one as an awaitable, yet receive different results.
 
 ```python
 from toolbox import asyncdispatch
@@ -267,7 +274,7 @@ asyncio.run(main())
 
 ### `string`
 
-Comes out of the box with built-in ANSI formats that allows one to do the following:
+Comes out of the box with built-in ANSI formats that allows text style modification.
 
 ```python
 from toolbox import bold, red
@@ -291,7 +298,7 @@ print(bold("hello world"))
 
 #### [`Style`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Style)
 
-Persistent ANSI format container that allows custom ANSI code.
+Persistent ANSI format container that allows multiple ANSI codes.
 
 ```python
 from toolbox import Style, red, bold
@@ -302,7 +309,7 @@ print(error("This is red & bolded error."))
 
 #### [`supports_color`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.supports_color)
 
-Returns bool that indicates whether or not the users terminal supports color.
+Returns bool that indicates whether or not the user's terminal supports color.
 
 ```python
 from toolbox import supports_color
