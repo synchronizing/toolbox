@@ -33,7 +33,7 @@ class Test_color:
 
         def test_style_repr(self):
             style = Style(red, 1, "underline")
-            assert style.__repr__() == "Style(31;1;4)"
+            assert style.__repr__() == "Style(args=31;1;4)"
 
     class Test_supports_color:
         """ No tests are done here. This function is part of the Django test suite (hopefully)."""
