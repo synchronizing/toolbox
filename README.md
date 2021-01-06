@@ -2,8 +2,12 @@
 
 <p align="center">
 
-  <a href="https://github.com/synchronizing/toolbox/">
+  <a href="https://github.com/synchronizing/toolbox/actions?query=workflow%3ABuild">
     <img src="https://github.com/synchronizing/toolbox/workflows/Build/badge.svg?branch=master&event=push">
+  </a>
+
+<a href="https://synchronizing.github.io/toolbox/">
+    <img src="https://github.com/synchronizing/toolbox/workflows/Docs/badge.svg?branch=master&event=push">
   </a>
 
   <a href="https://coveralls.io/github/synchronizing/toolbox?branch=master">
@@ -25,7 +29,7 @@ pip install toolbox
 
 ## Documentation
 
-Documentation can be found [here](http://synchronizing.github.io/toolbox/).
+Documentation can be found [**here**](http://synchronizing.github.io/toolbox/). PDF version of docs can be found [here](https://synchronizing.github.io/toolbox/toolbox.pdf).
 
 # Tools
 
