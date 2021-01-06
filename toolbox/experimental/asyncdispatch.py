@@ -14,7 +14,11 @@ def asyncdispatch(func: Callable) -> Callable:
     :func:`asyncdispatch` the ``inspect`` module is utilized, and therefore might not work with
     different implementations of Python.
 
-    Not recommended to be used in production in its current implementation.
+    Args:
+        func: Synchronous function to create a dispatch with.
+
+    Warning:
+        Not recommended to be used in production in its current implementation.
 
     Example:
 

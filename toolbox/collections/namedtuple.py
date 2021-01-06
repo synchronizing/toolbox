@@ -5,6 +5,9 @@ from collections.abc import Mapping
 def nestednamedtuple(dictionary: dict) -> namedtuple:
     """Converts dictionary to a nested namedtuple recursively.
 
+    Args:
+        dictionary: Dictionary to convert into a nested namedtuple.
+
     Example:
 
         .. code-block:: python

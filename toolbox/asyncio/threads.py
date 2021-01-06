@@ -5,20 +5,24 @@ import functools
 
 
 async def to_thread(func: Callable, *args, **kwargs) -> Awaitable:
-    """Asynchronously run function *func* in a separate thread.
+    """Asynchronously run function ``func`` in a separate thread.
 
-    Any *args and **kwargs supplied for this function are directly passed
-    to *func*. Also, the current :class:`contextvars.Context` is propogated,
+    Any ``*args`` and ``**kwargs`` supplied for this function are directly passed
+    to ``func``. Also, the current :class:`contextvars.Context` is propogated,
     allowing context variables from the main thread to be accessed in the
     separate thread.
 
     Return a coroutine that can be awaited to get the eventual result of *func*.
 
-    Note:
-        This function is similar to Python 3.9 'asyncio.to_thread()', which can be found here,
-        with slight modifications to make it backwards compatible.
+    Args:
+        func: Synchronous function to create awaitable context with.
+        args: Arguments to pass to ``func``.
+        kwargs: Arguments to pass to ``func``.
 
-        https://github.com/python/cpython/blob/e9684fac5a158be9806304a676e619857520a4dc/Lib/asyncio/threads.py
+    Note:
+        This function is similar to Python 3.9 ``asyncio.to_thread()``, which can be found
+        `here <https://github.com/python/cpython/blob/e9684fac5a158be9806304a676e619857520a4dc/Lib/asyncio/threads.py>`_,
+        with slight modifications to make it backwards compatible.
 
     Example:
 
@@ -47,9 +51,12 @@ async def to_thread(func: Callable, *args, **kwargs) -> Awaitable:
 def awaitable(func: Callable) -> Awaitable[Any]:
     """Decorator that converts a synchronous function into an asynchronous function.
 
-    When decorator is used *func* becomes an awaitable. When awaited, the synchronous
+    When decorator is used ``func`` becomes an awaitable. When awaited, the synchronous
     function runs in a seperate thread as to not block the event loop. This function
-    leverages the :func:`to_thread` function.
+    leverages the :func:`toolbox.asyncio.threads.to_thread` function.
+
+    Args:
+        func: Synchronous function to create awaitable context with.
 
     Example:
 

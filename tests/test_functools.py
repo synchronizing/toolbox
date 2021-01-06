@@ -33,7 +33,7 @@ class Test_sync_timeout:
         assert ret is True
 
     def test_timeout_sync_shorter_timeout_with_err(self):
-        @timeout(seconds=1, err=True)
+        @timeout(seconds=1, error=True)
         def sync_time_sleep_10():
             time.sleep(10)
             return True
@@ -73,7 +73,7 @@ class Test_async_timeout:
 
     @pytest.mark.asyncio
     async def test_timeout_sync_shorter_timeout_with_err(self):
-        @timeout(seconds=1, err=True)
+        @timeout(seconds=1, error=True)
         async def async_time_sleep_10():
             await asyncio.sleep(10)
             return True

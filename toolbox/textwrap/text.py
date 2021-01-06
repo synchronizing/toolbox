@@ -9,6 +9,9 @@ def unindent(text: str) -> str:
     situation one may expect that the \\n will not be there, and instead, line breaks will
     be in its place.
 
+    Args:
+        text: Text to unindent.
+
     Example:
 
         .. code-block:: python
