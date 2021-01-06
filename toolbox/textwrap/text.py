@@ -13,7 +13,7 @@ def unindent(text):
 
         .. code-block:: python
 
-            from toolbox import unident
+            from toolbox.textwrap.text import unident
 
             def test():
                 return unindent(

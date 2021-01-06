@@ -16,7 +16,7 @@ def timeout(days=0, hours=0, minutes=0, seconds=0, err=False):
 
         .. code-block:: python
 
-            from toolbox import timeout
+            from toolbox.functools.timeout import timeout
 
             @timeout(seconds=5)
             def func():

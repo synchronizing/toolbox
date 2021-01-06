@@ -11,7 +11,7 @@ class classproperty(property):
 
         .. code-block:: python
 
-            from toolbox import classproperty
+            from toolbox.builtins.property import classproperty
 
             class Animal:
                 @classproperty

@@ -19,7 +19,7 @@ def asyncdispatch(func):
 
         .. code-block:: python
 
-            from toolbox.experimental import asyncdispatch
+            from toolbox.experimental.asyncdispatch import asyncdispatch
             import asyncio
 
             @asyncdispatch

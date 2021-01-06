@@ -8,15 +8,23 @@ class BidirectionalDict(dict):
 
         .. code-block:: python
 
-            from toolbox import BidirectionalDict
+            from toolbox.collections.mapping import BidirectionalDict
 
             d = BidirectionalDict({"hello": "world"})
             print(d) # >>> {'hello': 'world', 'world': 'hello'}
     """
 
-    def __init__(self, data={}):
-        self.update(data)
-        self.update({v: k for k, v in data.items()})
+    def __init__(self, dictionary={}, **kwargs):
+        dict.__init__(
+            self,
+            {
+                **dictionary,
+                **{v: k for k, v in dictionary.items()},
+                **kwargs,
+                **{v: k for k, v in kwargs.items()},
+            },
+        )
+        self.__dict__ = self
 
 
 class ObjectDict(dict):
@@ -26,7 +34,7 @@ class ObjectDict(dict):
 
         .. code-block:: python
 
-            from toolbox import ObjectDict
+            from toolbox.collections.mapping import ObjectDict
 
             d = ObjectDict({"hello": "world"})
             print(d.hello) # >>> 'world'
@@ -43,7 +51,7 @@ class OverloadedDict(dict):
 
         .. code-block:: python
 
-            from toolbox import OverloadedDict
+            from toolbox.collections.mapping import OverloadedDict
 
             d1 = OverloadedDict({"hello": "world"})
             d2 = OverloadedDict({"ola": "mundo"})

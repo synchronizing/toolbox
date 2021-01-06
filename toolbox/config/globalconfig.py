@@ -12,7 +12,7 @@ def make_config(**kwargs):
 
         .. code-block:: python
 
-            from toolbox import make_config
+            from toolbox.config.globalconfig import make_config
 
             make_config(hello="world")
     """
@@ -27,7 +27,7 @@ def conf():
 
         .. code-block:: python
 
-            from toolbox import conf
+            from toolbox.config.globalconfig import conf
 
             print(conf().hello) # >>> 'world'
     """
@@ -45,7 +45,7 @@ def config():
 
         .. code-block:: python
 
-            from toolbox import config
+            from toolbox.config.globalconfig import config
 
             print(config()['hello']) # >>> 'world'
     """

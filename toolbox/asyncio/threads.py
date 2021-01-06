@@ -23,7 +23,7 @@ async def to_thread(func, *args, **kwargs):
 
         .. code-block:: python
 
-            from toolbox import to_thread
+            from toolbox.asyncio.threads import to_thread
             import asyncio
             import time
 
@@ -54,7 +54,7 @@ def awaitable(func):
 
         .. code-block:: python
 
-            from toolbox import awaitable
+            from toolbox.asyncio.threads import awaitable
             import asyncio
             import time
 

@@ -9,6 +9,8 @@ def nestednamedtuple(dictionary):
 
         .. code-block:: python
 
+            from toolbox.collections.namedtuple import nestednamedtuple
+
             nt = nestednamedtuple({"hello": {"ola": "mundo"}})
             print(nt) # >>> namedtupled(hello=namedtupled(ola='mundo'))
     """
@@ -29,6 +31,8 @@ class fdict(dict):
     Example:
 
         .. code-block:: python
+
+            from toolbox.collections.namedtuple import nestednamedtuple, fdict
 
             d = {"hello": "world"}
             nt = nestednamedtuple({"forced": fdict(d), "notforced": d})
