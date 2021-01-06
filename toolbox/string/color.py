@@ -3,15 +3,6 @@ import os
 import sys
 import re
 
-try:
-    import colorama
-except ImportError:
-    HAS_COLORAMA = False
-else:
-    colorama.init()
-    HAS_COLORAMA = True
-
-
 # Dictionary with 16-bit ANSI codes.
 ANSI = {
     # Foreground Colors
@@ -66,19 +57,19 @@ class Format:
         """
         self.code = code
 
-    def __call__(self, string: Optional[str] = None, reset: bool = True):
-        """ Creates a """
+    def __call__(self, string: str, reset: bool = True):
+        """Returns a string with ANSI code.
 
-        finished = ""
-        if isinstance(string, str):
-            finished = "{}[{}m{}".format(EC, self.code, string)
-        elif string is None:
-            finished = "{}[{}m".format(EC, self.code)
+        Args:
+            string: String to stylize.
+            reset: Optional flag to append reset ANSI code on specific call.
+        """
 
-        if string and reset:
-            finished += "{}[{}m".format(EC, ANSI["reset"])
+        fin = "{}[{}m{}".format(EC, self.code, string)
+        if reset:
+            fin += "{}[{}m".format(EC, ANSI["reset"])
 
-        return finished
+        return fin
 
     def __repr__(self):
         return "Format(code={})".format(self.code)
@@ -125,10 +116,15 @@ class Style:
         """Returns a string with ANSI codes set.
 
         Args:
-            obj: String to stylize.
+            string: String to stylize.
             reset: Optional flag to append reset ANSI code on specific call.
         """
 
+        codes = self._args_codes()
+        reset = reset if reset else self.reset
+        return Format(code=";".join(codes))(string, reset=reset)
+
+    def _args_codes(self):
         codes = []
         for arg in self.args:
             if isinstance(arg, int):
@@ -138,8 +134,10 @@ class Style:
             elif isinstance(arg, Format):
                 codes.append(str(arg.code))
 
-        reset = reset if reset else self.reset
-        return Format(code=";".join(codes))(string, reset=reset)
+        return codes
+
+    def __repr__(self):
+        return "Style(args={})".format(";".join(self._args_codes()))
 
 
 black = Format(code=30)
@@ -166,14 +164,23 @@ reverse = Format(code=7)
 conceal = Format(code=8)
 
 
-def supports_color():
+def supports_color():  # pragma: no cover
     """Checks if system's terminal has color support.
 
     Note:
-        This piece of code is from Django's source code `here <https://github.com/django/django/blob/b41d38ae26b1da9519a6cd765bc2f2ce7d355007/django/core/management/color.py#L20-L56>`_.
+        This piece of code is from Django's source code
+        `here <https://github.com/django/django/blob/b41d38ae26b1da9519a6cd765bc2f2ce7d355007/django/core/management/color.py#L20-L56>`_.
 
         Copyright (c) Django Software Foundation and individual contributors.
     """
+
+    try:
+        import colorama
+    except ImportError:
+        HAS_COLORAMA = False
+    else:
+        colorama.init()
+        HAS_COLORAMA = True
 
     def vt_codes_enabled_in_windows_registry():
         """ Check the Windows Registry to see if VT code handling has been enabled by default, see https://superuser.com/a/1300251/447564."""
