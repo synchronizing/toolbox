@@ -31,7 +31,7 @@ html_title = "{}".format(project)
 autodoc_member_order = "bysource"
 
 # Turn off typehints.
-autodoc_typehints = "none"
+autodoc_typehints = "signature"
 
 # Remove module names from class docs.
 add_module_names = False
