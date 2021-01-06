@@ -63,6 +63,13 @@ class Test_namedtuple:
         assert isinstance(nt.d, tuple)
         assert nt.d.hello == "world"
 
+    def test_reg_nestednamedtuple_list(self):
+        nt = nestednamedtuple({"d": ["ola", {"hello": "world"}]})
+        assert isinstance(nt, tuple)
+        assert isinstance(nt.d, list)
+        assert isinstance(nt.d[1], tuple)
+        assert nt.d[1].hello == "world"
+
     def test_fdict_nestednamedtuple(self):
         nt = nestednamedtuple({"d": fdict({"hello": "world"})})
         assert isinstance(nt, tuple)
