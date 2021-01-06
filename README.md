@@ -1,5 +1,20 @@
 # 🧰 Toolbox
 
+<p align="center">
+
+  <a href="https://github.com/synchronizing/toolbox/">
+    <img src="https://github.com/synchronizing/toolbox/workflows/Build/badge.svg?branch=master&event=push">
+  </a>
+
+  <a href="https://coveralls.io/github/synchronizing/toolbox?branch=master">
+    <img src="https://coveralls.io/repos/github/synchronizing/toolbox/badge.svg?branch=master">
+  </a>
+
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
+  </a>
+</p>
+
 Toolbox is a set of tools that expands on the [Python Standard Library](https://docs.python.org/3/library/).
 
 ## Installing
