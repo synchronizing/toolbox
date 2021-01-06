@@ -12,5 +12,13 @@ Tools here are proof-of-concept and are not recommended to be used in production
 
 ----
 
+*************
+asyncdispatch
+*************
+
+.. code-block:: python
+
+    from toolbox.experimental import asyncdispatch
+
 .. automodule:: toolbox.experimental.asyncdispatch
     :members: 
