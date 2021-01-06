@@ -10,5 +10,4 @@ text
 
     from toolbox.textwrap import text
 
-.. automodule:: toolbox.textwrap.text
-    :members:
+.. autofunction:: toolbox.textwrap.text.unindent

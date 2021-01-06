@@ -20,5 +20,4 @@ asyncdispatch
 
     from toolbox.experimental import asyncdispatch
 
-.. automodule:: toolbox.experimental.asyncdispatch
-    :members: 
+.. autofunction:: toolbox.experimental.asyncdispatch.asyncdispatch

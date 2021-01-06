@@ -10,5 +10,6 @@ threads
 
     from toolbox.asyncio import threads
 
-.. automodule:: toolbox.asyncio.threads
-    :members:
+.. autofunction:: toolbox.asyncio.threads.to_thread
+
+.. autofunction:: toolbox.asyncio.threads.awaitable

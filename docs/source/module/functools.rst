@@ -10,5 +10,4 @@ timeout
 
     from toolbox.functools import timeout
 
-.. automodule:: toolbox.functools.timeout
-    :members:
+.. autofunction:: toolbox.functools.timeout.timeout
