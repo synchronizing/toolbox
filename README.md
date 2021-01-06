@@ -35,43 +35,6 @@ Documentation can be found [**here**](http://synchronizing.github.io/toolbox/). 
 
 Toolbox follows the same pattern as of the Python Standard Library (PSL) which means that all tools are found inside package names that corresponds to that of the PSL (e.g. `asyncio`, `collections`, etc.) with only one exception (`config`).
 
-The following packages and tools are included:
-
-* [`asyncio`](#asyncio)
-    * thread
-        * [`to_thread`](#to_thread)
-        * [`awaitable`](#awaitable)
-* [`builtins`](#builtins)
-    * property
-        * [`classproperty`](#classproperty)
-* [`collections`](#collections)
-    * mapping
-        * [`BidirectionalDict`](#BidirectionalDict)
-        * [`ObjectDict`](#ObjectDict)
-        * [`OverloadedDict`](#OverloadedDict)
-    * namedtuple
-        * [`nestednamedtuple`](#nestednamedtuple)
-* [`config`](#config)
-    * globalconfig
-        * [`make_config`](#make_config)
-        * [`conf`](#conf)
-        * [`config`](#config)
-* [`experimental`](#experimental)
-    * asyncdispatch
-        * [`asyncdispatch`](#asyncdispatch)
-* [`functools`](#functools)
-    * timeout
-        * [`timeout`](#timeout)
-* [`string`](#string)
-    * color
-        * [`Format`](#Format)
-        * [`Style`](#Style)
-        * [`supports_color`](#supports_color)
-        * [`strips_ansi`](#strips_ansi)
-* [`textwrap`](#textwrap)
-    * text
-        * [`unindent`](#unindent)
-
 ## Code Examples
 
 Check out documentation for function definitions and more details.
@@ -91,7 +54,7 @@ def func():
     time.sleep(2)
     return "Hello world"
 
-asyncio main():
+async def main():
     await to_thread(func)
 
 asyncio.run(main())
