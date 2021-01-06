@@ -1,4 +1,3 @@
-from __future__ import annotations
 from typing import Union, Tuple, Optional
 import os
 import sys
@@ -99,7 +98,7 @@ class Style:
         print(error("This is an error"))
     """
 
-    def __init__(self, *args: Tuple[Union[str, int, Format]], reset: bool = True):
+    def __init__(self, *args: Tuple[Union[str, int, "Format"]], reset: bool = True):
         """Initializes a complex ANSI style that can be called to retrieve a styled string.
 
         Args:
