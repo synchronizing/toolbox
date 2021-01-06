@@ -15,16 +15,18 @@ class BidirectionalDict(dict):
     """
 
     def __init__(self, dictionary: dict = {}, **kwargs) -> dict:
-        dict.__init__(
-            self,
+        super(BidirectionalDict, self).__init__(
             {
                 **dictionary,
                 **{v: k for k, v in dictionary.items()},
                 **kwargs,
                 **{v: k for k, v in kwargs.items()},
-            },
+            }
         )
-        self.__dict__ = self
+
+    def __setitem__(self, key: Any, value: Any):
+        super(BidirectionalDict, self).__setitem__(key, value)
+        super(BidirectionalDict, self).__setitem__(value, key)
 
 
 class ObjectDict(dict):

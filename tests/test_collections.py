@@ -19,6 +19,13 @@ class Test_mapping:
             assert d["hello"] == "world"
             assert d["world"] == "hello"
 
+        def test_bidirectional_dict_setattr(self):
+            d = BidirectionalDict({"hello": "world"})
+            d["ola"] = "mundo"
+
+            assert d["ola"] == "mundo"
+            assert d["mundo"] == "ola"
+
     class Test_collection_object:
         def test_object_dict_type(self):
             assert isinstance(ObjectDict(), dict)
