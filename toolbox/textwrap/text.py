@@ -1,7 +1,7 @@
 import textwrap
 
 
-def unindent(text):
+def unindent(text: str) -> str:
     r"""Unident triple quotes and removes any white spaces before or after text.
 
     Note that in the example below we are not necessarily printing the results of
@@ -9,11 +9,14 @@ def unindent(text):
     situation one may expect that the \\n will not be there, and instead, line breaks will
     be in its place.
 
+    Args:
+        text: Text to unindent.
+
     Example:
 
         .. code-block:: python
 
-            from toolbox import unident
+            from toolbox.textwrap.text import unident
 
             def test():
                 return unindent(

@@ -1,4 +1,5 @@
 from builtins import property
+from typing import Type
 
 
 class classproperty(property):
@@ -11,7 +12,7 @@ class classproperty(property):
 
         .. code-block:: python
 
-            from toolbox import classproperty
+            from toolbox.builtins.property import classproperty
 
             class Animal:
                 @classproperty
@@ -21,5 +22,5 @@ class classproperty(property):
             print(Animal.dog) # >>> 'whoof!'
     """
 
-    def __get__(self, cls, owner):
+    def __get__(self, cls: Type, owner: object) -> classmethod:
         return classmethod(self.fget).__get__(None, owner)()

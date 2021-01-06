@@ -103,11 +103,11 @@ Dictionary with 16-bit ANSI codes.
 
 ANSI escape character that toolbox.color uses.
 
-To modify the escape character, one may do the following:
-
 .. code-block:: python
 
     EC = "\x1B"
+
+To modify the escape character, one may do the following:
 
 .. code-block:: python
 

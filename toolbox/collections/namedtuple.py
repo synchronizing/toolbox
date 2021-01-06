@@ -2,12 +2,17 @@ from collections import namedtuple
 from collections.abc import Mapping
 
 
-def nestednamedtuple(dictionary):
+def nestednamedtuple(dictionary: dict) -> namedtuple:
     """Converts dictionary to a nested namedtuple recursively.
+
+    Args:
+        dictionary: Dictionary to convert into a nested namedtuple.
 
     Example:
 
         .. code-block:: python
+
+            from toolbox.collections.namedtuple import nestednamedtuple
 
             nt = nestednamedtuple({"hello": {"ola": "mundo"}})
             print(nt) # >>> namedtupled(hello=namedtupled(ola='mundo'))
@@ -29,6 +34,8 @@ class fdict(dict):
     Example:
 
         .. code-block:: python
+
+            from toolbox.collections.namedtuple import nestednamedtuple, fdict
 
             d = {"hello": "world"}
             nt = nestednamedtuple({"forced": fdict(d), "notforced": d})

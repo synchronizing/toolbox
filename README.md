@@ -12,7 +12,6 @@ pip install toolbox
 
 Documentation can be found [here](http://synchronizing.github.io/toolbox/).
 
-
 # Tools
 
 Toolbox follows the same pattern as of the Python Standard Library (PSL) which means that all tools are found inside package names that corresponds to that of the PSL (e.g. `asyncio`, `collections`, etc.) with only one exception (`config`).
@@ -20,25 +19,39 @@ Toolbox follows the same pattern as of the Python Standard Library (PSL) which m
 The following packages and tools are included:
 
 * [`asyncio`](#asyncio)
-    * `to_thread`
-    * `awaitable`
+    * thread
+        * [`to_thread`](#to_thread)
+        * [`awaitable`](#awaitable)
 * [`builtins`](#builtins)
-    * `classproperty`
+    * property
+        * [`classproperty`](#classproperty)
 * [`collections`](#collections)
-    * `BidirectionalDict`
-    * `ObjectDict`
-    * `OverloadedDict`
-    * `nestednamedtuple`
+    * mapping
+        * [`BidirectionalDict`](#BidirectionalDict)
+        * [`ObjectDict`](#ObjectDict)
+        * [`OverloadedDict`](#OverloadedDict)
+    * namedtuple
+        * [`nestednamedtuple`](#nestednamedtuple)
 * [`config`](#config)
-    * `make_config`
-    * `conf`
-    * `config`
+    * globalconfig
+        * [`make_config`](#make_config)
+        * [`conf`](#conf)
+        * [`config`](#config)
 * [`experimental`](#experimental)
-    * `asyncdispatch`
+    * asyncdispatch
+        * [`asyncdispatch`](#asyncdispatch)
 * [`functools`](#functools)
-    * `timeout`
+    * timeout
+        * [`timeout`](#timeout)
+* [`string`](#string)
+    * color
+        * [`Format`](#Format)
+        * [`Style`](#Style)
+        * [`supports_color`](#supports_color)
+        * [`strips_ansi`](#strips_ansi)
 * [`textwrap`](#textwrap)
-    * `unindent`
+    * text
+        * [`unindent`](#unindent)
 
 ## Code Examples
 
@@ -231,6 +244,61 @@ async def main():
     print(await func())    # >>> async
 
 asyncio.run(main())
+```
+
+### `string`
+
+Comes out of the box with built-in ANSI formats that allows one to do the following:
+
+```python
+from toolbox import bold, red
+
+print(red("This text is red!"))
+print(bold("This text is bolded!"))
+```
+
+Check documentation [here](https://synchronizing.github.io/toolbox/module/string.html#color) for further information on all built-in formats.
+
+#### [`Format`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Format)
+
+Persistent ANSI format container that allows custom ANSI code.
+
+```python
+from toolbox import Format
+
+bold = Format(code=1)
+print(bold("hello world"))
+```
+
+#### [`Style`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Style)
+
+Persistent ANSI format container that allows custom ANSI code.
+
+```python
+from toolbox import Style, red, bold
+
+error = Style(red, bold)
+print(error("This is red & bolded error."))
+```
+
+#### [`supports_color`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.supports_color)
+
+Returns bool that indicates whether or not the users terminal supports color.
+
+```python
+from toolbox import supports_color
+
+print(supports_color())
+```
+
+#### [`strip_ansi`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.strip_ansi)
+
+Removes ANSI codes from string.
+
+```python
+from toolbox import strip_ansi
+
+print(strip_ansi("\x1b[1mhello world\x1b[0m")) # >>> hello world
 ```
 
 ### `textwrap`

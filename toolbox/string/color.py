@@ -1,7 +1,7 @@
-from typing import Union, Tuple, Optional
 import os
-import sys
 import re
+import sys
+from typing import Optional, Tuple, Union
 
 # Dictionary with 16-bit ANSI codes.
 ANSI = {
@@ -37,23 +37,20 @@ EC = "\x1B"
 
 
 class Format:
-    """Persistent ANSI format object.
-
-    Example:
-
-    .. code-block:: python
-
-        from toolbox.string.color import Format
-
-        bold = Format(code="1")
-        print(bold("hello world"))
-    """
-
     def __init__(self, code: int):
         r"""Creates a new ANSI format that can be called to retrieve a styled string.
 
         Args:
             code: ANSI code.
+
+        Example:
+
+        .. code-block:: python
+
+            from toolbox.string.color import Format
+
+            bold = Format(code="1")
+            print(bold("hello world"))
         """
         self.code = code
 
@@ -76,24 +73,11 @@ class Format:
 
 
 class Style:
-    """Persistent ANSI style object.
-
-    Example:
-
-    .. code-block:: python
-
-        from toolbox.string.color import Style, red
-
-        # ANSI code 1 is bold.
-        error = Style(red, 1, "underline")
-        print(error("This is an error"))
-    """
-
     def __init__(self, *args: Tuple[Union[str, int, "Format"]], reset: bool = True):
         """Initializes a complex ANSI style that can be called to retrieve a styled string.
 
         Args:
-            *args: Arguments that can be either a string, integer, or Format type to create a
+            args: Arguments that can be either a string, integer, or Format type to create a
                 new ANSI style.
             reset: Boolean flag that when set to True will append the ANSI reset code to ensure
                 no style spill over.
@@ -103,6 +87,16 @@ class Style:
             using string, it will look up the ANSI code in the 16-bit ANSI dictionary.
             To use a non-standard code use either a custom Format, or an integer representation
             of the ANSI code.
+
+        Example:
+
+        .. code-block:: python
+
+            from toolbox.string.color import Style, red
+
+            # ANSI code 1 is bold.
+            error = Style(red, 1, "underline")
+            print(error("This is an error"))
         """
 
         if not all(isinstance(x, (int, str, Format)) for x in args):
@@ -112,7 +106,7 @@ class Style:
         self.args = args
         self.reset = reset
 
-    def __call__(self, string, reset: Optional[bool] = None):
+    def __call__(self, text: str, reset: Optional[bool] = None):
         """Returns a string with ANSI codes set.
 
         Args:
@@ -122,7 +116,7 @@ class Style:
 
         codes = self._args_codes()
         reset = reset if reset else self.reset
-        return Format(code=";".join(codes))(string, reset=reset)
+        return Format(code=";".join(codes))(text, reset=reset)
 
     def _args_codes(self):
         codes = []
@@ -164,7 +158,7 @@ reverse = Format(code=7)
 conceal = Format(code=8)
 
 
-def supports_color():  # pragma: no cover
+def supports_color() -> bool:  # pragma: no cover
     """Checks if system's terminal has color support.
 
     Note:
@@ -216,11 +210,11 @@ def supports_color():  # pragma: no cover
     )
 
 
-def strip_ansi(string: str):
+def strip_ansi(text: str) -> str:
     """Removes ANSI color/style sequence.
 
     Args:
-        string: String to remove ANSI style from.
+        text: String to remove ANSI style from.
 
     Example:
 
@@ -231,6 +225,4 @@ def strip_ansi(string: str):
             print(strip_ansi(red("hello world")))
     """
 
-    return re.sub(
-        r"\x1b\[([0-9,A-Z]{1,2}(;[0-9]{1,2})?(;[0-9]{3})?)?[m|K]?", "", string
-    )
+    return re.sub(r"\x1b\[([0-9,A-Z]{1,2}(;[0-9]{1,2})?(;[0-9]{3})?)?[m|K]?", "", text)
