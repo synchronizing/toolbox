@@ -1,0 +1,409 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="generator" content="sphinx-3.4.1, furo 2020.12.30.beta24"/>
+        <title>toolbox.string.color - Toolbox</title>
+      <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=33d2fc4f3f180ec1ffc6524e273e21d7d58cbe49">
+    <link rel="stylesheet" href="../../../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" href="../../../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script defer="defer" src="../../../_static/jquery.js"></script>
+    <script defer="defer" src="../../../_static/underscore.js"></script>
+    <script defer="defer" src="../../../_static/doctools.js"></script>
+    <script defer="defer" src="../../../_static/clipboard.min.js"></script>
+    <script defer="defer" src="../../../_static/copybutton.js"></script>
+    <script defer src="../../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">Toolbox</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">Toolbox</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Content</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../module/asyncio.html">asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module/builtins.html">builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module/collections.html">collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module/config.html">config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module/experimental.html">experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module/functools.html">functools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module/string.html">string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module/textwrap.html">textwrap</a></li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <h1>Source code for toolbox.string.color</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="c1"># Dictionary with 16-bit ANSI codes.</span>
+<span class="n">ANSI</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># Foreground Colors</span>
+    <span class="s2">"black"</span><span class="p">:</span> <span class="s2">"30"</span><span class="p">,</span>
+    <span class="s2">"red"</span><span class="p">:</span> <span class="s2">"31"</span><span class="p">,</span>
+    <span class="s2">"green"</span><span class="p">:</span> <span class="s2">"32"</span><span class="p">,</span>
+    <span class="s2">"yellow"</span><span class="p">:</span> <span class="s2">"33"</span><span class="p">,</span>
+    <span class="s2">"blue"</span><span class="p">:</span> <span class="s2">"34"</span><span class="p">,</span>
+    <span class="s2">"magenta"</span><span class="p">:</span> <span class="s2">"35"</span><span class="p">,</span>
+    <span class="s2">"cyan"</span><span class="p">:</span> <span class="s2">"36"</span><span class="p">,</span>
+    <span class="s2">"white"</span><span class="p">:</span> <span class="s2">"37"</span><span class="p">,</span>
+    <span class="c1"># Background Colors</span>
+    <span class="s2">"bblack"</span><span class="p">:</span> <span class="s2">"40"</span><span class="p">,</span>
+    <span class="s2">"bred"</span><span class="p">:</span> <span class="s2">"41"</span><span class="p">,</span>
+    <span class="s2">"bgreen"</span><span class="p">:</span> <span class="s2">"42"</span><span class="p">,</span>
+    <span class="s2">"byellow"</span><span class="p">:</span> <span class="s2">"43"</span><span class="p">,</span>
+    <span class="s2">"bblue"</span><span class="p">:</span> <span class="s2">"44"</span><span class="p">,</span>
+    <span class="s2">"bmagenta"</span><span class="p">:</span> <span class="s2">"45"</span><span class="p">,</span>
+    <span class="s2">"bcyan"</span><span class="p">:</span> <span class="s2">"46"</span><span class="p">,</span>
+    <span class="s2">"bwhite"</span><span class="p">:</span> <span class="s2">"47"</span><span class="p">,</span>
+    <span class="c1"># Styles</span>
+    <span class="s2">"reset"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"bold"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="s2">"underline"</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">,</span>
+    <span class="s2">"blink"</span><span class="p">:</span> <span class="s2">"5"</span><span class="p">,</span>
+    <span class="s2">"reverse"</span><span class="p">:</span> <span class="s2">"7"</span><span class="p">,</span>
+    <span class="s2">"conceal"</span><span class="p">:</span> <span class="s2">"8"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># ANSI escape character that toolbox.string.color uses.</span>
+<span class="n">EC</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\x1B</span><span class="s2">"</span>
+
+
+<div class="viewcode-block" id="Format"><a class="viewcode-back" href="../../../module/string.html#toolbox.string.color.Format">[docs]</a><span class="k">class</span> <span class="nc">Format</span><span class="p">:</span>
+    <span class="sd">"""Persistent ANSI format object.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        from toolbox.string.color import Format</span>
+
+<span class="sd">        bold = Format(code="1")</span>
+<span class="sd">        print(bold("hello world"))</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">"""Creates a new ANSI format that can be called to retrieve a styled string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            code: ANSI code.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="n">code</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="sd">"""Returns a string with ANSI code.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            string: String to stylize.</span>
+<span class="sd">            reset: Optional flag to append reset ANSI code on specific call.</span>
+<span class="sd">        """</span>
+
+        <span class="n">fin</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">[</span><span class="si">{}</span><span class="s2">m</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">EC</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">reset</span><span class="p">:</span>
+            <span class="n">fin</span> <span class="o">+=</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">[</span><span class="si">{}</span><span class="s2">m"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">EC</span><span class="p">,</span> <span class="n">ANSI</span><span class="p">[</span><span class="s2">"reset"</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">fin</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"Format(code=</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Style"><a class="viewcode-back" href="../../../module/string.html#toolbox.string.color.Style">[docs]</a><span class="k">class</span> <span class="nc">Style</span><span class="p">:</span>
+    <span class="sd">"""Persistent ANSI style object.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        from toolbox.string.color import Style, red</span>
+
+<span class="sd">        # ANSI code 1 is bold.</span>
+<span class="sd">        error = Style(red, 1, "underline")</span>
+<span class="sd">        print(error("This is an error"))</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="s2">"Format"</span><span class="p">]],</span> <span class="n">reset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="sd">"""Initializes a complex ANSI style that can be called to retrieve a styled string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            *args: Arguments that can be either a string, integer, or Format type to create a</span>
+<span class="sd">                new ANSI style.</span>
+<span class="sd">            reset: Boolean flag that when set to True will append the ANSI reset code to ensure</span>
+<span class="sd">                no style spill over.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            :py:class:`Style` can take arguments of type string, int, and Format. When</span>
+<span class="sd">            using string, it will look up the ANSI code in the 16-bit ANSI dictionary.</span>
+<span class="sd">            To use a non-standard code use either a custom Format, or an integer representation</span>
+<span class="sd">            of the ANSI code.</span>
+<span class="sd">        """</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">Format</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">args</span><span class="p">):</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="s2">"Arguments must either be of format 'Format', 'int', or 'str'."</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span> <span class="o">=</span> <span class="n">reset</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">reset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""Returns a string with ANSI codes set.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            string: String to stylize.</span>
+<span class="sd">            reset: Optional flag to append reset ANSI code on specific call.</span>
+<span class="sd">        """</span>
+
+        <span class="n">codes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args_codes</span><span class="p">()</span>
+        <span class="n">reset</span> <span class="o">=</span> <span class="n">reset</span> <span class="k">if</span> <span class="n">reset</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">reset</span>
+        <span class="k">return</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s2">";"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">codes</span><span class="p">))(</span><span class="n">string</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_args_codes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">codes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">codes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">codes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ANSI</span><span class="p">[</span><span class="n">arg</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Format</span><span class="p">):</span>
+                <span class="n">codes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">code</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">codes</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"Style(args=</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">";"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_args_codes</span><span class="p">()))</span></div>
+
+
+<span class="n">black</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">red</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">31</span><span class="p">)</span>
+<span class="n">green</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">yellow</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">33</span><span class="p">)</span>
+<span class="n">blue</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">34</span><span class="p">)</span>
+<span class="n">magenta</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span>
+<span class="n">cyan</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">36</span><span class="p">)</span>
+<span class="n">white</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">37</span><span class="p">)</span>
+<span class="n">bblack</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">bred</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">41</span><span class="p">)</span>
+<span class="n">bgreen</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">byellow</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">43</span><span class="p">)</span>
+<span class="n">bblue</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">44</span><span class="p">)</span>
+<span class="n">bmagenta</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">bcyan</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">46</span><span class="p">)</span>
+<span class="n">bwhite</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">47</span><span class="p">)</span>
+<span class="n">reset</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">bold</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">underline</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">blink</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">reverse</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">conceal</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="supports_color"><a class="viewcode-back" href="../../../module/string.html#toolbox.string.color.supports_color">[docs]</a><span class="k">def</span> <span class="nf">supports_color</span><span class="p">():</span>  <span class="c1"># pragma: no cover</span>
+    <span class="sd">"""Checks if system's terminal has color support.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This piece of code is from Django's source code</span>
+<span class="sd">        `here &lt;https://github.com/django/django/blob/b41d38ae26b1da9519a6cd765bc2f2ce7d355007/django/core/management/color.py#L20-L56&gt;`_.</span>
+
+<span class="sd">        Copyright (c) Django Software Foundation and individual contributors.</span>
+<span class="sd">    """</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">colorama</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="n">HAS_COLORAMA</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">colorama</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+        <span class="n">HAS_COLORAMA</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">vt_codes_enabled_in_windows_registry</span><span class="p">():</span>
+        <span class="sd">""" Check the Windows Registry to see if VT code handling has been enabled by default, see https://superuser.com/a/1300251/447564."""</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># winreg is only available on Windows.</span>
+            <span class="kn">import</span> <span class="nn">winreg</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">reg_key</span> <span class="o">=</span> <span class="n">winreg</span><span class="o">.</span><span class="n">OpenKey</span><span class="p">(</span><span class="n">winreg</span><span class="o">.</span><span class="n">HKEY_CURRENT_USER</span><span class="p">,</span> <span class="s2">"Console"</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">reg_key_value</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">winreg</span><span class="o">.</span><span class="n">QueryValueEx</span><span class="p">(</span><span class="n">reg_key</span><span class="p">,</span> <span class="s2">"VirtualTerminalLevel"</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">reg_key_value</span> <span class="o">==</span> <span class="mi">1</span>
+
+    <span class="c1"># isatty is not always implemented, #6223.</span>
+    <span class="n">is_a_tty</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="s2">"isatty"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">isatty</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">is_a_tty</span> <span class="ow">and</span> <span class="p">(</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">!=</span> <span class="s2">"win32"</span>
+        <span class="ow">or</span> <span class="n">HAS_COLORAMA</span>
+        <span class="ow">or</span> <span class="s2">"ANSICON"</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span>
+        <span class="ow">or</span>
+        <span class="c1"># Windows Terminal supports VT codes.</span>
+        <span class="s2">"WT_SESSION"</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span>
+        <span class="ow">or</span>
+        <span class="c1"># Microsoft Visual Studio Code's built-in terminal supports colors.</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"TERM_PROGRAM"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"vscode"</span>
+        <span class="ow">or</span> <span class="n">vt_codes_enabled_in_windows_registry</span><span class="p">()</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="strip_ansi"><a class="viewcode-back" href="../../../module/string.html#toolbox.string.color.strip_ansi">[docs]</a><span class="k">def</span> <span class="nf">strip_ansi</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Removes ANSI color/style sequence.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        string: String to remove ANSI style from.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            from toolbox import strip_ansi, red</span>
+
+<span class="sd">            print(strip_ansi(red("hello world")))</span>
+<span class="sd">    """</span>
+
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">"\x1b\[([0-9,A-Z]{1,2}(;[0-9]{1,2})?(;[0-9]</span><span class="si">{3}</span><span class="s2">)?)?[m|K]?"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">string</span>
+    <span class="p">)</span></div>
+</pre></div>
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2020, Felipe Faria
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </main>
+</div>
+  </body>
+</html>
