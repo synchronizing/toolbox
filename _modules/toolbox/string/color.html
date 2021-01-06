@@ -142,10 +142,10 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <h1>Source code for toolbox.string.color</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="c1"># Dictionary with 16-bit ANSI codes.</span>
 <span class="n">ANSI</span> <span class="o">=</span> <span class="p">{</span>
@@ -181,23 +181,20 @@
 
 
 <div class="viewcode-block" id="Format"><a class="viewcode-back" href="../../../module/string.html#toolbox.string.color.Format">[docs]</a><span class="k">class</span> <span class="nc">Format</span><span class="p">:</span>
-    <span class="sd">"""Persistent ANSI format object.</span>
-
-<span class="sd">    Example:</span>
-
-<span class="sd">    .. code-block:: python</span>
-
-<span class="sd">        from toolbox.string.color import Format</span>
-
-<span class="sd">        bold = Format(code="1")</span>
-<span class="sd">        print(bold("hello world"))</span>
-<span class="sd">    """</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">"""Creates a new ANSI format that can be called to retrieve a styled string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            code: ANSI code.</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            from toolbox.string.color import Format</span>
+
+<span class="sd">            bold = Format(code="1")</span>
+<span class="sd">            print(bold("hello world"))</span>
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="n">code</span>
 
@@ -220,24 +217,11 @@
 
 
 <div class="viewcode-block" id="Style"><a class="viewcode-back" href="../../../module/string.html#toolbox.string.color.Style">[docs]</a><span class="k">class</span> <span class="nc">Style</span><span class="p">:</span>
-    <span class="sd">"""Persistent ANSI style object.</span>
-
-<span class="sd">    Example:</span>
-
-<span class="sd">    .. code-block:: python</span>
-
-<span class="sd">        from toolbox.string.color import Style, red</span>
-
-<span class="sd">        # ANSI code 1 is bold.</span>
-<span class="sd">        error = Style(red, 1, "underline")</span>
-<span class="sd">        print(error("This is an error"))</span>
-<span class="sd">    """</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="s2">"Format"</span><span class="p">]],</span> <span class="n">reset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
         <span class="sd">"""Initializes a complex ANSI style that can be called to retrieve a styled string.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            *args: Arguments that can be either a string, integer, or Format type to create a</span>
+<span class="sd">            args: Arguments that can be either a string, integer, or Format type to create a</span>
 <span class="sd">                new ANSI style.</span>
 <span class="sd">            reset: Boolean flag that when set to True will append the ANSI reset code to ensure</span>
 <span class="sd">                no style spill over.</span>
@@ -247,6 +231,16 @@
 <span class="sd">            using string, it will look up the ANSI code in the 16-bit ANSI dictionary.</span>
 <span class="sd">            To use a non-standard code use either a custom Format, or an integer representation</span>
 <span class="sd">            of the ANSI code.</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            from toolbox.string.color import Style, red</span>
+
+<span class="sd">            # ANSI code 1 is bold.</span>
+<span class="sd">            error = Style(red, 1, "underline")</span>
+<span class="sd">            print(error("This is an error"))</span>
 <span class="sd">        """</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">Format</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">args</span><span class="p">):</span>
@@ -256,7 +250,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span> <span class="o">=</span> <span class="n">reset</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">reset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">"""Returns a string with ANSI codes set.</span>
 
 <span class="sd">        Args:</span>
@@ -266,7 +260,7 @@
 
         <span class="n">codes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args_codes</span><span class="p">()</span>
         <span class="n">reset</span> <span class="o">=</span> <span class="n">reset</span> <span class="k">if</span> <span class="n">reset</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">reset</span>
-        <span class="k">return</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s2">";"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">codes</span><span class="p">))(</span><span class="n">string</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s2">";"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">codes</span><span class="p">))(</span><span class="n">text</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_args_codes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">codes</span> <span class="o">=</span> <span class="p">[]</span>
@@ -308,7 +302,7 @@
 <span class="n">conceal</span> <span class="o">=</span> <span class="n">Format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="supports_color"><a class="viewcode-back" href="../../../module/string.html#toolbox.string.color.supports_color">[docs]</a><span class="k">def</span> <span class="nf">supports_color</span><span class="p">():</span>  <span class="c1"># pragma: no cover</span>
+<div class="viewcode-block" id="supports_color"><a class="viewcode-back" href="../../../module/string.html#toolbox.string.color.supports_color">[docs]</a><span class="k">def</span> <span class="nf">supports_color</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
     <span class="sd">"""Checks if system's terminal has color support.</span>
 
 <span class="sd">    Note:</span>
@@ -360,11 +354,11 @@
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="strip_ansi"><a class="viewcode-back" href="../../../module/string.html#toolbox.string.color.strip_ansi">[docs]</a><span class="k">def</span> <span class="nf">strip_ansi</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="viewcode-block" id="strip_ansi"><a class="viewcode-back" href="../../../module/string.html#toolbox.string.color.strip_ansi">[docs]</a><span class="k">def</span> <span class="nf">strip_ansi</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Removes ANSI color/style sequence.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        string: String to remove ANSI style from.</span>
+<span class="sd">        text: String to remove ANSI style from.</span>
 
 <span class="sd">    Example:</span>
 
@@ -375,9 +369,7 @@
 <span class="sd">            print(strip_ansi(red("hello world")))</span>
 <span class="sd">    """</span>
 
-    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-        <span class="sa">r</span><span class="s2">"\x1b\[([0-9,A-Z]{1,2}(;[0-9]{1,2})?(;[0-9]</span><span class="si">{3}</span><span class="s2">)?)?[m|K]?"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">string</span>
-    <span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\x1b\[([0-9,A-Z]{1,2}(;[0-9]{1,2})?(;[0-9]</span><span class="si">{3}</span><span class="s2">)?)?[m|K]?"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></div>
 </pre></div>
       </article>
       <footer>

@@ -145,7 +145,7 @@
 <span></span><span class="kn">import</span> <span class="nn">textwrap</span>
 
 
-<div class="viewcode-block" id="unindent"><a class="viewcode-back" href="../../../module/textwrap.html#toolbox.textwrap.text.unindent">[docs]</a><span class="k">def</span> <span class="nf">unindent</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<div class="viewcode-block" id="unindent"><a class="viewcode-back" href="../../../module/textwrap.html#toolbox.textwrap.text.unindent">[docs]</a><span class="k">def</span> <span class="nf">unindent</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">"""Unident triple quotes and removes any white spaces before or after text.</span>
 
 <span class="sd">    Note that in the example below we are not necessarily printing the results of</span>
@@ -153,11 +153,14 @@
 <span class="sd">    situation one may expect that the \\n will not be there, and instead, line breaks will</span>
 <span class="sd">    be in its place.</span>
 
+<span class="sd">    Args:</span>
+<span class="sd">        text: Text to unindent.</span>
+
 <span class="sd">    Example:</span>
 
 <span class="sd">        .. code-block:: python</span>
 
-<span class="sd">            from toolbox import unident</span>
+<span class="sd">            from toolbox.textwrap.text import unident</span>
 
 <span class="sd">            def test():</span>
 <span class="sd">                return unindent(</span>

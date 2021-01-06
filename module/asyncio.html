@@ -96,7 +96,7 @@
       <a href="../index.html"><div class="brand">Toolbox</div></a>
     </div>
     <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -138,28 +138,42 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="module-toolbox.asyncio.threads">
-<span id="asyncio"></span><h1>asyncio<a class="headerlink" href="#module-toolbox.asyncio.threads" title="Permalink to this headline">¶</a></h1>
+        <div class="section" id="asyncio">
+<h1>asyncio<a class="headerlink" href="#asyncio" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="threads">
+<h2>threads<a class="headerlink" href="#threads" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.asyncio</span> <span class="kn">import</span> <span class="n">threads</span>
+</pre></div>
+</div>
 <dl class="py function">
 <dt id="toolbox.asyncio.threads.to_thread">
-<em class="property">async </em><code class="sig-name descname">to_thread</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/asyncio/threads.html#to_thread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.asyncio.threads.to_thread" title="Permalink to this definition">¶</a></dt>
-<dd><p>Asynchronously run function <em>func</em> in a separate thread.</p>
-<p>Any <em>args and **kwargs supplied for this function are directly passed
-to *func</em>. Also, the current <code class="xref py py-class docutils literal notranslate"><span class="pre">contextvars.Context</span></code> is propogated,
+<em class="property">async </em><code class="sig-name descname">to_thread</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> → Awaitable<a class="reference internal" href="../_modules/toolbox/asyncio/threads.html#to_thread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.asyncio.threads.to_thread" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asynchronously run function <code class="docutils literal notranslate"><span class="pre">func</span></code> in a separate thread.</p>
+<p>Any <code class="docutils literal notranslate"><span class="pre">*args</span></code> and <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> supplied for this function are directly passed
+to <code class="docutils literal notranslate"><span class="pre">func</span></code>. Also, the current <code class="xref py py-class docutils literal notranslate"><span class="pre">contextvars.Context</span></code> is propogated,
 allowing context variables from the main thread to be accessed in the
 separate thread.</p>
 <p>Return a coroutine that can be awaited to get the eventual result of <em>func</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> – Synchronous function to create awaitable context with.</p></li>
+<li><p><strong>args</strong> – Arguments to pass to <code class="docutils literal notranslate"><span class="pre">func</span></code>.</p></li>
+<li><p><strong>kwargs</strong> – Arguments to pass to <code class="docutils literal notranslate"><span class="pre">func</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This function is similar to Python 3.9 ‘asyncio.to_thread()’, which can be found here,
+<p>This function is similar to Python 3.9 <code class="docutils literal notranslate"><span class="pre">asyncio.to_thread()</span></code>, which can be found
+<a class="reference external" href="https://github.com/python/cpython/blob/e9684fac5a158be9806304a676e619857520a4dc/Lib/asyncio/threads.py">here</a>,
 with slight modifications to make it backwards compatible.</p>
-<p><a class="reference external" href="https://github.com/python/cpython/blob/e9684fac5a158be9806304a676e619857520a4dc/Lib/asyncio/threads.py">https://github.com/python/cpython/blob/e9684fac5a158be9806304a676e619857520a4dc/Lib/asyncio/threads.py</a></p>
 </div>
 <p class="rubric">Example</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox</span> <span class="kn">import</span> <span class="n">to_thread</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.asyncio.threads</span> <span class="kn">import</span> <span class="n">to_thread</span>
 <span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
@@ -176,13 +190,18 @@ with slight modifications to make it backwards compatible.</p>
 </dd></dl>
 <dl class="py function">
 <dt id="toolbox.asyncio.threads.awaitable">
-<code class="sig-name descname">awaitable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/asyncio/threads.html#awaitable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.asyncio.threads.awaitable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">awaitable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span> → Awaitable<span class="p">[</span>Any<span class="p">]</span><a class="reference internal" href="../_modules/toolbox/asyncio/threads.html#awaitable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.asyncio.threads.awaitable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that converts a synchronous function into an asynchronous function.</p>
-<p>When decorator is used <em>func</em> becomes an awaitable. When awaited, the synchronous
+<p>When decorator is used <code class="docutils literal notranslate"><span class="pre">func</span></code> becomes an awaitable. When awaited, the synchronous
 function runs in a seperate thread as to not block the event loop. This function
-leverages the <a class="reference internal" href="#toolbox.asyncio.threads.to_thread" title="toolbox.asyncio.threads.to_thread"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_thread()</span></code></a> function.</p>
+leverages the <a class="reference internal" href="#toolbox.asyncio.threads.to_thread" title="toolbox.asyncio.threads.to_thread"><code class="xref py py-func docutils literal notranslate"><span class="pre">toolbox.asyncio.threads.to_thread()</span></code></a> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>func</strong> – Synchronous function to create awaitable context with.</p>
+</dd>
+</dl>
 <p class="rubric">Example</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox</span> <span class="kn">import</span> <span class="n">awaitable</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.asyncio.threads</span> <span class="kn">import</span> <span class="n">awaitable</span>
 <span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
@@ -198,6 +217,7 @@ leverages the <a class="reference internal" href="#toolbox.asyncio.threads.to_th
 </pre></div>
 </div>
 </dd></dl>
+</div>
 </div>
 
       </article>
@@ -242,8 +262,27 @@ leverages the <a class="reference internal" href="#toolbox.asyncio.threads.to_th
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">asyncio</a><ul>
+<li><a class="reference internal" href="#threads">threads</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

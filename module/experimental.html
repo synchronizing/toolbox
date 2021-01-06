@@ -96,7 +96,7 @@
       <a href="../index.html"><div class="brand">Toolbox</div></a>
     </div>
     <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -138,7 +138,7 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <div class="section" id="experimental">
@@ -149,18 +149,31 @@
 </div>
 <p>Tools here are proof-of-concept and are not recommended to be used in production.</p>
 <hr class="docutils"/>
-<span class="target" id="module-toolbox.experimental.asyncdispatch"></span><dl class="py function">
+<div class="section" id="asyncdispatch">
+<h2>asyncdispatch<a class="headerlink" href="#asyncdispatch" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.experimental</span> <span class="kn">import</span> <span class="n">asyncdispatch</span>
+</pre></div>
+</div>
+<dl class="py function">
 <dt id="toolbox.experimental.asyncdispatch.asyncdispatch">
-<code class="sig-name descname">asyncdispatch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/experimental/asyncdispatch.html#asyncdispatch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.experimental.asyncdispatch.asyncdispatch" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">asyncdispatch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span> → Callable<a class="reference internal" href="../_modules/toolbox/experimental/asyncdispatch.html#asyncdispatch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.experimental.asyncdispatch.asyncdispatch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator for adding dispatch functionality between async and sync functions.</p>
 <p>Similar to <code class="xref py py-func docutils literal notranslate"><span class="pre">functools.singledispatch()</span></code>, but for sync and async function. This
 decorator allows for a single function name to be used for two different implementations,
 one synchronous and another asynchronous. Note that in the implementation of
 <a class="reference internal" href="#toolbox.experimental.asyncdispatch.asyncdispatch" title="toolbox.experimental.asyncdispatch.asyncdispatch"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncdispatch()</span></code></a> the <code class="docutils literal notranslate"><span class="pre">inspect</span></code> module is utilized, and therefore might not work with
 different implementations of Python.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>func</strong> – Synchronous function to create a dispatch with.</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>Not recommended to be used in production in its current implementation.</p>
+</div>
 <p class="rubric">Example</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.experimental</span> <span class="kn">import</span> <span class="n">asyncdispatch</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.experimental.asyncdispatch</span> <span class="kn">import</span> <span class="n">asyncdispatch</span>
 <span class="kn">import</span> <span class="nn">asyncio</span>
 
 <span class="nd">@asyncdispatch</span>
@@ -179,6 +192,7 @@ different implementations of Python.</p>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 </div>
 
       </article>
@@ -223,8 +237,27 @@ different implementations of Python.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">experimental</a><ul>
+<li><a class="reference internal" href="#asyncdispatch">asyncdispatch</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

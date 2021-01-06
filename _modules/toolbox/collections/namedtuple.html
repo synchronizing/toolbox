@@ -146,12 +146,17 @@
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Mapping</span>
 
 
-<div class="viewcode-block" id="nestednamedtuple"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.namedtuple.nestednamedtuple">[docs]</a><span class="k">def</span> <span class="nf">nestednamedtuple</span><span class="p">(</span><span class="n">dictionary</span><span class="p">):</span>
+<div class="viewcode-block" id="nestednamedtuple"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.namedtuple.nestednamedtuple">[docs]</a><span class="k">def</span> <span class="nf">nestednamedtuple</span><span class="p">(</span><span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">namedtuple</span><span class="p">:</span>
     <span class="sd">"""Converts dictionary to a nested namedtuple recursively.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dictionary: Dictionary to convert into a nested namedtuple.</span>
 
 <span class="sd">    Example:</span>
 
 <span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            from toolbox.collections.namedtuple import nestednamedtuple</span>
 
 <span class="sd">            nt = nestednamedtuple({"hello": {"ola": "mundo"}})</span>
 <span class="sd">            print(nt) # &gt;&gt;&gt; namedtupled(hello=namedtupled(ola='mundo'))</span>
@@ -173,6 +178,8 @@
 <span class="sd">    Example:</span>
 
 <span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            from toolbox.collections.namedtuple import nestednamedtuple, fdict</span>
 
 <span class="sd">            d = {"hello": "world"}</span>
 <span class="sd">            nt = nestednamedtuple({"forced": fdict(d), "notforced": d})</span>

@@ -142,13 +142,14 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <h1>Source code for toolbox.experimental.asyncdispatch</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">inspect</span>
-<span class="kn">import</span> <span class="nn">ast</span>
-<span class="kn">import</span> <span class="nn">textwrap</span>
+<span></span><span class="kn">import</span> <span class="nn">ast</span>
 <span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Awaitable</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Union</span>
 
 
-<div class="viewcode-block" id="asyncdispatch"><a class="viewcode-back" href="../../../module/experimental.html#toolbox.experimental.asyncdispatch.asyncdispatch">[docs]</a><span class="k">def</span> <span class="nf">asyncdispatch</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<div class="viewcode-block" id="asyncdispatch"><a class="viewcode-back" href="../../../module/experimental.html#toolbox.experimental.asyncdispatch.asyncdispatch">[docs]</a><span class="k">def</span> <span class="nf">asyncdispatch</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
     <span class="sd">"""Decorator for adding dispatch functionality between async and sync functions.</span>
 
 <span class="sd">    Similar to :py:func:`functools.singledispatch`, but for sync and async function. This</span>
@@ -157,13 +158,17 @@
 <span class="sd">    :func:`asyncdispatch` the ``inspect`` module is utilized, and therefore might not work with</span>
 <span class="sd">    different implementations of Python.</span>
 
-<span class="sd">    Not recommended to be used in production in its current implementation.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        func: Synchronous function to create a dispatch with.</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        Not recommended to be used in production in its current implementation.</span>
 
 <span class="sd">    Example:</span>
 
 <span class="sd">        .. code-block:: python</span>
 
-<span class="sd">            from toolbox.experimental import asyncdispatch</span>
+<span class="sd">            from toolbox.experimental.asyncdispatch import asyncdispatch</span>
 <span class="sd">            import asyncio</span>
 
 <span class="sd">            @asyncdispatch</span>
@@ -184,7 +189,7 @@
     <span class="n">funcs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"sync"</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"async"</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 
     <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">Awaitable</span><span class="p">]:</span>
 
         <span class="c1"># Gets the location where the function was called from.</span>
         <span class="n">info</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
@@ -221,7 +226,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">funcs</span><span class="p">[</span><span class="s2">"async"</span><span class="p">](</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Awaitable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Register the functions accordingly.</span>
         <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">iscoroutinefunction</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
             <span class="n">funcs</span><span class="p">[</span><span class="s2">"async"</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span>

@@ -204,8 +204,13 @@
 </div>
 <dl class="py class">
 <dt id="toolbox.string.color.Format">
-<em class="property">class </em><code class="sig-name descname">Format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/string/color.html#Format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.string.color.Format" title="Permalink to this definition">¶</a></dt>
-<dd><p>Persistent ANSI format object.</p>
+<em class="property">class </em><code class="sig-name descname">Format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/string/color.html#Format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.string.color.Format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new ANSI format that can be called to retrieve a styled string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>code</strong> – ANSI code.</p>
+</dd>
+</dl>
 <p>Example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.string.color</span> <span class="kn">import</span> <span class="n">Format</span>
 
@@ -213,30 +218,15 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">bold</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Creates a new ANSI format that can be called to retrieve a styled string.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>code</strong> – ANSI code.</p>
-</dd>
-</dl>
 </dd></dl>
 <dl class="py class">
 <dt id="toolbox.string.color.Style">
-<em class="property">class </em><code class="sig-name descname">Style</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">reset</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/string/color.html#Style"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.string.color.Style" title="Permalink to this definition">¶</a></dt>
-<dd><p>Persistent ANSI style object.</p>
-<p>Example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.string.color</span> <span class="kn">import</span> <span class="n">Style</span><span class="p">,</span> <span class="n">red</span>
-
-<span class="c1"># ANSI code 1 is bold.</span>
-<span class="n">error</span> <span class="o">=</span> <span class="n">Style</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"underline"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">error</span><span class="p">(</span><span class="s2">"This is an error"</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>Initializes a complex ANSI style that can be called to retrieve a styled string.</p>
+<em class="property">class </em><code class="sig-name descname">Style</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>int<span class="p">, </span><a class="reference internal" href="#toolbox.string.color.Format" title="toolbox.string.color.Format">toolbox.string.color.Format</a><span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">reset</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/string/color.html#Style"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.string.color.Style" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes a complex ANSI style that can be called to retrieve a styled string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>*args</strong> – Arguments that can be either a string, integer, or Format type to create a
+<li><p><strong>args</strong> – Arguments that can be either a string, integer, or Format type to create a
 new ANSI style.</p></li>
 <li><p><strong>reset</strong> – Boolean flag that when set to True will append the ANSI reset code to ensure
 no style spill over.</p></li>
@@ -250,10 +240,18 @@ using string, it will look up the ANSI code in the 16-bit ANSI dictionary.
 To use a non-standard code use either a custom Format, or an integer representation
 of the ANSI code.</p>
 </div>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.string.color</span> <span class="kn">import</span> <span class="n">Style</span><span class="p">,</span> <span class="n">red</span>
+
+<span class="c1"># ANSI code 1 is bold.</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">Style</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"underline"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">error</span><span class="p">(</span><span class="s2">"This is an error"</span><span class="p">))</span>
+</pre></div>
+</div>
 </dd></dl>
 <dl class="py function">
 <dt id="toolbox.string.color.supports_color">
-<code class="sig-name descname">supports_color</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/string/color.html#supports_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.string.color.supports_color" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">supports_color</code><span class="sig-paren">(</span><span class="sig-paren">)</span> → bool<a class="reference internal" href="../_modules/toolbox/string/color.html#supports_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.string.color.supports_color" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if system’s terminal has color support.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -264,11 +262,11 @@ of the ANSI code.</p>
 </dd></dl>
 <dl class="py function">
 <dt id="toolbox.string.color.strip_ansi">
-<code class="sig-name descname">strip_ansi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/string/color.html#strip_ansi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.string.color.strip_ansi" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">strip_ansi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> → str<a class="reference internal" href="../_modules/toolbox/string/color.html#strip_ansi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.string.color.strip_ansi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes ANSI color/style sequence.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>string</strong> – String to remove ANSI style from.</p>
+<dd class="field-odd"><p><strong>text</strong> – String to remove ANSI style from.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -316,10 +314,10 @@ of the ANSI code.</p>
 <div class="section" id="ec">
 <h4><code class="xref py py-data docutils literal notranslate"><span class="pre">EC</span></code><a class="headerlink" href="#ec" title="Permalink to this headline">¶</a></h4>
 <p>ANSI escape character that toolbox.color uses.</p>
-<p>To modify the escape character, one may do the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EC</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\x1B</span><span class="s2">"</span>
 </pre></div>
 </div>
+<p>To modify the escape character, one may do the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.string.color</span> <span class="kn">import</span> <span class="n">red</span>
 <span class="kn">import</span> <span class="nn">toolbox</span>
 

@@ -96,7 +96,7 @@
       <a href="../index.html"><div class="brand">Toolbox</div></a>
     </div>
     <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -138,21 +138,31 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="module-toolbox.textwrap.text">
-<span id="textwrap"></span><h1>textwrap<a class="headerlink" href="#module-toolbox.textwrap.text" title="Permalink to this headline">¶</a></h1>
+        <div class="section" id="textwrap">
+<h1>textwrap<a class="headerlink" href="#textwrap" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="text">
+<h2>text<a class="headerlink" href="#text" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.textwrap</span> <span class="kn">import</span> <span class="n">text</span>
+</pre></div>
+</div>
 <dl class="py function">
 <dt id="toolbox.textwrap.text.unindent">
-<code class="sig-name descname">unindent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/textwrap/text.html#unindent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.textwrap.text.unindent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">unindent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> → str<a class="reference internal" href="../_modules/toolbox/textwrap/text.html#unindent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.textwrap.text.unindent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unident triple quotes and removes any white spaces before or after text.</p>
 <p>Note that in the example below we are not necessarily printing the results of
 the <em>test</em> function, and instead looking at the raw string results. In real world
 situation one may expect that the \n will not be there, and instead, line breaks will
 be in its place.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> – Text to unindent.</p>
+</dd>
+</dl>
 <p class="rubric">Example</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox</span> <span class="kn">import</span> <span class="n">unident</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.textwrap.text</span> <span class="kn">import</span> <span class="n">unident</span>
 
 <span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">unindent</span><span class="p">(</span>
@@ -167,6 +177,7 @@ be in its place.</p>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 </div>
 
       </article>
@@ -203,8 +214,27 @@ be in its place.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">textwrap</a><ul>
+<li><a class="reference internal" href="#text">text</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

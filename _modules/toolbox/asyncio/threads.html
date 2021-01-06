@@ -145,29 +145,34 @@
 <span></span><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">contextvars</span>
 <span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Awaitable</span><span class="p">,</span> <span class="n">Callable</span>
 
 
-<div class="viewcode-block" id="to_thread"><a class="viewcode-back" href="../../../module/asyncio.html#toolbox.asyncio.threads.to_thread">[docs]</a><span class="k">async</span> <span class="k">def</span> <span class="nf">to_thread</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">"""Asynchronously run function *func* in a separate thread.</span>
+<div class="viewcode-block" id="to_thread"><a class="viewcode-back" href="../../../module/asyncio.html#toolbox.asyncio.threads.to_thread">[docs]</a><span class="k">async</span> <span class="k">def</span> <span class="nf">to_thread</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">:</span>
+    <span class="sd">"""Asynchronously run function ``func`` in a separate thread.</span>
 
-<span class="sd">    Any *args and **kwargs supplied for this function are directly passed</span>
-<span class="sd">    to *func*. Also, the current :class:`contextvars.Context` is propogated,</span>
+<span class="sd">    Any ``*args`` and ``**kwargs`` supplied for this function are directly passed</span>
+<span class="sd">    to ``func``. Also, the current :class:`contextvars.Context` is propogated,</span>
 <span class="sd">    allowing context variables from the main thread to be accessed in the</span>
 <span class="sd">    separate thread.</span>
 
 <span class="sd">    Return a coroutine that can be awaited to get the eventual result of *func*.</span>
 
-<span class="sd">    Note:</span>
-<span class="sd">        This function is similar to Python 3.9 'asyncio.to_thread()', which can be found here,</span>
-<span class="sd">        with slight modifications to make it backwards compatible.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        func: Synchronous function to create awaitable context with.</span>
+<span class="sd">        args: Arguments to pass to ``func``.</span>
+<span class="sd">        kwargs: Arguments to pass to ``func``.</span>
 
-<span class="sd">        https://github.com/python/cpython/blob/e9684fac5a158be9806304a676e619857520a4dc/Lib/asyncio/threads.py</span>
+<span class="sd">    Note:</span>
+<span class="sd">        This function is similar to Python 3.9 ``asyncio.to_thread()``, which can be found</span>
+<span class="sd">        `here &lt;https://github.com/python/cpython/blob/e9684fac5a158be9806304a676e619857520a4dc/Lib/asyncio/threads.py&gt;`_,</span>
+<span class="sd">        with slight modifications to make it backwards compatible.</span>
 
 <span class="sd">    Example:</span>
 
 <span class="sd">        .. code-block:: python</span>
 
-<span class="sd">            from toolbox import to_thread</span>
+<span class="sd">            from toolbox.asyncio.threads import to_thread</span>
 <span class="sd">            import asyncio</span>
 <span class="sd">            import time</span>
 
@@ -187,18 +192,21 @@
     <span class="k">return</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">func_call</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="awaitable"><a class="viewcode-back" href="../../../module/asyncio.html#toolbox.asyncio.threads.awaitable">[docs]</a><span class="k">def</span> <span class="nf">awaitable</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<div class="viewcode-block" id="awaitable"><a class="viewcode-back" href="../../../module/asyncio.html#toolbox.asyncio.threads.awaitable">[docs]</a><span class="k">def</span> <span class="nf">awaitable</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
     <span class="sd">"""Decorator that converts a synchronous function into an asynchronous function.</span>
 
-<span class="sd">    When decorator is used *func* becomes an awaitable. When awaited, the synchronous</span>
+<span class="sd">    When decorator is used ``func`` becomes an awaitable. When awaited, the synchronous</span>
 <span class="sd">    function runs in a seperate thread as to not block the event loop. This function</span>
-<span class="sd">    leverages the :func:`to_thread` function.</span>
+<span class="sd">    leverages the :func:`toolbox.asyncio.threads.to_thread` function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Synchronous function to create awaitable context with.</span>
 
 <span class="sd">    Example:</span>
 
 <span class="sd">        .. code-block:: python</span>
 
-<span class="sd">            from toolbox import awaitable</span>
+<span class="sd">            from toolbox.asyncio.threads import awaitable</span>
 <span class="sd">            import asyncio</span>
 <span class="sd">            import time</span>
 

@@ -96,7 +96,7 @@
       <a href="../index.html"><div class="brand">Toolbox</div></a>
     </div>
     <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -138,19 +138,24 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="module-toolbox.builtins.property">
-<span id="builtins"></span><h1>builtins<a class="headerlink" href="#module-toolbox.builtins.property" title="Permalink to this headline">¶</a></h1>
+        <div class="section" id="builtins">
+<h1>builtins<a class="headerlink" href="#builtins" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="property">
+<h2>property<a class="headerlink" href="#property" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.builtins</span> <span class="kn">import</span> <span class="nb">property</span>
+</pre></div>
+</div>
 <dl class="py class">
 <dt id="toolbox.builtins.property.classproperty">
-<em class="property">class </em><code class="sig-name descname">classproperty</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fget</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fset</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fdel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">doc</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/builtins/property.html#classproperty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.builtins.property.classproperty" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">classproperty</code><a class="reference internal" href="../_modules/toolbox/builtins/property.html#classproperty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.builtins.property.classproperty" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator to set a class method as a class property.</p>
 <p>Combines a property and a classmethod into one, creating a class property. Allows
 access to computed class attributes.</p>
 <p class="rubric">Example</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox</span> <span class="kn">import</span> <span class="n">classproperty</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.builtins.property</span> <span class="kn">import</span> <span class="n">classproperty</span>
 
 <span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
     <span class="nd">@classproperty</span>
@@ -161,6 +166,7 @@ access to computed class attributes.</p>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 </div>
 
       </article>
@@ -205,8 +211,27 @@ access to computed class attributes.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">builtins</a><ul>
+<li><a class="reference internal" href="#property">property</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

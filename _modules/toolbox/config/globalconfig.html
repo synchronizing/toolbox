@@ -142,36 +142,42 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <h1>Source code for toolbox.config.globalconfig</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">..collections.namedtuple</span> <span class="kn">import</span> <span class="n">nestednamedtuple</span>
+<span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="kn">from</span> <span class="nn">..collections.namedtuple</span> <span class="kn">import</span> <span class="n">nestednamedtuple</span>
 
 
-<div class="viewcode-block" id="make_config"><a class="viewcode-back" href="../../../module/config.html#toolbox.config.globalconfig.make_config">[docs]</a><span class="k">def</span> <span class="nf">make_config</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="make_config"><a class="viewcode-back" href="../../../module/config.html#toolbox.config.globalconfig.make_config">[docs]</a><span class="k">def</span> <span class="nf">make_config</span><span class="p">(</span><span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Creates a global configuration that can be accessed anywhere during runtime.</span>
 
 <span class="sd">    This function is a useful replacement to passing configuration classes between classes.</span>
 <span class="sd">    Instead of creating a `Config` object, one may use :func:`make_config` to create a</span>
 <span class="sd">    global runtime configuration that can be accessed by any module, function, or object.</span>
 
+<span class="sd">    Args:</span>
+<span class="sd">        dictionary: Dictionary to create global configuration with.</span>
+<span class="sd">        kwargs: Arguments to make global configuration with.</span>
+
 <span class="sd">    Example:</span>
 
 <span class="sd">        .. code-block:: python</span>
 
-<span class="sd">            from toolbox import make_config</span>
+<span class="sd">            from toolbox.config.globalconfig import make_config</span>
 
 <span class="sd">            make_config(hello="world")</span>
 <span class="sd">    """</span>
 
-    <span class="nb">globals</span><span class="p">()[</span><span class="s2">"gconf"</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span></div>
+    <span class="nb">globals</span><span class="p">()[</span><span class="s2">"gconf"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">dictionary</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">}</span></div>
 
 
-<div class="viewcode-block" id="conf"><a class="viewcode-back" href="../../../module/config.html#toolbox.config.globalconfig.conf">[docs]</a><span class="k">def</span> <span class="nf">conf</span><span class="p">():</span>
-    <span class="sd">"""Access global configuration as a nestednamedtuple.</span>
+<div class="viewcode-block" id="conf"><a class="viewcode-back" href="../../../module/config.html#toolbox.config.globalconfig.conf">[docs]</a><span class="k">def</span> <span class="nf">conf</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">namedtuple</span><span class="p">:</span>
+    <span class="sd">"""Access global configuration as a :class:`toolbox.collections.namedtuple.nestednamedtuple`.</span>
 
 <span class="sd">    Example:</span>
 
 <span class="sd">        .. code-block:: python</span>
 
-<span class="sd">            from toolbox import conf</span>
+<span class="sd">            from toolbox.config.globalconfig import conf</span>
 
 <span class="sd">            print(conf().hello) # &gt;&gt;&gt; 'world'</span>
 <span class="sd">    """</span>
@@ -182,14 +188,14 @@
         <span class="k">return</span> <span class="n">nestednamedtuple</span><span class="p">({})</span></div>
 
 
-<div class="viewcode-block" id="config"><a class="viewcode-back" href="../../../module/config.html#toolbox.config.globalconfig.config">[docs]</a><span class="k">def</span> <span class="nf">config</span><span class="p">():</span>
+<div class="viewcode-block" id="config"><a class="viewcode-back" href="../../../module/config.html#toolbox.config.globalconfig.config">[docs]</a><span class="k">def</span> <span class="nf">config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">"""Access global configuration as a dict.</span>
 
 <span class="sd">    Example:</span>
 
 <span class="sd">        .. code-block:: python</span>
 
-<span class="sd">            from toolbox import config</span>
+<span class="sd">            from toolbox.config.globalconfig import config</span>
 
 <span class="sd">            print(config()['hello']) # &gt;&gt;&gt; 'world'</span>
 <span class="sd">    """</span>

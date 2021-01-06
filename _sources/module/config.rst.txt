@@ -2,6 +2,13 @@
 config
 ######
 
+************
+globalconfig
+************
+
+.. code-block:: python
+
+    from toolbox.config import globalconfig
 
 .. autofunction:: toolbox.config.globalconfig.make_config
 

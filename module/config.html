@@ -96,7 +96,7 @@
       <a href="../index.html"><div class="brand">Toolbox</div></a>
     </div>
     <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -138,30 +138,43 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <div class="section" id="config">
 <h1>config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="globalconfig">
+<h2>globalconfig<a class="headerlink" href="#globalconfig" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.config</span> <span class="kn">import</span> <span class="n">globalconfig</span>
+</pre></div>
+</div>
 <dl class="py function">
 <dt id="toolbox.config.globalconfig.make_config">
-<code class="sig-name descname">make_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/config/globalconfig.html#make_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.config.globalconfig.make_config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">make_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dictionary</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> → None<a class="reference internal" href="../_modules/toolbox/config/globalconfig.html#make_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.config.globalconfig.make_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a global configuration that can be accessed anywhere during runtime.</p>
 <p>This function is a useful replacement to passing configuration classes between classes.
 Instead of creating a <cite>Config</cite> object, one may use <a class="reference internal" href="#toolbox.config.globalconfig.make_config" title="toolbox.config.globalconfig.make_config"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_config()</span></code></a> to create a
 global runtime configuration that can be accessed by any module, function, or object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dictionary</strong> – Dictionary to create global configuration with.</p></li>
+<li><p><strong>kwargs</strong> – Arguments to make global configuration with.</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Example</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox</span> <span class="kn">import</span> <span class="n">make_config</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.config.globalconfig</span> <span class="kn">import</span> <span class="n">make_config</span>
 
 <span class="n">make_config</span><span class="p">(</span><span class="n">hello</span><span class="o">=</span><span class="s2">"world"</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="py function">
 <dt id="toolbox.config.globalconfig.config">
-<code class="sig-name descname">config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/config/globalconfig.html#config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.config.globalconfig.config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">config</code><span class="sig-paren">(</span><span class="sig-paren">)</span> → dict<a class="reference internal" href="../_modules/toolbox/config/globalconfig.html#config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.config.globalconfig.config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Access global configuration as a dict.</p>
 <p class="rubric">Example</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox</span> <span class="kn">import</span> <span class="n">config</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.config.globalconfig</span> <span class="kn">import</span> <span class="n">config</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">()[</span><span class="s1">'hello'</span><span class="p">])</span> <span class="c1"># &gt;&gt;&gt; 'world'</span>
 </pre></div>
@@ -169,16 +182,17 @@ global runtime configuration that can be accessed by any module, function, or ob
 </dd></dl>
 <dl class="py function">
 <dt id="toolbox.config.globalconfig.conf">
-<code class="sig-name descname">conf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/config/globalconfig.html#conf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.config.globalconfig.conf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Access global configuration as a nestednamedtuple.</p>
+<code class="sig-name descname">conf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> → collections.namedtuple<a class="reference internal" href="../_modules/toolbox/config/globalconfig.html#conf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.config.globalconfig.conf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Access global configuration as a <a class="reference internal" href="collections.html#toolbox.collections.namedtuple.nestednamedtuple" title="toolbox.collections.namedtuple.nestednamedtuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">toolbox.collections.namedtuple.nestednamedtuple</span></code></a>.</p>
 <p class="rubric">Example</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox</span> <span class="kn">import</span> <span class="n">conf</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.config.globalconfig</span> <span class="kn">import</span> <span class="n">conf</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">conf</span><span class="p">()</span><span class="o">.</span><span class="n">hello</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; 'world'</span>
 </pre></div>
 </div>
 </dd></dl>
 </dd></dl>
+</div>
 </div>
 
       </article>
@@ -223,8 +237,27 @@ global runtime configuration that can be accessed by any module, function, or ob
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">config</a><ul>
+<li><a class="reference internal" href="#globalconfig">globalconfig</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
