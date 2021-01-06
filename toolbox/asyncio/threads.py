@@ -1,7 +1,7 @@
-from typing import Callable, Awaitable, Any
 import asyncio
 import contextvars
 import functools
+from typing import Any, Awaitable, Callable
 
 
 async def to_thread(func: Callable, *args, **kwargs) -> Awaitable:

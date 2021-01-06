@@ -1,8 +1,8 @@
-from typing import Callable, Union, Awaitable
-import inspect
 import ast
-import textwrap
 import functools
+import inspect
+import textwrap
+from typing import Awaitable, Callable, Union
 
 
 def asyncdispatch(func: Callable) -> Callable:

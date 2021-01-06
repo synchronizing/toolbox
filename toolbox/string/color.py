@@ -1,7 +1,7 @@
-from typing import Union, Tuple, Optional
 import os
-import sys
 import re
+import sys
+from typing import Optional, Tuple, Union
 
 # Dictionary with 16-bit ANSI codes.
 ANSI = {

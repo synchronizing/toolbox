@@ -1,5 +1,5 @@
-from typing import Type
 from builtins import property
+from typing import Type
 
 
 class classproperty(property):

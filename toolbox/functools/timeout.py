@@ -1,9 +1,9 @@
-from typing import Union, Awaitable, Callable
-import functools
-import datetime
-import inspect
 import asyncio
+import datetime
+import functools
+import inspect
 import signal
+from typing import Awaitable, Callable, Union
 
 
 def timeout(
