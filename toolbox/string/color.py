@@ -112,7 +112,7 @@ class Style:
         self.args = args
         self.reset = reset
 
-    def __call__(self, string, reset: Optional[bool] = None):
+    def __call__(self, text: str, reset: Optional[bool] = None):
         """Returns a string with ANSI codes set.
 
         Args:
@@ -122,7 +122,7 @@ class Style:
 
         codes = self._args_codes()
         reset = reset if reset else self.reset
-        return Format(code=";".join(codes))(string, reset=reset)
+        return Format(code=";".join(codes))(text, reset=reset)
 
     def _args_codes(self):
         codes = []
@@ -164,7 +164,7 @@ reverse = Format(code=7)
 conceal = Format(code=8)
 
 
-def supports_color():  # pragma: no cover
+def supports_color() -> bool:  # pragma: no cover
     """Checks if system's terminal has color support.
 
     Note:
@@ -216,11 +216,11 @@ def supports_color():  # pragma: no cover
     )
 
 
-def strip_ansi(string: str):
+def strip_ansi(text: str) -> str:
     """Removes ANSI color/style sequence.
 
     Args:
-        string: String to remove ANSI style from.
+        text: String to remove ANSI style from.
 
     Example:
 
@@ -231,6 +231,4 @@ def strip_ansi(string: str):
             print(strip_ansi(red("hello world")))
     """
 
-    return re.sub(
-        r"\x1b\[([0-9,A-Z]{1,2}(;[0-9]{1,2})?(;[0-9]{3})?)?[m|K]?", "", string
-    )
+    return re.sub(r"\x1b\[([0-9,A-Z]{1,2}(;[0-9]{1,2})?(;[0-9]{3})?)?[m|K]?", "", text)

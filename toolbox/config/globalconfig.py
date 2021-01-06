@@ -1,7 +1,9 @@
+from collections import namedtuple
+
 from ..collections.namedtuple import nestednamedtuple
 
 
-def make_config(**kwargs):
+def make_config(**kwargs) -> None:
     """Creates a global configuration that can be accessed anywhere during runtime.
 
     This function is a useful replacement to passing configuration classes between classes.
@@ -20,8 +22,8 @@ def make_config(**kwargs):
     globals()["gconf"] = kwargs
 
 
-def conf():
-    """Access global configuration as a nestednamedtuple.
+def conf() -> namedtuple:
+    """Access global configuration as a :class:`toolbox.collections.namedtuple.nestednamedtuple`.
 
     Example:
 
@@ -38,7 +40,7 @@ def conf():
         return nestednamedtuple({})
 
 
-def config():
+def config() -> dict:
     """Access global configuration as a dict.
 
     Example:

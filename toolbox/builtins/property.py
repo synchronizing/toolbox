@@ -1,3 +1,4 @@
+from typing import Type
 from builtins import property
 
 
@@ -21,5 +22,5 @@ class classproperty(property):
             print(Animal.dog) # >>> 'whoof!'
     """
 
-    def __get__(self, cls, owner):
+    def __get__(self, cls: Type, owner: object) -> classmethod:
         return classmethod(self.fget).__get__(None, owner)()

@@ -1,3 +1,4 @@
+from typing import Union, Awaitable, Callable
 import functools
 import datetime
 import inspect
@@ -5,7 +6,13 @@ import asyncio
 import signal
 
 
-def timeout(days=0, hours=0, minutes=0, seconds=0, err=False):
+def timeout(
+    days: int = 0,
+    hours: int = 0,
+    minutes: int = 0,
+    seconds: int = 0,
+    err: bool = False,
+):
     """Wait for *time* before quitting *func* run and returning None.
 
     This decorator works with both asynchronous and synchronous functions. Note,
@@ -28,7 +35,7 @@ def timeout(days=0, hours=0, minutes=0, seconds=0, err=False):
     td = datetime.timedelta(days=days, hours=hours, minutes=minutes, seconds=seconds)
     total_seconds = int(td.total_seconds())
 
-    def wrapper(func):
+    def wrapper(func: Union[Callable, Awaitable]):
         @functools.wraps(func)
         async def async_wrapper(*args, **kwargs):
             try:

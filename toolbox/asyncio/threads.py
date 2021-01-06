@@ -1,9 +1,10 @@
+from typing import Callable, Awaitable, Any
 import asyncio
 import contextvars
 import functools
 
 
-async def to_thread(func, *args, **kwargs):
+async def to_thread(func: Callable, *args, **kwargs) -> Awaitable:
     """Asynchronously run function *func* in a separate thread.
 
     Any *args and **kwargs supplied for this function are directly passed
@@ -43,7 +44,7 @@ async def to_thread(func, *args, **kwargs):
     return await loop.run_in_executor(None, func_call)
 
 
-def awaitable(func):
+def awaitable(func: Callable) -> Awaitable[Any]:
     """Decorator that converts a synchronous function into an asynchronous function.
 
     When decorator is used *func* becomes an awaitable. When awaited, the synchronous

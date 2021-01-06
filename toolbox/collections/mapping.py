@@ -1,4 +1,4 @@
-""" Adds functionalities to the standard dictionary model. """
+from typing import Any
 
 
 class BidirectionalDict(dict):
@@ -14,7 +14,7 @@ class BidirectionalDict(dict):
             print(d) # >>> {'hello': 'world', 'world': 'hello'}
     """
 
-    def __init__(self, dictionary={}, **kwargs):
+    def __init__(self, dictionary: dict = {}, **kwargs) -> dict:
         dict.__init__(
             self,
             {
@@ -40,7 +40,7 @@ class ObjectDict(dict):
             print(d.hello) # >>> 'world'
     """
 
-    def __getattr__(self, key):
+    def __getattr__(self, key: Any) -> Any:
         return self.__getitem__(key)
 
 
@@ -61,18 +61,18 @@ class OverloadedDict(dict):
             print(d1) # >>> {'hello': 'world'}
     """
 
-    def __add__(self, other):
+    def __add__(self, other: dict) -> dict:
         d = {**self, **other}
         return OverloadedDict(d)
 
-    def __iadd__(self, other):
+    def __iadd__(self, other: dict) -> dict:
         self = self.__add__(other)
         return self
 
-    def __sub__(self, other):
+    def __sub__(self, other: dict) -> dict:
         d = {k: v for k, v in self.items() if (k, v) not in other.items()}
         return OverloadedDict(d)
 
-    def __isub__(self, other):
+    def __isub__(self, other: dict) -> dict:
         self = self.__sub__(other)
         return self

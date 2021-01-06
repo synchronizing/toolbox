@@ -2,7 +2,7 @@ from collections import namedtuple
 from collections.abc import Mapping
 
 
-def nestednamedtuple(dictionary):
+def nestednamedtuple(dictionary: dict) -> namedtuple:
     """Converts dictionary to a nested namedtuple recursively.
 
     Example:

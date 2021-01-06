@@ -1,7 +1,7 @@
 import textwrap
 
 
-def unindent(text):
+def unindent(text: str) -> str:
     r"""Unident triple quotes and removes any white spaces before or after text.
 
     Note that in the example below we are not necessarily printing the results of

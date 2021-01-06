@@ -1,10 +1,11 @@
+from typing import Callable, Union, Awaitable
 import inspect
 import ast
 import textwrap
 import functools
 
 
-def asyncdispatch(func):
+def asyncdispatch(func: Callable) -> Callable:
     """Decorator for adding dispatch functionality between async and sync functions.
 
     Similar to :py:func:`functools.singledispatch`, but for sync and async function. This
@@ -40,7 +41,7 @@ def asyncdispatch(func):
     funcs = {"sync": lambda: True, "async": lambda: True}
 
     @functools.wraps(func)
-    def wrapper(*args, **kwargs):
+    def wrapper(*args, **kwargs) -> Union[Callable, Awaitable]:
 
         # Gets the location where the function was called from.
         info = inspect.stack()[1]
@@ -77,7 +78,7 @@ def asyncdispatch(func):
         else:
             return funcs["async"](*args, **kwargs)
 
-    def register(func):
+    def register(func: Awaitable) -> None:
         # Register the functions accordingly.
         if inspect.iscoroutinefunction(func):
             funcs["async"] = func
