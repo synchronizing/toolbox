@@ -3,6 +3,7 @@ from toolbox import (
     BidirectionalDict,
     ObjectDict,
     OverloadedDict,
+    UnderscoreAccessDict,
     nestednamedtuple,
     fdict,
 )
@@ -61,6 +62,15 @@ class Test_mapping:
             d2 = OverloadedDict({"two": 2})
             d1 -= d2
             assert d1 == {"one": 1}
+
+    class Test_collection_underscore:
+        def test_underscore_access_str(self):
+            d = UnderscoreAccessDict(
+                {"hello world": "ola mundo", "ola_mundo": "hello world", "key": "value"}
+            )
+            assert d["hello_world"] == "ola mundo"
+            assert d["ola_mundo"] == "hello world"
+            assert d["key"] == "value"
 
 
 class Test_namedtuple:

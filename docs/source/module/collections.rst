@@ -23,6 +23,7 @@ Since the mappings below are children class to :py:class:`dict`, they may all be
 .. autoclass:: toolbox.collections.mapping.BidirectionalDict()
 .. autoclass:: toolbox.collections.mapping.ObjectDict()
 .. autoclass:: toolbox.collections.mapping.OverloadedDict()
+.. autoclass:: toolbox.collections.mapping.UnderscoreAccessDict()
 
 ----
 

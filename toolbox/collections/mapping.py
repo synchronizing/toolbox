@@ -78,3 +78,27 @@ class OverloadedDict(dict):
     def __isub__(self, other: dict) -> dict:
         self = self.__sub__(other)
         return self
+
+
+class UnderscoreAccessDict(dict):
+    """Dictionary that doesn't distinct keys with empty spaces and underscores.
+
+    Example:
+
+        .. code-block:: python
+
+            from toolbox.collections.mapping import UnderscoreAccessDict
+
+            d = UnderscoreAccessDict({"hello world": "ola mundo"})
+            d['hello_world'] # >>> 'ola mundo'
+    """
+
+    def __getitem__(self, key: Any) -> Any:
+        utw = key.replace("_", " ")
+        wtu = key.replace("_", "")
+        if utw in self:
+            return super(UnderscoreAccessDict, self).__getitem__(utw)
+        elif wtu in self:
+            return super(UnderscoreAccessDict, self).__getitem__(wtu)
+
+        return super(UnderscoreAccessDict, self).__getitem__(key)
