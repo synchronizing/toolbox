@@ -97,19 +97,18 @@ class Animal:
 print(Animal.dog) # >>> 'whoof!'
 ```
 
+
 ### `collections`
 
-All `*Dict` types below can be combined together (as mixins) to create unique dictionary types. Example:
+#### [Item](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.item.Item)
+
+An interface for type-agnostic operations between different types.
 
 ```python
-from toolbox import ObjectDict, UnderscoreAccessDict
+from toolbox import Item
 
-class Dict(ObjectDict, UnderscoreAccessDict):
-    """ New dictionary that allows object access with underscore access. """
-
-d = Dict({"hello world": "ola mundo", "100": "one hundred"})
-print(d.hello_world)    # >>> ola mundo
-print(d._100)           # >>> one hundred
+item = Item(100)
+print(item == b"100" == "100" == 100)
 ```
 
 #### [`BidirectionalDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.BidirectionalDict)
@@ -160,6 +159,19 @@ from toolbox import UnderscoreAccessDict
 
 d = UnderscoreAccessDict({"hello world": "ola mundo"})
 d['hello_world'] # >>> 'ola mundo'
+```
+
+All `*Dict` types above can be combined together (as mixins) to create unique dictionary types. Example:
+
+```python
+from toolbox import ObjectDict, UnderscoreAccessDict
+
+class Dict(ObjectDict, UnderscoreAccessDict):
+    """ New dictionary that allows object access with underscore access. """
+
+d = Dict({"hello world": "ola mundo", "100": "one hundred"})
+print(d.hello_world)    # >>> ola mundo
+print(d._100)           # >>> one hundred
 ```
 
 #### [`nestednamedtuple`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.nestednamedtuple)
