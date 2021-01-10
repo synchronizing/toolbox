@@ -55,6 +55,11 @@ class Test_item:
         assert -Item(None) == None
         assert -Item(False) == 0
 
+    def test_item_contains(self):
+        assert b"hello" in Item("hello world")
+        assert 100 in Item("one hundred is 100")
+        assert "ola" in Item(b"ola mundo")
+
     def test_item_eq(self):
         assert Item(100) == Item("100") == Item(b"100")
         assert Item("hello") == Item(b"hello")
