@@ -160,10 +160,26 @@
 <span class="sd">        object. The true usefulness of this container is for type-agnostic operations such as</span>
 <span class="sd">        equality checks.</span>
 
+<span class="sd">        Example:</span>
+
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                from toolbox.collections.item import Item</span>
+
+<span class="sd">                item = Item("hello world")</span>
+<span class="sd">                if b" world" in item:</span>
+<span class="sd">                    item -= " world"</span>
+
+<span class="sd">                print(item.raw, item.string)</span>
+<span class="sd">                # &gt;&gt;&gt; b'hello' hello</span>
+
+<span class="sd">                print(repr(item))</span>
+<span class="sd">                # &gt;&gt;&gt; Item(bytes=b'hello', str='hello', int=None, bool=True, original_type=str)</span>
+
+
 <span class="sd">        Args:</span>
 <span class="sd">            item: Input to be stored.</span>
 <span class="sd">        """</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">byte_item</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
 
@@ -181,9 +197,8 @@
     <span class="k">def</span> <span class="nf">integer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
         <span class="sd">"""Integer representation of the passed item.</span>
 
-<span class="sd">        If passed item is not a sub class of type int, this property returns None.</span>
+<span class="sd">        If passed item is not a sub class of type int or str.isdigit() this property returns None.</span>
 <span class="sd">        """</span>
-
         <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
             <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_item</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -200,7 +215,6 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">original</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ItemType</span><span class="p">:</span>
         <span class="sd">"""Original representation of the passed item."""</span>
-
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="ow">is</span> <span class="nb">str</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_item</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_item</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">ENCODE</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">):</span>
@@ -235,6 +249,10 @@
 <span class="sd">                print(-item, type(-item)) # &gt;&gt;&gt; 100 &lt;class 'int'&gt;</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">integer</span></div>
+
+<div class="viewcode-block" id="Item.__contains__"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.item.Item.__contains__">[docs]</a>    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">ItemType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">byte_item</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_item</span></div>
 
 <div class="viewcode-block" id="Item.__eq__"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.item.Item.__eq__">[docs]</a>    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">ItemType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="n">_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">byte_item</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>

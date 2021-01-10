@@ -157,6 +157,20 @@ and <code class="docutils literal notranslate"><span class="pre">None</span></co
 operation or modification to the new <code class="docutils literal notranslate"><span class="pre">Item</span></code> instance is done to the internal <code class="docutils literal notranslate"><span class="pre">bytes</span></code>
 object. The true usefulness of this container is for type-agnostic operations such as
 equality checks.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.item</span> <span class="kn">import</span> <span class="n">Item</span>
+
+<span class="n">item</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">)</span>
+<span class="k">if</span> <span class="sa">b</span><span class="s2">" world"</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+    <span class="n">item</span> <span class="o">-=</span> <span class="s2">" world"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
+<span class="c1"># &gt;&gt;&gt; b'hello' hello</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+<span class="c1"># &gt;&gt;&gt; Item(bytes=b'hello', str='hello', int=None, bool=True, original_type=str)</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>item</strong> – Input to be stored.</p>
@@ -176,7 +190,7 @@ equality checks.</p>
 <dt id="toolbox.collections.item.Item.integer">
 <em class="property">property </em><code class="sig-name descname">integer</code><a class="headerlink" href="#toolbox.collections.item.Item.integer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Integer representation of the passed item.</p>
-<p>If passed item is not a sub class of type int, this property returns None.</p>
+<p>If passed item is not a sub class of type int or str.isdigit() this property returns None.</p>
 </dd></dl>
 <dl class="py method">
 <dt id="toolbox.collections.item.Item.boolean">
@@ -214,6 +228,13 @@ equality checks.</p>
 </div>
 </dd></dl>
 <p>The following operations are also included:</p>
+<dl class="py function">
+<dt id="toolbox.collections.item.Item.__contains__">
+<code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.item.Item.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sa">b</span><span class="s2">"hello"</span> <span class="ow">in</span> <span class="n">Item</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; True</span>
+</pre></div>
+</div>
+</dd></dl>
 <dl class="py function">
 <dt id="toolbox.collections.item.Item.__eq__">
 <code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.item.Item.__eq__" title="Permalink to this definition">¶</a></dt>

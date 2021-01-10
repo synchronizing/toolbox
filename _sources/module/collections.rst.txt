@@ -25,6 +25,12 @@ item
 
     The following operations are also included:
 
+    .. function:: __contains__()
+
+        .. code-block:: python
+
+            b"hello" in Item("hello world") # >>> True
+
     .. function:: __eq__()
 
         .. code-block:: python
