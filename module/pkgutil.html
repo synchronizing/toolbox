@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="collections" href="collections.html" /><link rel="prev" title="asyncio" href="asyncio.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="string" href="string.html" /><link rel="prev" title="functools" href="functools.html" />
 
     <meta name="generator" content="sphinx-3.4.1, furo 2020.12.30.beta24"/>
-        <title>builtins - Toolbox</title>
+        <title>pkgutil - Toolbox</title>
       <link rel="stylesheet" href="../_static/styles/furo.css?digest=33d2fc4f3f180ec1ffc6524e273e21d7d58cbe49">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
@@ -120,12 +120,12 @@
 <p class="caption"><span class="caption-text">Packages</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="asyncio.html">asyncio</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="builtins.html">builtins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="collections.html">collections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config.html">config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experimental.html">experimental</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functools.html">functools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pkgutil.html">pkgutil</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">pkgutil</a></li>
 <li class="toctree-l1"><a class="reference internal" href="string.html">string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="textwrap.html">textwrap</a></li>
 </ul>
@@ -142,28 +142,44 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="builtins">
-<h1>builtins<a class="headerlink" href="#builtins" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="property">
-<h2>property<a class="headerlink" href="#property" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.builtins</span> <span class="kn">import</span> <span class="nb">property</span>
+        <div class="section" id="pkgutil">
+<h1>pkgutil<a class="headerlink" href="#pkgutil" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="package">
+<h2>package<a class="headerlink" href="#package" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.config</span> <span class="kn">import</span> <span class="n">pkgutil</span>
 </pre></div>
 </div>
-<dl class="py class">
-<dt id="toolbox.builtins.property.classproperty">
-<em class="property">class </em><code class="sig-name descname">classproperty</code><a class="reference internal" href="../_modules/toolbox/builtins/property.html#classproperty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.builtins.property.classproperty" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decorator to set a class method as a class property.</p>
-<p>Combines a property and a classmethod into one, creating a class property. Allows
-access to computed class attributes.</p>
+<dl class="py function">
+<dt id="toolbox.pkgutil.package.search_package">
+<code class="sig-name descname">search_package</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pkg</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">method</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'is'</span></em><span class="sig-paren">)</span> → dict<a class="reference internal" href="../_modules/toolbox/pkgutil/package.html#search_package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.pkgutil.package.search_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discover packages installed in the system.</p>
+<p>Function iterates through all of the installed packages in the system and returns a dictionary
+with all modules that passes the search criteria passed by <code class="docutils literal notranslate"><span class="pre">method</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pkg</strong> – Package name to search for.</p></li>
+<li><p><strong>method</strong> – String that is either <code class="docutils literal notranslate"><span class="pre">is</span></code>, <code class="docutils literal notranslate"><span class="pre">in</span></code>, or <code class="docutils literal notranslate"><span class="pre">startswith</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>TypeError</strong> – The search method passed is invalid.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The search method must be one of the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">is</span></code>: Returns modules that are exactly worded <code class="docutils literal notranslate"><span class="pre">pkg</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in</span></code>: Returns modules that contains the string <code class="docutils literal notranslate"><span class="pre">pkg</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">startswith</span></code>: Return modules that starts with the passed <code class="docutils literal notranslate"><span class="pre">pkg</span></code> name.</p></li>
+</ul>
+</div>
 <p class="rubric">Example</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.builtins.property</span> <span class="kn">import</span> <span class="n">classproperty</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.pkgutil.package</span> <span class="kn">import</span> <span class="n">search_package</span>
 
-<span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
-    <span class="nd">@classproperty</span>
-    <span class="k">def</span> <span class="nf">dog</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"whoof!"</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">Animal</span><span class="o">.</span><span class="n">dog</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; 'whoof!'</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">search_package</span><span class="p">(</span><span class="s2">"toolbox"</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"is"</span><span class="p">))</span>
+<span class="c1"># &gt;&gt;&gt; {'toolbox': &lt;module 'toolbox' from '.../toolbox/__init__.py'&gt;}</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -174,23 +190,23 @@ access to computed class attributes.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="collections.html">
+          <a class="next-page" href="string.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">collections</div>
+                <div class="title">string</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="asyncio.html">
+          <a class="prev-page" href="functools.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">asyncio</div>
+                <div class="title">functools</div>
                 
               </div>
             </a>
@@ -204,7 +220,7 @@ access to computed class attributes.</p>
               <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
               <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
             |
-            <a class="muted-link" href="../_sources/module/builtins.rst.txt"
+            <a class="muted-link" href="../_sources/module/pkgutil.rst.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -224,8 +240,8 @@ access to computed class attributes.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">builtins</a><ul>
-<li><a class="reference internal" href="#property">property</a></li>
+<li><a class="reference internal" href="#">pkgutil</a><ul>
+<li><a class="reference internal" href="#package">package</a></li>
 </ul>
 </li>
 </ul>
