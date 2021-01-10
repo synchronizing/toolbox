@@ -16,10 +16,26 @@ class Item:
         object. The true usefulness of this container is for type-agnostic operations such as
         equality checks.
 
+        Example:
+
+            .. code-block:: python
+
+                from toolbox.collections.item import Item
+
+                item = Item("hello world")
+                if b" world" in item:
+                    item -= " world"
+
+                print(item.raw, item.string)
+                # >>> b'hello' hello
+
+                print(repr(item))
+                # >>> Item(bytes=b'hello', str='hello', int=None, bool=True, original_type=str)
+
+
         Args:
             item: Input to be stored.
         """
-
         self._type = type(item)
         self._item = self.byte_item(item=item)
 
@@ -37,9 +53,8 @@ class Item:
     def integer(self) -> Union[int, None]:
         """Integer representation of the passed item.
 
-        If passed item is not a sub class of type int, this property returns None.
+        If passed item is not a sub class of type int or str.isdigit() this property returns None.
         """
-
         if issubclass(self._type, int) or self.string.isdigit():
             return int(self._item)
         else:
@@ -56,7 +71,6 @@ class Item:
     @property
     def original(self) -> ItemType:
         """Original representation of the passed item."""
-
         if self._type is str and isinstance(self._item, bytes):
             return self._item.decode(ENCODE)
         elif self._type is type(None):
@@ -91,6 +105,10 @@ class Item:
                 print(-item, type(-item)) # >>> 100 <class 'int'>
         """
         return self.integer
+
+    def __contains__(self, item: ItemType) -> bool:
+        _item = self.byte_item(item=item)
+        return _item in self._item
 
     def __eq__(self, item: ItemType) -> bool:
         _item = self.byte_item(item=item)
