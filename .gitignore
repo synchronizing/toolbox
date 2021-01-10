@@ -4,6 +4,7 @@
 # Python
 __pycache__
 *.egg-info
+.eggs
 
 # Documentation
 docs/build/

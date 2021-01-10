@@ -248,6 +248,19 @@ def func():
 func()
 ```
 
+### `pkgutil`
+
+#### [`search_package`](https://synchronizing.github.io/toolbox/module/pkgutil.html#toolbox.pkgutil.package.search_package)
+
+Searches for packages installed in the system.
+
+```python
+from toolbox import search_package
+
+print(search_package("toolbox", method="is"))
+# >>> {'toolbox': <module 'toolbox' from '.../toolbox/__init__.py'>}
+```
+
 ### `experimental`
 
 All tools marked as experimental are not meant to be used in production.
