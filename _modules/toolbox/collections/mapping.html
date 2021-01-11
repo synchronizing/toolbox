@@ -146,7 +146,33 @@
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 
 
-<div class="viewcode-block" id="BidirectionalDict"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.mapping.BidirectionalDict">[docs]</a><span class="k">class</span> <span class="nc">BidirectionalDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseDict"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.mapping.BaseDict">[docs]</a><span class="k">class</span> <span class="nc">BaseDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="sd">"""Dictionary with pretty :py:func:`__repr__` output.</span>
+
+<span class="sd">    Base class that all other dictionaries in this file inherit from. :py:func:`__repr__` is</span>
+<span class="sd">    replaced with ``&lt;{class_name} {dictionary data}&gt;`` output style for implicit inferences.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            from toolbox.collections.mapping import BaseDict</span>
+
+<span class="sd">            class NewDict(BaseDict):</span>
+<span class="sd">                '''New dictionary example.'''</span>
+
+<span class="sd">            d = NewDict({"hello": "world"})</span>
+<span class="sd">            print(d) # &gt;&gt;&gt; &lt;NewDict {'hello': 'world'}&gt;</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"&lt;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">BaseDict</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">(),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BidirectionalDict"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.mapping.BidirectionalDict">[docs]</a><span class="k">class</span> <span class="nc">BidirectionalDict</span><span class="p">(</span><span class="n">BaseDict</span><span class="p">):</span>
     <span class="sd">"""Dictionary with two-way capabilities.</span>
 
 <span class="sd">    Example:</span>
@@ -156,7 +182,7 @@
 <span class="sd">            from toolbox.collections.mapping import BidirectionalDict</span>
 
 <span class="sd">            d = BidirectionalDict({"hello": "world"})</span>
-<span class="sd">            print(d) # &gt;&gt;&gt; {'hello': 'world', 'world': 'hello'}</span>
+<span class="sd">            print(d) # &gt;&gt;&gt; &lt;BidirectionalDict {'hello': 'world', 'world': 'hello'}&gt;</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
@@ -174,7 +200,7 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">BidirectionalDict</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__setitem__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ObjectDict"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.mapping.ObjectDict">[docs]</a><span class="k">class</span> <span class="nc">ObjectDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<div class="viewcode-block" id="ObjectDict"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.mapping.ObjectDict">[docs]</a><span class="k">class</span> <span class="nc">ObjectDict</span><span class="p">(</span><span class="n">BaseDict</span><span class="p">):</span>
     <span class="sd">"""Dictionary that can be accessed as though it was an object.</span>
 
 <span class="sd">    Example:</span>
@@ -184,6 +210,8 @@
 <span class="sd">            from toolbox.collections.mapping import ObjectDict</span>
 
 <span class="sd">            d = ObjectDict({"hello": "world"})</span>
+<span class="sd">            print(d) # &gt;&gt;&gt; &lt;ObjectDict {'hello': 'world'}&gt;</span>
+
 <span class="sd">            print(d.hello) # &gt;&gt;&gt; 'world'</span>
 <span class="sd">    """</span>
 
@@ -191,7 +219,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="OverloadedDict"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.mapping.OverloadedDict">[docs]</a><span class="k">class</span> <span class="nc">OverloadedDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<div class="viewcode-block" id="OverloadedDict"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.mapping.OverloadedDict">[docs]</a><span class="k">class</span> <span class="nc">OverloadedDict</span><span class="p">(</span><span class="n">BaseDict</span><span class="p">):</span>
     <span class="sd">"""Dictionary that can be added or subtracted.</span>
 
 <span class="sd">    Example:</span>
@@ -201,11 +229,13 @@
 <span class="sd">            from toolbox.collections.mapping import OverloadedDict</span>
 
 <span class="sd">            d1 = OverloadedDict({"hello": "world"})</span>
-<span class="sd">            d2 = OverloadedDict({"ola": "mundo"})</span>
+<span class="sd">            d2 = {"ola": "mundo"}</span>
+
 <span class="sd">            d1 += d2</span>
-<span class="sd">            print(d1) # &gt;&gt;&gt; {'hello': 'world', 'ola': 'mundo'}</span>
+<span class="sd">            print(d1) # &gt;&gt;&gt; &lt;OverloadedDict {'hello': 'world', 'ola': 'mundo'}&gt;</span>
+
 <span class="sd">            d1 -= d2</span>
-<span class="sd">            print(d1) # &gt;&gt;&gt; {'hello': 'world'}</span>
+<span class="sd">            print(d1) # &gt;&gt;&gt; &lt;OverloadedDict {'hello': 'world'}&gt;</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
@@ -225,7 +255,7 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 
-<div class="viewcode-block" id="UnderscoreAccessDict"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.mapping.UnderscoreAccessDict">[docs]</a><span class="k">class</span> <span class="nc">UnderscoreAccessDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<div class="viewcode-block" id="UnderscoreAccessDict"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.mapping.UnderscoreAccessDict">[docs]</a><span class="k">class</span> <span class="nc">UnderscoreAccessDict</span><span class="p">(</span><span class="n">BaseDict</span><span class="p">):</span>
     <span class="sd">"""Dictionary that doesn't distinct keys with empty spaces and underscores.</span>
 
 <span class="sd">    Example:</span>
@@ -235,7 +265,9 @@
 <span class="sd">            from toolbox.collections.mapping import UnderscoreAccessDict</span>
 
 <span class="sd">            d = UnderscoreAccessDict({"hello world": "ola mundo"})</span>
-<span class="sd">            d['hello_world'] # &gt;&gt;&gt; 'ola mundo'</span>
+<span class="sd">            print(d) # &gt;&gt;&gt; &lt;UnderscoreAccessDict {'hello world': 'ola mundo'}&gt;</span>
+
+<span class="sd">            print(d['hello_world']) # &gt;&gt;&gt; 'ola mundo'</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
@@ -247,6 +279,25 @@
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">UnderscoreAccessDict</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">wtu</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">UnderscoreAccessDict</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FrozenDict"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.mapping.FrozenDict">[docs]</a><span class="k">class</span> <span class="nc">FrozenDict</span><span class="p">(</span><span class="n">BaseDict</span><span class="p">):</span>
+    <span class="sd">"""Dictionary that is frozen.</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        from toolbox.collections.mapping import FrozenDict</span>
+
+<span class="sd">        d = FrozenDict({"hello": "world"})</span>
+<span class="sd">        print(d) # &gt;&gt;&gt; &lt;FrozenDict {'hello': 'world'}&gt;</span>
+
+<span class="sd">        d['ola'] = 'mundo'</span>
+<span class="sd">        # &gt;&gt;&gt; KeyError: 'Cannot set key and value because this is a frozen dictionary.'</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="s2">"Cannot set key and value because this is a frozen dictionary."</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span></div>
 </pre></div>
       </article>
       <footer>

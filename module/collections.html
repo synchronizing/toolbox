@@ -299,8 +299,8 @@ equality checks.</p>
 <dl class="py function">
 <dt id="toolbox.collections.item.Item.__bool__">
 <code class="sig-name descname">__bool__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__bool__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.item.Item.__bool__" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="s2">""</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="sa">b</span><span class="s2">""</span><span class="p">))</span> <span class="c1"># &gt;&gt;&gt; True</span>
-<span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="sa">b</span><span class="s2">"hello"</span><span class="p">))</span> <span class="c1"># True</span>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">False</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="s2">""</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="sa">b</span><span class="s2">""</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="kc">False</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span> <span class="c1"># &gt;&gt;&gt; True</span>
+<span class="kc">True</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="sa">b</span><span class="s2">"hello"</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span> <span class="c1"># &gt;&gt;&gt; True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -334,55 +334,104 @@ equality checks.</p>
 <span class="n">ObjectDict</span><span class="p">({</span><span class="s2">"hello"</span><span class="p">:</span><span class="s2">"world"</span><span class="p">},</span> <span class="n">ola</span><span class="o">=</span><span class="s2">"mundo"</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Note that <code class="xref py py-class docutils literal notranslate"><span class="pre">*Dict</span></code> types below can be combined together (as mixins) to create unique dictionary types.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">ObjectDict</span><span class="p">,</span> <span class="n">UnderscoreAccessDict</span><span class="p">,</span> <span class="n">FrozenDict</span>
+
+<span class="k">class</span> <span class="nc">Dict</span><span class="p">(</span><span class="n">ObjectDict</span><span class="p">,</span> <span class="n">UnderscoreAccessDict</span><span class="p">,</span> <span class="n">FrozenDict</span><span class="p">):</span>
+    <span class="sd">""" Frozen dictionary that allows object access with underscore access. """</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">({</span><span class="s2">"hello world"</span><span class="p">:</span> <span class="s2">"ola mundo"</span><span class="p">,</span> <span class="s2">"100"</span><span class="p">:</span> <span class="s2">"one hundred"</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>                <span class="c1"># &gt;&gt;&gt; &lt;Dict {'hello world': 'ola mundo', '100': 'one hundred'}&gt;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">hello_world</span><span class="p">)</span>    <span class="c1"># &gt;&gt;&gt; ola mundo</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">_100</span><span class="p">)</span>           <span class="c1"># &gt;&gt;&gt; one hundred</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt id="toolbox.collections.mapping.BaseDict">
+<em class="property">class </em><code class="sig-name descname">BaseDict</code><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#BaseDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.mapping.BaseDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary with pretty <code class="xref py py-func docutils literal notranslate"><span class="pre">__repr__()</span></code> output.</p>
+<p>Base class that all other dictionaries in this file inherit from. <code class="xref py py-func docutils literal notranslate"><span class="pre">__repr__()</span></code> is
+replaced with <code class="docutils literal notranslate"><span class="pre">&lt;{class_name}</span> <span class="pre">{dictionary</span> <span class="pre">data}&gt;</span></code> output style for implicit inferences.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">BaseDict</span>
+
+<span class="k">class</span> <span class="nc">NewDict</span><span class="p">(</span><span class="n">BaseDict</span><span class="p">):</span>
+    <span class="sd">'''New dictionary example.'''</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">NewDict</span><span class="p">({</span><span class="s2">"hello"</span><span class="p">:</span> <span class="s2">"world"</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;NewDict {'hello': 'world'}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
 <dl class="py class">
 <dt id="toolbox.collections.mapping.BidirectionalDict">
-<em class="property">class </em><code class="sig-name descname">BidirectionalDict</code><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#BidirectionalDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.mapping.BidirectionalDict" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">BidirectionalDict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">BaseDict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#BidirectionalDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.mapping.BidirectionalDict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary with two-way capabilities.</p>
 <p class="rubric">Example</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">BidirectionalDict</span>
 
 <span class="n">d</span> <span class="o">=</span> <span class="n">BidirectionalDict</span><span class="p">({</span><span class="s2">"hello"</span><span class="p">:</span> <span class="s2">"world"</span><span class="p">})</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; {'hello': 'world', 'world': 'hello'}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;BidirectionalDict {'hello': 'world', 'world': 'hello'}&gt;</span>
 </pre></div>
 </div>
 </dd></dl>
 <dl class="py class">
 <dt id="toolbox.collections.mapping.ObjectDict">
-<em class="property">class </em><code class="sig-name descname">ObjectDict</code><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#ObjectDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.mapping.ObjectDict" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">ObjectDict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">BaseDict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#ObjectDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.mapping.ObjectDict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary that can be accessed as though it was an object.</p>
 <p class="rubric">Example</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">ObjectDict</span>
 
 <span class="n">d</span> <span class="o">=</span> <span class="n">ObjectDict</span><span class="p">({</span><span class="s2">"hello"</span><span class="p">:</span> <span class="s2">"world"</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;ObjectDict {'hello': 'world'}&gt;</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">hello</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; 'world'</span>
 </pre></div>
 </div>
 </dd></dl>
 <dl class="py class">
 <dt id="toolbox.collections.mapping.OverloadedDict">
-<em class="property">class </em><code class="sig-name descname">OverloadedDict</code><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#OverloadedDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.mapping.OverloadedDict" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">OverloadedDict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">BaseDict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#OverloadedDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.mapping.OverloadedDict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary that can be added or subtracted.</p>
 <p class="rubric">Example</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">OverloadedDict</span>
 
 <span class="n">d1</span> <span class="o">=</span> <span class="n">OverloadedDict</span><span class="p">({</span><span class="s2">"hello"</span><span class="p">:</span> <span class="s2">"world"</span><span class="p">})</span>
-<span class="n">d2</span> <span class="o">=</span> <span class="n">OverloadedDict</span><span class="p">({</span><span class="s2">"ola"</span><span class="p">:</span> <span class="s2">"mundo"</span><span class="p">})</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"ola"</span><span class="p">:</span> <span class="s2">"mundo"</span><span class="p">}</span>
+
 <span class="n">d1</span> <span class="o">+=</span> <span class="n">d2</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; {'hello': 'world', 'ola': 'mundo'}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;OverloadedDict {'hello': 'world', 'ola': 'mundo'}&gt;</span>
+
 <span class="n">d1</span> <span class="o">-=</span> <span class="n">d2</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; {'hello': 'world'}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;OverloadedDict {'hello': 'world'}&gt;</span>
 </pre></div>
 </div>
 </dd></dl>
 <dl class="py class">
 <dt id="toolbox.collections.mapping.UnderscoreAccessDict">
-<em class="property">class </em><code class="sig-name descname">UnderscoreAccessDict</code><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#UnderscoreAccessDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.mapping.UnderscoreAccessDict" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">UnderscoreAccessDict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">BaseDict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#UnderscoreAccessDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.mapping.UnderscoreAccessDict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary that doesn’t distinct keys with empty spaces and underscores.</p>
 <p class="rubric">Example</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">UnderscoreAccessDict</span>
 
 <span class="n">d</span> <span class="o">=</span> <span class="n">UnderscoreAccessDict</span><span class="p">({</span><span class="s2">"hello world"</span><span class="p">:</span> <span class="s2">"ola mundo"</span><span class="p">})</span>
-<span class="n">d</span><span class="p">[</span><span class="s1">'hello_world'</span><span class="p">]</span> <span class="c1"># &gt;&gt;&gt; 'ola mundo'</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;UnderscoreAccessDict {'hello world': 'ola mundo'}&gt;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">'hello_world'</span><span class="p">])</span> <span class="c1"># &gt;&gt;&gt; 'ola mundo'</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py class">
+<dt id="toolbox.collections.mapping.FrozenDict">
+<em class="property">class </em><code class="sig-name descname">FrozenDict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">BaseDict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#FrozenDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.mapping.FrozenDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary that is frozen.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">FrozenDict</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">FrozenDict</span><span class="p">({</span><span class="s2">"hello"</span><span class="p">:</span> <span class="s2">"world"</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;FrozenDict {'hello': 'world'}&gt;</span>
+
+<span class="n">d</span><span class="p">[</span><span class="s1">'ola'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'mundo'</span>
+<span class="c1"># &gt;&gt;&gt; KeyError: 'Cannot set key and value because this is a frozen dictionary.'</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -395,11 +444,34 @@ equality checks.</p>
 </div>
 <dl class="py function">
 <dt id="toolbox.collections.namedtuple.nestednamedtuple">
-<code class="sig-prename descclassname">toolbox.collections.namedtuple.</code><code class="sig-name descname">nestednamedtuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toolbox.collections.namedtuple.nestednamedtuple" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py function">
+<code class="sig-name descname">nestednamedtuple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dictionary</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> → collections.namedtuple<a class="reference internal" href="../_modules/toolbox/collections/namedtuple.html#nestednamedtuple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.namedtuple.nestednamedtuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts dictionary to a nested namedtuple recursively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dictionary</strong> – Dictionary to convert into a nested namedtuple.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.namedtuple</span> <span class="kn">import</span> <span class="n">nestednamedtuple</span>
+
+<span class="n">nt</span> <span class="o">=</span> <span class="n">nestednamedtuple</span><span class="p">({</span><span class="s2">"hello"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"ola"</span><span class="p">:</span> <span class="s2">"mundo"</span><span class="p">}})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; namedtupled(hello=namedtupled(ola='mundo'))</span>
+</pre></div>
+</div>
+<dl class="py class">
 <dt id="toolbox.collections.namedtuple.fdict">
-<code class="sig-name descname">fdict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toolbox.collections.namedtuple.fdict" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<em class="property">class </em><code class="sig-name descname">fdict</code><a class="reference internal" href="../_modules/toolbox/collections/namedtuple.html#fdict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.collections.namedtuple.fdict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forced dictionary. Prevents dictionary from becoming a nested namedtuple.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.namedtuple</span> <span class="kn">import</span> <span class="n">nestednamedtuple</span><span class="p">,</span> <span class="n">fdict</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"hello"</span><span class="p">:</span> <span class="s2">"world"</span><span class="p">}</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="n">nestednamedtuple</span><span class="p">({</span><span class="s2">"forced"</span><span class="p">:</span> <span class="n">fdict</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="s2">"notforced"</span><span class="p">:</span> <span class="n">d</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nt</span><span class="o">.</span><span class="n">notforced</span><span class="p">)</span>    <span class="c1"># &gt;&gt;&gt; namedtupled(hello='world')</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nt</span><span class="o">.</span><span class="n">forced</span><span class="p">)</span>       <span class="c1"># &gt;&gt;&gt; {'hello': 'world'}</span>
+</pre></div>
+</div>
+</dd></dl>
 </dd></dl>
 </div>
 </div>
