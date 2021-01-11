@@ -100,7 +100,7 @@ print(Animal.dog) # >>> 'whoof!'
 
 ### `collections`
 
-#### [Item](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.item.Item)
+#### [`Item`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.item.Item)
 
 An interface for type-agnostic operations between different types.
 
@@ -173,6 +173,18 @@ d['ola'] = 'mundo'
 # >>> KeyError: 'Cannot set key and value because this is a frozen dictionary.'
 ```
 
+#### [`ItemDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.ItemDict)
+
+Dictionary that utilizes [`Item`](#Item) for key and values.
+
+```python
+from toolbox import ItemDict, Item
+
+d = ItemDict({"100": "one hundred"})
+print(d[100])                                          # >>> one hundred
+print(d[100] == d['100'] == d[b'100'] == d[Item(100)]) # >>> True
+```
+
 All `*Dict` types above can be combined together (as mixins) to create unique dictionary types. Example:
 
 ```python
@@ -194,7 +206,7 @@ Creates a nested `namedtuple` for easy object access.
 from toolbox import nestednamedtuple
 
 nt = nestednamedtuple({"hello": {"ola": "mundo"}})
-print(nt) # >>> namedtupled(hello=namedtupled(ola='mundo'))
+print(nt)           # >>> namedtupled(hello=namedtupled(ola='mundo'))
 print(nt.hello.ola) # >>> mundo
 ```
 
@@ -208,8 +220,8 @@ from toolbox import nestednamedtuple
 d = {"hello": "world"}
 nt = nestednamedtuple({"forced": fdict(d), "notforced": d})
 
-print(nt.notforced)    # >>> namedtupled(hello='world')
-print(nt.forced)       # >>> {'hello': 'world'}
+print(nt.notforced) # >>> namedtupled(hello='world')
+print(nt.forced)    # >>> {'hello': 'world'}
 ```
 
 ### `config`

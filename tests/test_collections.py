@@ -7,6 +7,7 @@ from toolbox import (
     OverloadedDict,
     UnderscoreAccessDict,
     FrozenDict,
+    ItemDict,
     fdict,
     nestednamedtuple,
 )
@@ -142,6 +143,12 @@ class Test_mapping:
             assert d["ola"] == "mundo"
             assert d["mundo"] == "ola"
 
+        def test_bidirectional_dict_update(self):
+            d = BidirectionalDict()
+            d.update({"hello": "world"})
+            assert d["hello"] == "world"
+            assert d["world"] == "hello"
+
     class Test_collection_object:
         def test_object_dict_type(self):
             assert isinstance(ObjectDict(), dict)
@@ -194,11 +201,49 @@ class Test_mapping:
             assert d["_100"] == "one hundred"
 
     class Test_collection_frozen:
-        def test_frozen(self):
+        def test_frozen_init(self):
             d = FrozenDict({"hello": "world"})
 
             with pytest.raises(KeyError):
                 d["ola"] = "mundo"
+
+        def test_frozen_update(self):
+            d = FrozenDict({"hello": "world"})
+
+            with pytest.raises(KeyError):
+                d.update({"ola": "mundo"})
+
+    class Test_collection_item:
+        def test_item_init(self):
+            d = ItemDict({"100": "one hundred"})
+            assert d["100"] == d[b"100"] == d[100] == d[Item(100)]
+
+        def test_item_setitem(self):
+            d = ItemDict()
+            d[100] = "one hundred"
+            assert d["100"] == d[b"100"] == d[100] == d[Item(100)]
+
+        def test_item_delitem(self):
+            d = ItemDict()
+            d[100] = "one hundred"
+            assert len(d) == 1
+            del d[100]
+            assert len(d) == 0
+
+        def test_item_contains(self):
+            d = ItemDict({"100": "one hundred"})
+            assert "100" in d
+            assert b"100" in d
+            assert 100 in d
+            assert Item(100) in d
+
+        def test_item_update(self):
+            d = ItemDict()
+            d.update({"100": "one hundred"})
+            assert "100" in d
+            assert b"100" in d
+            assert 100 in d
+            assert Item(100) in d
 
 
 class Test_namedtuple:
