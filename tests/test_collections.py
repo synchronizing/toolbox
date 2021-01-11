@@ -1,10 +1,12 @@
 import pytest
 from toolbox import (
+    BaseDict,
     BidirectionalDict,
     Item,
     ObjectDict,
     OverloadedDict,
     UnderscoreAccessDict,
+    FrozenDict,
     fdict,
     nestednamedtuple,
 )
@@ -119,6 +121,11 @@ class Test_item:
 
 
 class Test_mapping:
+    class Test_collection_base:
+        def test_base_dict_repr(self):
+            d = BaseDict({"hello": "world"})
+            assert repr(d) == "<BaseDict {'hello': 'world'}>"
+
     class Test_collection_bidirectional:
         def test_bidirectional_dict_type(self):
             assert isinstance(BidirectionalDict(), dict)
@@ -185,6 +192,13 @@ class Test_mapping:
             assert d["ola_mundo"] == "hello world"
             assert d["key"] == "value"
             assert d["_100"] == "one hundred"
+
+    class Test_collection_frozen:
+        def test_frozen(self):
+            d = FrozenDict({"hello": "world"})
+
+            with pytest.raises(KeyError):
+                d["ola"] = "mundo"
 
 
 class Test_namedtuple:
