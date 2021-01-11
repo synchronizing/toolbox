@@ -90,8 +90,8 @@ item
 
         .. code-block:: python
 
-            bool(Item(None)) == bool(Item(0)) == bool(Item("")) == bool(Item(b"")) # >>> True
-            bool(Item(1)) == bool(Item("hello")) == bool(Item(b"hello")) # True
+            False == bool(Item(0)) == bool(Item("")) == bool(Item(b"")) == bool(Item(False)) == bool(Item(None)) # >>> True
+            True == bool(Item(1)) == bool(Item("hello")) == bool(Item(b"hello")) == bool(Item(True)) # >>> True
 
     .. function:: __str__()
 
@@ -125,10 +125,27 @@ Since the mappings below are children class to :py:class:`dict`, they may all be
     ObjectDict({"hello":"world", "ola": "mundo"})
     ObjectDict({"hello":"world"}, ola="mundo")
 
-.. autoclass:: toolbox.collections.mapping.BidirectionalDict()
-.. autoclass:: toolbox.collections.mapping.ObjectDict()
-.. autoclass:: toolbox.collections.mapping.OverloadedDict()
-.. autoclass:: toolbox.collections.mapping.UnderscoreAccessDict()
+Note that :py:class:`*Dict` types below can be combined together (as mixins) to create unique dictionary types.
+
+.. code-block:: python
+
+    from toolbox.collections.mapping import ObjectDict, UnderscoreAccessDict, FrozenDict
+
+    class Dict(ObjectDict, UnderscoreAccessDict, FrozenDict):
+        """ Frozen dictionary that allows object access with underscore access. """
+
+    d = Dict({"hello world": "ola mundo", "100": "one hundred"})
+    print(d)                # >>> <Dict {'hello world': 'ola mundo', '100': 'one hundred'}>
+    print(d.hello_world)    # >>> ola mundo
+    print(d._100)           # >>> one hundred
+
+.. autoclass:: toolbox.collections.mapping.BaseDict()
+.. autoclass:: toolbox.collections.mapping.BidirectionalDict(BaseDict)
+.. autoclass:: toolbox.collections.mapping.ObjectDict(BaseDict)
+.. autoclass:: toolbox.collections.mapping.OverloadedDict(BaseDict)
+.. autoclass:: toolbox.collections.mapping.UnderscoreAccessDict(BaseDict)
+.. autoclass:: toolbox.collections.mapping.FrozenDict(BaseDict)
+
 
 ----
 
@@ -140,6 +157,6 @@ namedtuple
 
     from toolbox.collections import namedtuple
 
-.. function:: toolbox.collections.namedtuple.nestednamedtuple
+.. autofunction:: toolbox.collections.namedtuple.nestednamedtuple
 
-    .. function:: toolbox.collections.namedtuple.fdict
+    .. autoclass:: toolbox.collections.namedtuple.fdict

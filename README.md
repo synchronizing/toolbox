@@ -108,7 +108,7 @@ An interface for type-agnostic operations between different types.
 from toolbox import Item
 
 item = Item(100)
-print(item == b"100" == "100" == 100)
+print(item == b"100" == "100" == 100) # >>> True
 ```
 
 #### [`BidirectionalDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.BidirectionalDict)
@@ -159,6 +159,18 @@ from toolbox import UnderscoreAccessDict
 
 d = UnderscoreAccessDict({"hello world": "ola mundo"})
 d['hello_world'] # >>> 'ola mundo'
+```
+
+#### [`FrozenDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.FrozenDict)
+
+Dictionary that is frozen.
+
+```python
+from toolbox import FrozenDict
+
+d = FrozenDict({"hello": "world"})
+d['ola'] = 'mundo'
+# >>> KeyError: 'Cannot set key and value because this is a frozen dictionary.'
 ```
 
 All `*Dict` types above can be combined together (as mixins) to create unique dictionary types. Example:
