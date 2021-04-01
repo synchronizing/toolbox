@@ -55,8 +55,6 @@ def search_package(pkg: str, method: str = "is", imports: bool = False) -> dict:
         err = "Search method must be either 'is', 'in', or 'startswith'."
         raise TypeError(err)
 
-    print(method)
-
     installed_pkgs = {
         pkg.project_name: pkg.version for pkg in pkg_resources.working_set
     }
