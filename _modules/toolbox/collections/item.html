@@ -217,6 +217,15 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_item</span><span class="p">)</span>
 
+<div class="viewcode-block" id="Item.replace"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.item.Item.replace">[docs]</a>    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">:</span> <span class="n">ItemType</span><span class="p">,</span> <span class="n">new</span><span class="p">:</span> <span class="n">ItemType</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">"""``bytes.replace()`` functionality on item.</span>
+
+<span class="sd">        See Python `docs &lt;https://docs.python.org/3/library/stdtypes.html?highlight=replace#bytes.replace&gt;`_ for more info.</span>
+<span class="sd">        """</span>
+        <span class="n">old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">byte_item</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">old</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">byte_item</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">new</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="Item.__pos__"><a class="viewcode-back" href="../../../module/collections.html#toolbox.collections.item.Item.__pos__">[docs]</a>    <span class="k">def</span> <span class="fm">__pos__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""Returns the string representation of the object.</span>
 

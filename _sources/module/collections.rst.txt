@@ -105,6 +105,10 @@ item
             repr(Item(True)) # >>> Item(bytes=b'1', str='1', int=1, bool=True, original_type=bool)
             repr(Item("hello")) # >>> Item(bytes=b'hello', str='hello', int=None, bool=True, original_type=str)
 
+    The following functions are included:
+
+    .. automethod:: replace
+
 ----
 
 *******
