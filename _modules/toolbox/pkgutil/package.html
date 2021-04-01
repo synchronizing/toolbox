@@ -194,8 +194,6 @@
         <span class="n">err</span> <span class="o">=</span> <span class="s2">"Search method must be either 'is', 'in', or 'startswith'."</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
-
     <span class="n">installed_pkgs</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">pkg</span><span class="o">.</span><span class="n">project_name</span><span class="p">:</span> <span class="n">pkg</span><span class="o">.</span><span class="n">version</span> <span class="k">for</span> <span class="n">pkg</span> <span class="ow">in</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">working_set</span>
     <span class="p">}</span>
