@@ -1,11 +1,12 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="string" href="string.html" /><link rel="prev" title="functools" href="functools.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="string" href="string.html" /><link rel="prev" title="functools" href="functools.html" />
 
-    <meta name="generator" content="sphinx-3.4.1, furo 2020.12.30.beta24"/>
+    <meta name="generator" content="sphinx-3.4.1, furo 2021.03.20.beta30"/>
         <title>pkgutil - Toolbox</title>
-      <link rel="stylesheet" href="../_static/styles/furo.css?digest=33d2fc4f3f180ec1ffc6524e273e21d7d58cbe49">
+      <link rel="stylesheet" href="../_static/styles/furo.css?digest=978e1795dfe158b585dda6a8417f6411828bf3ed">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
@@ -37,14 +38,7 @@
   
   }
 </style><link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script defer="defer" src="../_static/jquery.js"></script>
-    <script defer="defer" src="../_static/underscore.js"></script>
-    <script defer="defer" src="../_static/doctools.js"></script>
-    <script defer="defer" src="../_static/clipboard.min.js"></script>
-    <script defer="defer" src="../_static/copybutton.js"></script>
-    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -151,7 +145,7 @@
 </div>
 <dl class="py function">
 <dt id="toolbox.pkgutil.package.search_package">
-<code class="sig-name descname">search_package</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pkg</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">method</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'is'</span></em><span class="sig-paren">)</span> → dict<a class="reference internal" href="../_modules/toolbox/pkgutil/package.html#search_package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.pkgutil.package.search_package" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">search_package</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pkg</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">method</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'is'</span></em>, <em class="sig-param"><span class="n">imports</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> → dict<a class="reference internal" href="../_modules/toolbox/pkgutil/package.html#search_package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#toolbox.pkgutil.package.search_package" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discover packages installed in the system.</p>
 <p>Function iterates through all of the installed packages in the system and returns a dictionary
 with all modules that passes the search criteria passed by <code class="docutils literal notranslate"><span class="pre">method</span></code>.</p>
@@ -160,6 +154,7 @@ with all modules that passes the search criteria passed by <code class="docutils
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pkg</strong> – Package name to search for.</p></li>
 <li><p><strong>method</strong> – String that is either <code class="docutils literal notranslate"><span class="pre">is</span></code>, <code class="docutils literal notranslate"><span class="pre">in</span></code>, or <code class="docutils literal notranslate"><span class="pre">startswith</span></code>.</p></li>
+<li><p><strong>imports</strong> – Boolean that indicates whether or not to import the found package(s).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
@@ -174,12 +169,21 @@ with all modules that passes the search criteria passed by <code class="docutils
 <li><p><code class="docutils literal notranslate"><span class="pre">in</span></code>: Returns modules that contains the string <code class="docutils literal notranslate"><span class="pre">pkg</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">startswith</span></code>: Return modules that starts with the passed <code class="docutils literal notranslate"><span class="pre">pkg</span></code> name.</p></li>
 </ul>
+<p>When <code class="docutils literal notranslate"><span class="pre">imports</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code> this function returns a
+<code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">str]</span></code> where the key is the name of the module, and
+the value is the version installed on the system.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">imports</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> this function returns a
+<code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Module]</span></code> where the key is the name of the module,
+and the value is the _imported_ module.</p>
 </div>
 <p class="rubric">Example</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.pkgutil.package</span> <span class="kn">import</span> <span class="n">search_package</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">search_package</span><span class="p">(</span><span class="s2">"toolbox"</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"is"</span><span class="p">))</span>
-<span class="c1"># &gt;&gt;&gt; {'toolbox': &lt;module 'toolbox' from '.../toolbox/__init__.py'&gt;}</span>
+<span class="c1"># &gt;&gt;&gt; {'toolbox': '1.4.0'}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">search_package</span><span class="p">(</span><span class="s2">"toolbox"</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"is"</span><span class="p">,</span> <span class="n">imports</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="c1"># &gt;&gt;&gt; {'toolbox': &lt;module 'toolbox' from '.../toolbox/toolbox/__init__.py'&gt;}</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -254,5 +258,11 @@ with all modules that passes the search criteria passed by <code class="docutils
     </aside>
   </main>
 </div>
-  </body>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

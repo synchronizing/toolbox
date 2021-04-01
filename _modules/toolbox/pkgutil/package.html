@@ -1,11 +1,12 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <meta name="generator" content="sphinx-3.4.1, furo 2020.12.30.beta24"/>
+    <meta name="generator" content="sphinx-3.4.1, furo 2021.03.20.beta30"/>
         <title>toolbox.pkgutil.package - Toolbox</title>
-      <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=33d2fc4f3f180ec1ffc6524e273e21d7d58cbe49">
+      <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=978e1795dfe158b585dda6a8417f6411828bf3ed">
     <link rel="stylesheet" href="../../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
     
@@ -37,14 +38,7 @@
   
   }
 </style><link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" href="../../../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
-    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script defer="defer" src="../../../_static/jquery.js"></script>
-    <script defer="defer" src="../../../_static/underscore.js"></script>
-    <script defer="defer" src="../../../_static/doctools.js"></script>
-    <script defer="defer" src="../../../_static/clipboard.min.js"></script>
-    <script defer="defer" src="../../../_static/copybutton.js"></script>
-    <script defer src="../../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+    <link rel="stylesheet" href="../../../_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -144,10 +138,10 @@
         </label>
         <h1>Source code for toolbox.pkgutil.package</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">importlib</span>
-<span class="kn">import</span> <span class="nn">pkgutil</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
 
 
-<div class="viewcode-block" id="search_package"><a class="viewcode-back" href="../../../module/pkgutil.html#toolbox.pkgutil.package.search_package">[docs]</a><span class="k">def</span> <span class="nf">search_package</span><span class="p">(</span><span class="n">pkg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"is"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<div class="viewcode-block" id="search_package"><a class="viewcode-back" href="../../../module/pkgutil.html#toolbox.pkgutil.package.search_package">[docs]</a><span class="k">def</span> <span class="nf">search_package</span><span class="p">(</span><span class="n">pkg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"is"</span><span class="p">,</span> <span class="n">imports</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">"""Discover packages installed in the system.</span>
 
 <span class="sd">    Function iterates through all of the installed packages in the system and returns a dictionary</span>
@@ -156,6 +150,7 @@
 <span class="sd">    Args:</span>
 <span class="sd">        pkg: Package name to search for.</span>
 <span class="sd">        method: String that is either ``is``, ``in``, or ``startswith``.</span>
+<span class="sd">        imports: Boolean that indicates whether or not to import the found package(s).</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        TypeError: The search method passed is invalid.</span>
@@ -167,6 +162,14 @@
 <span class="sd">        * ``in``: Returns modules that contains the string ``pkg``.</span>
 <span class="sd">        * ``startswith``: Return modules that starts with the passed ``pkg`` name.</span>
 
+<span class="sd">        When ``imports`` is set to ``False`` this function returns a</span>
+<span class="sd">        ``Dict[str, str]`` where the key is the name of the module, and</span>
+<span class="sd">        the value is the version installed on the system.</span>
+
+<span class="sd">        If ``imports`` is set to ``True`` this function returns a</span>
+<span class="sd">        ``Dict[str, Module]`` where the key is the name of the module,</span>
+<span class="sd">        and the value is the _imported_ module.</span>
+
 <span class="sd">    Example:</span>
 
 <span class="sd">        .. code-block:: python</span>
@@ -174,7 +177,11 @@
 <span class="sd">            from toolbox.pkgutil.package import search_package</span>
 
 <span class="sd">            print(search_package("toolbox", method="is"))</span>
-<span class="sd">            # &gt;&gt;&gt; {'toolbox': &lt;module 'toolbox' from '.../toolbox/__init__.py'&gt;}</span>
+<span class="sd">            # &gt;&gt;&gt; {'toolbox': '1.4.0'}</span>
+
+<span class="sd">            print(search_package("toolbox", method="is", imports=True))</span>
+<span class="sd">            # &gt;&gt;&gt; {'toolbox': &lt;module 'toolbox' from '.../toolbox/toolbox/__init__.py'&gt;}</span>
+
 <span class="sd">    """</span>
 
     <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">"is"</span><span class="p">:</span>
@@ -187,10 +194,19 @@
         <span class="n">err</span> <span class="o">=</span> <span class="s2">"Search method must be either 'is', 'in', or 'startswith'."</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
 
+    <span class="nb">print</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+
+    <span class="n">installed_pkgs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">pkg</span><span class="o">.</span><span class="n">project_name</span><span class="p">:</span> <span class="n">pkg</span><span class="o">.</span><span class="n">version</span> <span class="k">for</span> <span class="n">pkg</span> <span class="ow">in</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">working_set</span>
+    <span class="p">}</span>
+
     <span class="n">packages</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">ispkg</span> <span class="ow">in</span> <span class="n">pkgutil</span><span class="o">.</span><span class="n">iter_modules</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">ispkg</span> <span class="ow">and</span> <span class="n">search</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-            <span class="n">packages</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">package</span><span class="p">,</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">installed_pkgs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">search</span><span class="p">(</span><span class="n">package</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">imports</span><span class="p">:</span>
+                <span class="n">packages</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">packages</span><span class="p">[</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="n">version</span>
 
     <span class="k">return</span> <span class="n">packages</span></div>
 </pre></div>
@@ -220,5 +236,11 @@
     </aside>
   </main>
 </div>
-  </body>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>
