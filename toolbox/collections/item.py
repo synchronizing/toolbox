@@ -78,6 +78,15 @@ class Item:
 
         return self._type(self._item)
 
+    def replace(self, old: ItemType, new: ItemType, count: int = -1) -> bytes:
+        """``bytes.replace()`` functionality on item.
+
+        See Python `docs <https://docs.python.org/3/library/stdtypes.html?highlight=replace#bytes.replace>`_ for more info.
+        """
+        old = self.byte_item(item=old)
+        new = self.byte_item(item=new)
+        return self.raw.replace(old, new, count)
+
     def __pos__(self):
         """Returns the string representation of the object.
 
