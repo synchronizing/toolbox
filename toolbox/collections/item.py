@@ -1,6 +1,6 @@
 from typing import Union, Iterator
 
-ENCODE = "ascii"
+ENCODE = "utf-8"
 ItemType = Union[bytes, str, int, bool, None, "Item"]
 
 
