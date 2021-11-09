@@ -47,6 +47,11 @@ class Test_item:
         assert item3.boolean == False
         assert item3.original == None
 
+    def test_replace(self):
+        item = Item("hello world")
+        item = item.replace("hello", "ola")
+        assert item == Item("ola world")
+
     def test_item_pos_and_neg(self):
         assert +Item("100") == "100"
         assert +Item(100) == "100"
