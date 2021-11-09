@@ -84,7 +84,13 @@ item
 
         .. code-block:: python
 
-            hash(Item(100)) == hash(b"100") # True
+            hash(Item(100)) == hash(b"100") # >>> True
+
+    .. function:: __len__()
+
+        .. code-block:: python
+
+            len(Item("hello world")) == 11 # >>> True
 
     .. function:: __bool__()
 

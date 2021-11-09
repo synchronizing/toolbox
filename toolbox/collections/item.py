@@ -145,6 +145,9 @@ class Item:
     def __hash__(self) -> int:
         return hash(self._item)
 
+    def __len__(self) -> int:
+        return len(self.raw)
+
     def __bool__(self) -> bool:
         return self.boolean
 

@@ -90,6 +90,11 @@ class Test_item:
     def test_item_hash(self):
         assert hash(b"hello") == hash(Item("hello")) == hash(Item(b"hello"))
 
+    def test_item_len(self):
+        assert len(Item(None)) == 0
+        assert len(Item(123)) == 3
+        assert len(Item("hello world")) == 11
+
     def test_item_bool(self):
         item = Item(100)
         assert bool(item) == item.boolean
