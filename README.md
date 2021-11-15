@@ -2,12 +2,12 @@
 
 <p align="center">
 
-  <a href="https://github.com/shades-st/toolbox/actions?query=workflow%3ABuild">
-    <img src="https://github.com/shades-st/toolbox/workflows/Build/badge.svg?branch=master&event=push">
+  <a href="https://github.com/synchronizing/toolbox/actions?query=workflow%3ABuild">
+    <img src="https://github.com/synchronizing/toolbox/workflows/Build/badge.svg?branch=master&event=push">
   </a>
 
-<a href="https://shades-st.github.io/toolbox/">
-    <img src="https://github.com/shades-st/toolbox/workflows/Docs/badge.svg?branch=master&event=push">
+<a href="https://synchronizing.github.io/toolbox/">
+    <img src="https://github.com/synchronizing/toolbox/workflows/Docs/badge.svg?branch=master&event=push">
   </a>
 
   <a href="https://coveralls.io/github/synchronizing/toolbox?branch=master">
@@ -29,7 +29,7 @@ pip install toolbox
 
 ## Documentation
 
-Documentation can be found [**here**](http://shades-st.github.io/toolbox/). PDF version of docs can be found [here](https://shades-st.github.io/toolbox/toolbox.pdf).
+Documentation can be found [**here**](http://synchronizing.github.io/toolbox/). PDF version of docs can be found [here](https://synchronizing.github.io/toolbox/toolbox.pdf).
 
 # Tools
 
@@ -41,7 +41,7 @@ Check out documentation for function definitions and more details.
 
 ### `asyncio`
 
-#### [`async to_thread`](https://shades-st.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.to_thread)
+#### [`async to_thread`](https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.to_thread)
 
 Runs passed function in a new thread to ensure non-blocking IO during asynchronous programming.
 
@@ -60,7 +60,7 @@ async def main():
 asyncio.run(main())
 ```
 
-#### [`awaitable`](https://shades-st.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.awaitable)
+#### [`awaitable`](https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.awaitable)
 
 Decorator that converts synchronous function into an asynchronous function. Leverages the `to_thread` function above.
 
@@ -82,7 +82,7 @@ asyncio.run(func())
 
 ### `builtins`
 
-#### [`classproperty`](https://shades-st.github.io/toolbox/module/builtins.html#toolbox.builtins.property.classproperty)
+#### [`classproperty`](https://synchronizing.github.io/toolbox/module/builtins.html#toolbox.builtins.property.classproperty)
 
 Combines a `property` and a `classmethod` into one, creating a class property. Allows access to computed class attributes.
 
@@ -100,7 +100,7 @@ print(Animal.dog) # >>> 'whoof!'
 
 ### `collections`
 
-#### [`Item`](https://shades-st.github.io/toolbox/module/collections.html#toolbox.collections.item.Item)
+#### [`Item`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.item.Item)
 
 An interface for type-agnostic operations between different types.
 
@@ -111,7 +111,7 @@ item = Item(100)
 print(item == b"100" == "100" == 100) # >>> True
 ```
 
-#### [`BidirectionalDict`](https://shades-st.github.io/toolbox/module/collections.html#toolbox.collections.mapping.BidirectionalDict)
+#### [`BidirectionalDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.BidirectionalDict)
 
 Dictionary with two-way capabilities.
 
@@ -122,7 +122,7 @@ d = BidirectionalDict({"hello": "world"})
 print(d) # >>> {'hello': 'world', 'world': 'hello'}
 ```
 
-#### [`ObjectDict`](https://shades-st.github.io/toolbox/module/collections.html#toolbox.collections.mapping.ObjectDict)
+#### [`ObjectDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.ObjectDict)
 
 Dictionary that can be accessed as though it was an object.
 
@@ -133,7 +133,7 @@ d = ObjectDict({"hello": "world"})
 print(d.hello) # >>> 'world'
 ```
 
-#### [`OverloadedDict`](https://shades-st.github.io/toolbox/module/collections.html#toolbox.collections.mapping.OverloadedDict)
+#### [`OverloadedDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.OverloadedDict)
 
 Dictionary that can be added or subtracted to.
 
@@ -150,7 +150,7 @@ d1 -= d2
 print(d1) # >>> {'hello': 'world'}
 ```
 
-#### [`UnderscoreAccessDict`](https://shades-st.github.io/toolbox/module/collections.html#toolbox.collections.mapping.UnderscoreAccessDict)
+#### [`UnderscoreAccessDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.UnderscoreAccessDict)
 
 Dictionary that does not distinct between spaces and underscores.
 
@@ -161,7 +161,7 @@ d = UnderscoreAccessDict({"hello world": "ola mundo"})
 d['hello_world'] # >>> 'ola mundo'
 ```
 
-#### [`FrozenDict`](https://shades-st.github.io/toolbox/module/collections.html#toolbox.collections.mapping.FrozenDict)
+#### [`FrozenDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.FrozenDict)
 
 Dictionary that is frozen.
 
@@ -173,7 +173,7 @@ d['ola'] = 'mundo'
 # >>> KeyError: 'Cannot set key and value because this is a frozen dictionary.'
 ```
 
-#### [`ItemDict`](https://shades-st.github.io/toolbox/module/collections.html#toolbox.collections.mapping.ItemDict)
+#### [`ItemDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.ItemDict)
 
 Dictionary that utilizes [`Item`](#Item) for key and values.
 
@@ -198,7 +198,7 @@ print(d.hello_world)    # >>> ola mundo
 print(d._100)           # >>> one hundred
 ```
 
-#### [`nestednamedtuple`](https://shades-st.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.nestednamedtuple)
+#### [`nestednamedtuple`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.nestednamedtuple)
 
 Creates a nested `namedtuple` for easy object access.
 
@@ -210,7 +210,7 @@ print(nt)           # >>> namedtupled(hello=namedtupled(ola='mundo'))
 print(nt.hello.ola) # >>> mundo
 ```
 
-#### [`fdict`](https://shades-st.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.fdict)
+#### [`fdict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.fdict)
 
 Forces `nestednamedtuple` to not convert `dict` to `namedtuple`. 
 
@@ -226,7 +226,7 @@ print(nt.forced)    # >>> {'hello': 'world'}
 
 ### `config`
 
-#### [`make_config`](https://shades-st.github.io/toolbox/module/config.html#toolbox.config.globalconfig.make_config)
+#### [`make_config`](https://synchronizing.github.io/toolbox/module/config.html#toolbox.config.globalconfig.make_config)
 
 Creates a global configuration that can be accessed by other portions of the code via `conf` or `config` function calls. Minimizes the need to create `Config` objects and pass them around different modules, classes, functions, etc.
 
@@ -236,7 +236,7 @@ from toolbox import make_config
 make_config(hello="world")
 ```
 
-#### [`conf`](https://shades-st.github.io/toolbox/module/config.html#toolbox.config.globalconfig.conf)
+#### [`conf`](https://synchronizing.github.io/toolbox/module/config.html#toolbox.config.globalconfig.conf)
 
 Access global configuration as a `nestednamedtuple`.
 
@@ -246,7 +246,7 @@ from toolbox import conf
 print(conf().hello) # >>> 'world'
 ```
 
-#### [`config`](https://shades-st.github.io/toolbox/module/config.html#toolbox.config.globalconfig.config)
+#### [`config`](https://synchronizing.github.io/toolbox/module/config.html#toolbox.config.globalconfig.config)
 
 Access global configuration as a dictionary.
 
@@ -258,7 +258,7 @@ print(config()['hello']) # >>> 'world'
 
 ### `functools`
 
-#### [`timeout`](https://shades-st.github.io/toolbox/module/functools.html#toolbox.functools.timeout.timeout)
+#### [`timeout`](https://synchronizing.github.io/toolbox/module/functools.html#toolbox.functools.timeout.timeout)
 
 Decorator that adds support for synchronous and asynchronous function timeout. Quits function after an amount of time passes.
 
@@ -274,7 +274,7 @@ func()
 
 ### `pkgutil`
 
-#### [`search_package`](https://shades-st.github.io/toolbox/module/pkgutil.html#toolbox.pkgutil.package.search_package)
+#### [`search_package`](https://synchronizing.github.io/toolbox/module/pkgutil.html#toolbox.pkgutil.package.search_package)
 
 Searches for packages installed in the system.
 
@@ -289,7 +289,7 @@ print(search_package("toolbox", method="is"))
 
 All tools marked as experimental are not meant to be used in production.
 
-#### [`asyncdispatch`](https://shades-st.github.io/toolbox/module/experimental.html#toolbox.experimental.asyncdispatch.asyncdispatch)
+#### [`asyncdispatch`](https://synchronizing.github.io/toolbox/module/experimental.html#toolbox.experimental.asyncdispatch.asyncdispatch)
 
 Decorator for adding dispatch functionality between async and sync functions. Allows calling the same function name, one as a normal function and one as an awaitable, yet receive different results.
 
@@ -323,9 +323,9 @@ print(red("This text is red!"))
 print(bold("This text is bolded!"))
 ```
 
-Check documentation [here](https://shades-st.github.io/toolbox/module/string.html#color) for further information on all built-in formats.
+Check documentation [here](https://synchronizing.github.io/toolbox/module/string.html#color) for further information on all built-in formats.
 
-#### [`Format`](https://shades-st.github.io/toolbox/module/string.html#toolbox.string.color.Format)
+#### [`Format`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Format)
 
 Persistent ANSI format container that allows custom ANSI code.
 
@@ -336,7 +336,7 @@ bold = Format(code=1)
 print(bold("hello world"))
 ```
 
-#### [`Style`](https://shades-st.github.io/toolbox/module/string.html#toolbox.string.color.Style)
+#### [`Style`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Style)
 
 Persistent ANSI format container that allows multiple ANSI codes.
 
@@ -347,7 +347,7 @@ error = Style(red, bold)
 print(error("This is red & bolded error."))
 ```
 
-#### [`supports_color`](https://shades-st.github.io/toolbox/module/string.html#toolbox.string.color.supports_color)
+#### [`supports_color`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.supports_color)
 
 Returns bool that indicates whether or not the user's terminal supports color.
 
@@ -357,7 +357,7 @@ from toolbox import supports_color
 print(supports_color())
 ```
 
-#### [`strip_ansi`](https://shades-st.github.io/toolbox/module/string.html#toolbox.string.color.strip_ansi)
+#### [`strip_ansi`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.strip_ansi)
 
 Removes ANSI codes from string.
 
@@ -369,7 +369,7 @@ print(strip_ansi("\x1b[1mhello world\x1b[0m")) # >>> hello world
 
 ### `textwrap`
 
-#### [`unindent`](https://shades-st.github.io/toolbox/module/textwrap.html#toolbox.textwrap.text.unindent)
+#### [`unindent`](https://synchronizing.github.io/toolbox/module/textwrap.html#toolbox.textwrap.text.unindent)
 
 Unident triple quotes and removes any white spaces before or after text.
 
