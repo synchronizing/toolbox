@@ -1,5 +1,6 @@
 sphinx
 sphinx-copybutton
 sphinx-autobuild
-m2r2
 furo
+git+https://github.com/synchronizing/sphinx-autodoc-typehints.git
+git+https://github.com/synchronizing/toolbox.git

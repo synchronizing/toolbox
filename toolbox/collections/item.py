@@ -15,6 +15,9 @@ class Item:
         operation or modification to the new ``Item`` instance is done to the internal ``bytes``
         object. The true usefulness of this container is for type-agnostic operations such as
         equality checks.
+        
+        Args:
+            item: Input to be stored.
 
         Example:
 
@@ -31,10 +34,6 @@ class Item:
 
                 print(repr(item))
                 # >>> Item(bytes=b'hello', str='hello', int=None, bool=True, original_type=str)
-
-
-        Args:
-            item: Input to be stored.
         """
         self._type = type(item)
         self._item = self.byte_item(item=item)

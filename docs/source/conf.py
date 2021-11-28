@@ -8,18 +8,17 @@
 
 import os
 import sys
-import sphinx
 
 # Adds system path two folders back (where project lives.)
 sys.path.insert(0, os.path.abspath("../.."))
 
 # PyLint might complain, but the interpreter should be able to find this on run.
-import toolbox
+from toolbox import *
 
 # -- Project information -----------------------------------------------------
 
-project = "Toolbox"
-copyright = "2020, Felipe Faria"
+project = "🧰 toolbox"
+copyright = "2021, Felipe Faria"
 author = "Felipe Faria"
 
 # -- General configuration ---------------------------------------------------
@@ -31,7 +30,7 @@ html_title = "{}".format(project)
 autodoc_member_order = "bysource"
 
 # Turn off typehints.
-autodoc_typehints = "signature"
+autodoc_typehints = "none"
 
 # Remove module names from class docs.
 add_module_names = False
@@ -39,14 +38,26 @@ add_module_names = False
 # Show only class docs.
 autoclass_content = "both"
 
+# List __init___ docstrings separately from the class docstring
+napoleon_include_init_with_doc = True
+
+# Removes the default values from the documentation.
+keep_default_values = False
+
+# Removes the class values; e.g. 'Class(val, val, val):' becomes 'Class:'.
+hide_class_values = True
+
+# Test
+default_role = "py:obj"
+
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
     "sphinx.ext.viewcode",
-    "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
-    "m2r2",
+    "sphinx_autodoc_typehints",
+    "sphinx.ext.autodoc",
     "sphinx_copybutton",
 ]
 
@@ -58,15 +69,13 @@ templates_path = ["_templates"]
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
-# PDF Latex Config
-latex_elements = {"extraclassoptions": "openany,oneside"}
-
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
 html_theme = "furo"
+
+html_theme_options = {}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

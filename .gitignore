@@ -1,6 +1,7 @@
 # Env
 .vscode
 .venv
+.DS_Store
 
 # Python
 __pycache__

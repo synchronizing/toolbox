@@ -88,8 +88,8 @@ class AsyncClass(ClassTask):
     def __init__(self, start: bool = False):
         super().__init__(
             self.run,
-            start_log=lambda: print("Starting!"),
-            stop_log=lambda: print("Stopping!"),
+            log_start=lambda: print("Starting!"),
+            log_stop=lambda: print("Stopping!"),
             start=start,
         )
 

@@ -14,6 +14,8 @@ threads
 
 .. autofunction:: toolbox.asyncio.threads.awaitable
 
+----
+
 *******
 pattern
 *******
