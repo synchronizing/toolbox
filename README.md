@@ -86,12 +86,7 @@ import asyncio
 
 class AsyncClass(ClassTask):
     def __init__(self, start: bool = False):
-        super().__init__(
-            self.run,
-            log_start=lambda: print("Starting!"),
-            log_stop=lambda: print("Stopping!"),
-            start=start,
-        )
+        super().__init__(func=self.run, start=start)
 
     async def run(self):
         # Some async functionality here.
