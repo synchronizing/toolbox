@@ -76,6 +76,23 @@ async def main():
 asyncio.run(func())
 ```
 
+#### [`tls_handshake`](https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.streams.tls_handshake)
+
+Performs TLS handshake on passed reader/writer stream.
+
+```python
+from toolbox.asyncio.streams import tls_handshake
+import asyncio
+
+async def client():
+    reader, writer = await asyncio.open_connection("httpbin.org", 443, ssl=False)
+    await tls_handshake(reader=reader, writer=writer)
+
+    # Communication is now encrypted.
+
+asyncio.run(client())
+```
+
 #### [`ClassTask`](https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.pattern.ClassTask)
 
 Useful pattern to add non-blocking start/stop functions and an async context manager to a class.
