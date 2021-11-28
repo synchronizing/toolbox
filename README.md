@@ -19,7 +19,7 @@
   </a>
 </p>
 
-Toolbox is a set of tools that expands on the [Python Standard Library](https://docs.python.org/3/library/).
+Toolbox is a small (~0.2MB) set of tools that expands the [Python Standard Library](https://docs.python.org/3/library/).
 
 ## Installing
 
@@ -29,15 +29,11 @@ pip install toolbox
 
 ## Documentation
 
-Documentation can be found [**here**](http://synchronizing.github.io/toolbox/). PDF version of docs can be found [here](https://synchronizing.github.io/toolbox/toolbox.pdf).
+Documentation can be found [**here**](http://synchronizing.github.io/toolbox/).
 
-# Tools
+## Using
 
-Toolbox follows the same pattern as of the Python Standard Library (PSL) which means that all tools are found inside package names that corresponds to that of the PSL (e.g. `asyncio`, `collections`, etc.) with only one exception (`config`).
-
-## Code Examples
-
-Check out documentation for function definitions and more details.
+Toolbox follows the same pattern as of the Python Standard Library (PSL) which means that all tools are found inside package names that corresponds to that of the PSL (e.g. `asyncio`, `collections`, etc.) with only one exception (`config`). Check out documentation for function definitions and more details.
 
 ### `asyncio`
 
@@ -78,6 +74,46 @@ async def main():
     await func()
 
 asyncio.run(func())
+```
+
+#### [`ClassTask`](https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.pattern.ClassTask)
+
+Useful pattern to add non-blocking start/stop functions and an async context manager to a class.
+
+```python
+from toolbox import ClassTask
+import asyncio
+
+class AsyncClass(ClassTask):
+    def __init__(self, start: bool = False):
+        super().__init__(
+            self.run,
+            start_log=lambda: print("Starting!"),
+            stop_log=lambda: print("Stopping!"),
+            start=start,
+        )
+
+    async def run(self):
+        # Some async functionality here.
+
+async def main():
+
+    # Use with __init__ start.
+    process = AsyncClass(start=True)
+    await asyncio.sleep(1)
+    process.stop()
+
+    # Use with functions to start/stop.
+    process = AsyncClass()
+    process.start()
+    await asyncio.sleep(1)
+    process.stop()
+
+    # Use with context manager to start/stop.
+    async with AsyncClass() as process:
+        ...
+
+asyncio.run(main())
 ```
 
 ### `builtins`
