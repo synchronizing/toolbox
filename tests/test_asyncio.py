@@ -10,8 +10,8 @@ class Test_patterns:
         def __init__(self, future: asyncio.Future, start: bool = False):
             super().__init__(
                 self.run,
-                log_start=lambda: print("Starting!"),
-                log_stop=lambda: print("Stopping!"),
+                start_callback=lambda: print("Starting!"),
+                end_callback=lambda: print("Stopping!"),
                 start=start,
             )
             self.future = future

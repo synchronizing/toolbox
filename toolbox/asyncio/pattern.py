@@ -6,8 +6,9 @@ class ClassTask:
     def __init__(
         self,
         func: Awaitable,
-        log_start: Optional[Callable] = None,
-        log_stop: Optional[Callable] = None,
+        start_callback: Optional[Callable] = None,
+        end_callback: Optional[Callable] = None,
+        run_forever: bool = False,
         start: bool = False,
     ):
         """
@@ -22,8 +23,9 @@ class ClassTask:
 
         Args:
             func: The awaitable entry-point of the class.
-            log_start: A function to call when the class is started.
-            log_stop: A function to call when the class is stopped.
+            start_callback: A function to call when the class is started.
+            end_callback: A function to call when the class is stopped.
+            run_forever: Whether to run the class forever.
             start: Whether to start the class immediately on initialization.
 
         Example:
@@ -37,8 +39,9 @@ class ClassTask:
                     def __init__(self, start: bool = False):
                         super().__init__(
                             self.run,
-                            log_start=lambda: print("Starting!"),
-                            log_stop=lambda: print("Stopping!"),
+                            start_callback=lambda: print("Starting!"),
+                            end_callback=lambda: print("Stopping!"),
+                            run_forever=True,
                             start=start,
                         )
 
@@ -66,8 +69,9 @@ class ClassTask:
         """
 
         self._func = func
-        self._log_start = log_start
-        self._log_stop = log_stop
+        self._start_callback = start_callback
+        self._end_callback = end_callback
+        self._run_forever = run_forever
         self._task = None
         self._loop = asyncio.get_event_loop()
         if start:
@@ -78,17 +82,19 @@ class ClassTask:
         Starts the task without blocking.
         """
         if not self._task or self._task.cancelled():
-            if self._log_start:
-                self._log_start()
+            if self._start_callback:
+                self._start_callback()
             self._task = self._loop.create_task(self._func())
+            if self._run_forever:
+                self._loop.run_forever()
 
     def stop(self):
         """
         Stops the task without blocking.
         """
         if self._task and not self._task.cancelled():
-            if self._log_stop:
-                self._log_stop()
+            if self._end_callback:
+                self._end_callback()
             self._task.cancel()
 
     async def __aenter__(self) -> type:
