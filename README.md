@@ -93,19 +93,20 @@ async def client():
 asyncio.run(client())
 ```
 
-#### [`ClassTask`](https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.pattern.ClassTask)
+#### [`CoroutineClass`](https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.pattern.CoroutineClass)
 
 Useful pattern to add non-blocking start/stop functions and an async context manager to a class.
 
 ```python
-from toolbox import ClassTask
+from toolbox import CoroutineClass
 import asyncio
 
-class AsyncClass(ClassTask):
-    def __init__(self, start: bool = False):
-        super().__init__(func=self.run, start=start)
+class Coroutine(CoroutineClass):
+    def __init__(self, run: bool = False):
+        super().__init__(run=run)
 
-    async def run(self):
+    async def entry(self):
+        # Default entry function.
         # Some async functionality here.
 
 async def main():
@@ -124,6 +125,10 @@ async def main():
     # Use with context manager to start/stop.
     async with AsyncClass() as process:
         ...
+
+    # Use it with await.
+    process = AsyncClass()
+    await process
 
 asyncio.run(main())
 ```
