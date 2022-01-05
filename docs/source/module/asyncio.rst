@@ -10,11 +10,11 @@ pattern
 
     from toolbox.asyncio import pattern
 
-.. autoclass:: toolbox.asyncio.pattern.ClassTask
+.. autoclass:: toolbox.asyncio.pattern.CoroutineClass
 
-    .. autofunction:: toolbox.asyncio.pattern.ClassTask.start
+    .. autofunction:: toolbox.asyncio.pattern.CoroutineClass.run
 
-    .. autofunction:: toolbox.asyncio.pattern.ClassTask.stop
+    .. autofunction:: toolbox.asyncio.pattern.CoroutineClass.stop
 
 ----
 
