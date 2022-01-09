@@ -10,49 +10,49 @@ color
 
     from toolbox.string import color
 
-Out-of-the-box this module includes the following :class:`toolbox.string.color.Format` definitions:
-
-.. list-table:: 
-    :header-rows: 1
-
-    *   - Foreground Color
-        - Background Color
-        - Styles
-    *   - :py:class:`black`
-        - :py:class:`bblack`
-        - :py:class:`reset`
-    *   - :py:class:`red`
-        - :py:class:`bred`
-        - :py:class:`bold`
-    *   - :py:class:`green`
-        - :py:class:`bgreen`
-        - :py:class:`underline`
-    *   - :py:class:`yellow`
-        - :py:class:`byellow`
-        - :py:class:`blink`
-    *   - :py:class:`blue`
-        - :py:class:`bblue`
-        - :py:class:`reverse`
-    *   - :py:class:`magenta`
-        - :py:class:`bmagenta`
-        - :py:class:`conceal`
-    *   - :py:class:`cyan`
-        - :py:class:`bcyan`
-        - 
-    *   - :py:class:`white`
-        - :py:class:`bwhite`
-        - 
-
-
-These can be utilized like so:
-
-.. code-block:: python
-
-    from toolbox.string.color import bold
-
-    print(bold("Hello world!"))
-
 .. autoclass:: toolbox.string.color.Format
+
+    Out-of-the-box this module includes the following :class:`toolbox.string.color.Format` definitions:
+
+    .. list-table:: 
+        :header-rows: 1
+
+        *   - Foreground Color
+            - Background Color
+            - Styles
+        *   - :py:class:`black`
+            - :py:class:`bblack`
+            - :py:class:`reset`
+        *   - :py:class:`red`
+            - :py:class:`bred`
+            - :py:class:`bold`
+        *   - :py:class:`green`
+            - :py:class:`bgreen`
+            - :py:class:`underline`
+        *   - :py:class:`yellow`
+            - :py:class:`byellow`
+            - :py:class:`blink`
+        *   - :py:class:`blue`
+            - :py:class:`bblue`
+            - :py:class:`reverse`
+        *   - :py:class:`magenta`
+            - :py:class:`bmagenta`
+            - :py:class:`conceal`
+        *   - :py:class:`cyan`
+            - :py:class:`bcyan`
+            - 
+        *   - :py:class:`white`
+            - :py:class:`bwhite`
+            - 
+
+
+    These can be utilized like so:
+
+    .. code-block:: python
+
+        from toolbox.string.color import bold
+
+        print(bold("Hello world!"))
 
 .. autoclass:: toolbox.string.color.Style
 

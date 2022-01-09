@@ -33,13 +33,11 @@ Documentation can be found [**here**](http://synchronizing.github.io/toolbox/).
 
 ## Using
 
-Toolbox follows the same pattern as of the Python Standard Library (PSL) which means that all tools are found inside package names that corresponds to that of the PSL (e.g. `asyncio`, `collections`, etc.) with only one exception (`config`). Check out documentation for function definitions and more details.
-
 ### `asyncio`
 
 #### [`async to_thread`](https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.to_thread)
 
-Runs passed function in a new thread to ensure non-blocking IO during asynchronous programming.
+Runs given function in a new thread during asynchronous IO.
 
 ```python
 from toolbox import to_thread
@@ -95,7 +93,7 @@ asyncio.run(client())
 
 #### [`CoroutineClass`](https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.pattern.CoroutineClass)
 
-Useful pattern to add non-blocking start/stop functions and an async context manager to a class.
+Pattern for creating a coroutine-like class that has multiple ways to start it.
 
 ```python
 from toolbox import CoroutineClass
@@ -105,32 +103,48 @@ class Coroutine(CoroutineClass):
     def __init__(self, run: bool = False):
         super().__init__(run=run)
 
+    # Default entry function.
     async def entry(self):
-        # Default entry function.
-        # Some async functionality here.
+        await asyncio.sleep(1)
+        return "Hello world"
 
-async def main():
+# Start coroutine outside Python async context.
+def iomain():
 
-    # Use with __init__ start.
-    process = AsyncClass(start=True)
+    # via __init__
+    coro = Coroutine(run=True)
+    print(coro.result)  # Hello world
+
+    # via .run()
+    coro = Coroutine()
+    result = coro.run()
+    print(result)  # Hello world
+
+# Start coroutine inside Python async context.
+async def aiomain():
+
+    # via __init__
+    coro = Coroutine(run=True)
     await asyncio.sleep(1)
-    process.stop()
+    coro.stop()
+    print(coro.result)  # None - because process was stopped before completion.
 
-    # Use with functions to start/stop.
-    process = AsyncClass()
-    process.start()
+    # via .run()
+    coro = Coroutine()
+    coro.run()
     await asyncio.sleep(1)
-    process.stop()
+    result = coro.stop()  # None - because coroutine was stopped before completion.
+    print(result)  # Hello world
 
-    # Use with context manager to start/stop.
-    async with AsyncClass() as process:
-        ...
+    # via await
+    coro = Coroutine()
+    result = await coro  # You can also start, and await later.
+    print(result)  # Hello World
 
-    # Use it with await.
-    process = AsyncClass()
-    await process
-
-asyncio.run(main())
+    # via context manager
+    async with Coroutine() as coro:
+        result = await coro
+    print(result)  # Hello World
 ```
 
 ### `builtins`
@@ -147,7 +161,7 @@ class Animal:
     def dog(cls):
         return "whoof!"
 
-print(Animal.dog) # >>> 'whoof!'
+print(Animal.dog) #  'whoof!'
 ```
 
 
@@ -161,7 +175,7 @@ An interface for type-agnostic operations between different types.
 from toolbox import Item
 
 item = Item(100)
-print(item == b"100" == "100" == 100) # >>> True
+print(item == b"100" == "100" == 100) #  True
 ```
 
 #### [`BidirectionalDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.BidirectionalDict)
@@ -172,7 +186,7 @@ Dictionary with two-way capabilities.
 from toolbox import BidirectionalDict
 
 d = BidirectionalDict({"hello": "world"})
-print(d) # >>> {'hello': 'world', 'world': 'hello'}
+print(d) #  {'hello': 'world', 'world': 'hello'}
 ```
 
 #### [`ObjectDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.ObjectDict)
@@ -183,7 +197,7 @@ Dictionary that can be accessed as though it was an object.
 from toolbox import ObjectDict
 
 d = ObjectDict({"hello": "world"})
-print(d.hello) # >>> 'world'
+print(d.hello) #  'world'
 ```
 
 #### [`OverloadedDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.OverloadedDict)
@@ -197,10 +211,10 @@ d1 = OverloadedDict({"hello": "world"})
 d2 = OverloadedDict({"ola": "mundo"})
 
 d1 += d2
-print(d1) # >>> {'hello': 'world', 'ola': 'mundo'}
+print(d1) #  {'hello': 'world', 'ola': 'mundo'}
 
 d1 -= d2
-print(d1) # >>> {'hello': 'world'}
+print(d1) #  {'hello': 'world'}
 ```
 
 #### [`UnderscoreAccessDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.UnderscoreAccessDict)
@@ -211,7 +225,7 @@ Dictionary that does not distinct between spaces and underscores.
 from toolbox import UnderscoreAccessDict
 
 d = UnderscoreAccessDict({"hello world": "ola mundo"})
-d['hello_world'] # >>> 'ola mundo'
+d['hello_world'] #  'ola mundo'
 ```
 
 #### [`FrozenDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.FrozenDict)
@@ -223,7 +237,7 @@ from toolbox import FrozenDict
 
 d = FrozenDict({"hello": "world"})
 d['ola'] = 'mundo'
-# >>> KeyError: 'Cannot set key and value because this is a frozen dictionary.'
+#  KeyError: 'Cannot set key and value because this is a frozen dictionary.'
 ```
 
 #### [`ItemDict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.ItemDict)
@@ -234,8 +248,8 @@ Dictionary that utilizes [`Item`](#Item) for key and values.
 from toolbox import ItemDict, Item
 
 d = ItemDict({"100": "one hundred"})
-print(d[100])                                          # >>> one hundred
-print(d[100] == d['100'] == d[b'100'] == d[Item(100)]) # >>> True
+print(d[100])                                          #  one hundred
+print(d[100] == d['100'] == d[b'100'] == d[Item(100)]) #  True
 ```
 
 All `*Dict` types above can be combined together (as mixins) to create unique dictionary types. Example:
@@ -247,8 +261,8 @@ class Dict(ObjectDict, UnderscoreAccessDict):
     """ New dictionary that allows object access with underscore access. """
 
 d = Dict({"hello world": "ola mundo", "100": "one hundred"})
-print(d.hello_world)    # >>> ola mundo
-print(d._100)           # >>> one hundred
+print(d.hello_world)    #  ola mundo
+print(d._100)           #  one hundred
 ```
 
 #### [`nestednamedtuple`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.nestednamedtuple)
@@ -259,8 +273,8 @@ Creates a nested `namedtuple` for easy object access.
 from toolbox import nestednamedtuple
 
 nt = nestednamedtuple({"hello": {"ola": "mundo"}})
-print(nt)           # >>> namedtupled(hello=namedtupled(ola='mundo'))
-print(nt.hello.ola) # >>> mundo
+print(nt)           #  namedtupled(hello=namedtupled(ola='mundo'))
+print(nt.hello.ola) #  mundo
 ```
 
 #### [`fdict`](https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.fdict)
@@ -273,8 +287,8 @@ from toolbox import nestednamedtuple
 d = {"hello": "world"}
 nt = nestednamedtuple({"forced": fdict(d), "notforced": d})
 
-print(nt.notforced) # >>> namedtupled(hello='world')
-print(nt.forced)    # >>> {'hello': 'world'}
+print(nt.notforced) #  namedtupled(hello='world')
+print(nt.forced)    #  {'hello': 'world'}
 ```
 
 ### `config`
@@ -296,7 +310,7 @@ Access global configuration as a `nestednamedtuple`.
 ```python
 from toolbox import conf
 
-print(conf().hello) # >>> 'world'
+print(conf().hello) #  'world'
 ```
 
 #### [`config`](https://synchronizing.github.io/toolbox/module/config.html#toolbox.config.globalconfig.config)
@@ -306,7 +320,7 @@ Access global configuration as a dictionary.
 ```python
 from toolbox import config
 
-print(config()['hello']) # >>> 'world'
+print(config()['hello']) #  'world'
 ```
 
 ### `functools`
@@ -317,12 +331,16 @@ Decorator that adds support for synchronous and asynchronous function timeout. Q
 
 ```python
 from toolbox import timeout
+import asyncio
+import time
 
-@timeout(seconds=5)
+@timeout(seconds=1)
 def func():
-    time.wait(15)
+    time.sleep(15)
 
-func()
+@timeout(seconds=1)
+async def func():
+    await asyncio.sleep(15)
 ```
 
 ### `pkgutil`
@@ -335,39 +353,12 @@ Searches for packages installed in the system.
 from toolbox import search_package
 
 print(search_package("toolbox", method="is"))
-# >>> {'toolbox': <module 'toolbox' from '.../toolbox/__init__.py'>}
-```
-
-### `experimental`
-
-All tools marked as experimental are not meant to be used in production.
-
-#### [`asyncdispatch`](https://synchronizing.github.io/toolbox/module/experimental.html#toolbox.experimental.asyncdispatch.asyncdispatch)
-
-Decorator for adding dispatch functionality between async and sync functions. Allows calling the same function name, one as a normal function and one as an awaitable, yet receive different results.
-
-```python
-from toolbox import asyncdispatch
-import asyncio
-
-@asyncdispatch
-def func():
-    return "sync"
-
-@func.register
-async def _():
-    return "async"
-
-async def main():
-    print(func())          # >>> sync
-    print(await func())    # >>> async
-
-asyncio.run(main())
+#  {'toolbox': <module 'toolbox' from '.../toolbox/__init__.py'>}
 ```
 
 ### `string`
 
-Comes out of the box with built-in ANSI formats that allows text style modification.
+#### ANSI Formatting
 
 ```python
 from toolbox import bold, red
@@ -378,9 +369,9 @@ print(bold("This text is bolded!"))
 
 Check documentation [here](https://synchronizing.github.io/toolbox/module/string.html#color) for further information on all built-in formats.
 
-#### [`Format`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Format)
+##### [`Format`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Format)
 
-Persistent ANSI format container that allows custom ANSI code.
+Persistent ANSI formatter that takes a custom ANSI code.
 
 ```python
 from toolbox import Format
@@ -389,9 +380,9 @@ bold = Format(code=1)
 print(bold("hello world"))
 ```
 
-#### [`Style`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Style)
+##### [`Style`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Style)
 
-Persistent ANSI format container that allows multiple ANSI codes.
+Persistent ANSI formatter that allows multiple ANSI codes.
 
 ```python
 from toolbox import Style, red, bold
@@ -400,9 +391,9 @@ error = Style(red, bold)
 print(error("This is red & bolded error."))
 ```
 
-#### [`supports_color`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.supports_color)
+##### [`supports_color`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.supports_color)
 
-Returns bool that indicates whether or not the user's terminal supports color.
+Check's whether user's terminal supports color.
 
 ```python
 from toolbox import supports_color
@@ -410,36 +401,46 @@ from toolbox import supports_color
 print(supports_color())
 ```
 
-#### [`strip_ansi`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.strip_ansi)
+##### [`strip_ansi`](https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.strip_ansi)
 
 Removes ANSI codes from string.
 
 ```python
 from toolbox import strip_ansi
 
-print(strip_ansi("\x1b[1mhello world\x1b[0m")) # >>> hello world
+print(strip_ansi("\x1b[1mhello world\x1b[0m")) #  hello world
 ```
 
 ### `textwrap`
 
 #### [`unindent`](https://synchronizing.github.io/toolbox/module/textwrap.html#toolbox.textwrap.text.unindent)
 
-Unident triple quotes and removes any white spaces before or after text.
+Unindent triple quotes and removes any white spaces before or after text.
 
 ```python
-from toolbox import unident
+from toolbox import unindent
+
 
 def test():
-    return unindent(
-        '''
+    text = """
+           hello world
+           this is a test
+           """
+    print(text)
+
+    text = unindent(
+        """
         hello world
         this is a test
-        of this functionality
-        '''
+        """
     )
+    print(text)
 
-print(test()) 
-# >>> hello world
-# >>> this is a test
-# >>> of this functionality
+
+test()
+#           hello world
+#           this is a test
+#
+# hello world
+# this is a test
 ```

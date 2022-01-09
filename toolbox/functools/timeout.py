@@ -43,8 +43,16 @@ def timeout(
     total_seconds = int(td.total_seconds())
 
     def wrapper(func: Union[Callable, Awaitable]):
+        """
+        Wraps async or sync function with timeout functionality.
+        """
+
         @functools.wraps(func)
         async def async_wrapper(*args, **kwargs):
+            """
+            Leverages the asyncio.wait_for() function to wait for a given amount of time.
+            """
+
             try:
                 return await asyncio.wait_for(func(*args, **kwargs), total_seconds)
             except asyncio.TimeoutError as err:
@@ -52,11 +60,13 @@ def timeout(
                     raise TimeoutError(
                         "Function {} timed out.".format(func.__name__)
                     ) from err
-                else:
-                    return None
 
         @functools.wraps(func)
         def sync_wrapper(*args, **kwargs):
+            """
+            Leverages the signal.alarm() function to wait for a given amount of time.
+            """
+
             def _handle_timeout(signum, frame):
                 raise TimeoutError
 
@@ -69,8 +79,6 @@ def timeout(
                     raise TimeoutError(
                         "Function {} timed out.".format(func.__name__)
                     ) from err
-                else:
-                    return None
 
         if inspect.iscoroutinefunction(func):
             return async_wrapper
