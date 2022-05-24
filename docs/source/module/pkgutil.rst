@@ -8,6 +8,6 @@ package
 
 .. code-block:: python
 
-    from toolbox.config import pkgutil
+    from toolbox.pkgutil import package
 
 .. autofunction:: toolbox.pkgutil.package.search_package
