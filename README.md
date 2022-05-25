@@ -356,6 +356,19 @@ print(search_package("toolbox", method="is"))
 #  {'toolbox': <module 'toolbox' from '.../toolbox/__init__.py'>}
 ```
 
+### `sockets`
+
+#### [`is_ip`](https://synchronizing.github.io/toolbox/module/sockets.html#toolbox.sockets.ip.is_ip)
+ 
+Checks if a string is an IP address.
+
+```python
+from toolbox import is_ip
+
+print(is_ip('127.0.0.1')) # True
+print(is_ip('localhost'))  # False
+```
+
 ### `string`
 
 #### ANSI Formatting
