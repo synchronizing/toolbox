@@ -4,5 +4,6 @@ from .collections import *
 from .config import *
 from .functools import *
 from .pkgutil import *
+from .sockets import *
 from .string import *
 from .textwrap import *
