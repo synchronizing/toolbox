@@ -12,7 +12,7 @@ pattern
 
 .. autoclass:: toolbox.asyncio.pattern.CoroutineClass
 
-    .. autofunction:: toolbox.asyncio.pattern.CoroutineClass.run
+    .. autofunction:: toolbox.asyncio.pattern.CoroutineClass.start
 
     .. autofunction:: toolbox.asyncio.pattern.CoroutineClass.stop
 
