@@ -1,10 +1,8 @@
 from toolbox.sockets.ip import is_ip
-import pytest
-import sys
 
 
-class Test_package:
-    def test_search_package(self):
+class Test_sockets:
+    def test_is_ip(self):
         assert is_ip("127.0.0.1") is True
         assert is_ip("000.000.000.000") is True
         assert is_ip("localhost") is False
