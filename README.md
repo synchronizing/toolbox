@@ -354,6 +354,20 @@ async def func():
 ```
 </details>
 
+## pdb
+
+<details>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/pdb.html#toolbox.pdb.sprinke.sprinkle"><code>sprinkle</code></a> —  Prints the line and file that this function was just called from.</summary>
+
+```python
+from toolbox.pdb.sprinkle import sprinkle
+
+sprinkle() # >>> 3 this_file.py
+sprinkle("hello", "world") # >>> 4 this_file.py hello world
+```
+</details>
+
+
 ### `pkgutil`
 
 <details>
