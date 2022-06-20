@@ -185,7 +185,7 @@ print(item == b"100" == "100" == 100) #  True
 </details>
 
 <details>
-  <summary><a href="(https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.nestednamedtuple"><code>nestednamedtuple</code></a> — Creates a nested <code>namedtuple</code>.</summary><br>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.nestednamedtuple"><code>nestednamedtuple</code></a> — Creates a nested <code>namedtuple</code>.</summary><br>
 
 ```python
 from toolbox import nestednamedtuple
@@ -197,7 +197,7 @@ print(nt.hello.ola) #  mundo
 </details>
 
 <details>
-  <summary><a href="(https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.nestednamedtuple"><code>fdict</code></a> — Forces <code>nestednamedtuple</code> to not convert <code>dict</code> to <code>namedtuple</code>. </summary><br>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.fdict"><code>fdict</code></a> — Forces <code>nestednamedtuple</code> to not convert <code>dict</code> to <code>namedtuple</code>. </summary><br>
 
 ```python
 from toolbox import nestednamedtuple, fdict
