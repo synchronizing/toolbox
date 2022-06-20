@@ -2,9 +2,9 @@
 sockets
 #######
 
-*******
-package
-*******
+***
+ip
+***
 
 .. code-block:: python
 

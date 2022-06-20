@@ -177,7 +177,7 @@ def supports_color() -> bool:  # pragma: no cover
         HAS_COLORAMA = True
 
     def vt_codes_enabled_in_windows_registry():
-        """ Check the Windows Registry to see if VT code handling has been enabled by default, see https://superuser.com/a/1300251/447564."""
+        """Check the Windows Registry to see if VT code handling has been enabled by default, see https://superuser.com/a/1300251/447564."""
 
         try:
             # winreg is only available on Windows.

@@ -5,7 +5,7 @@ import pytest
 from toolbox import CoroutineClass, awaitable, tls_handshake, to_thread
 
 
-class Test_patterns:
+class Test_patterns:  # pylint: disable=protected-access
     class CC(CoroutineClass):
         def __init__(
             self,
@@ -70,20 +70,20 @@ class Test_patterns:
 
         # Start callback
         process = self.CC(future, run=future.set_result(None))
-        process.run()
+        process.start()
         assert future.done() and future.result() is None
         process.stop()
 
         # End callback.
         future = loop.create_future()
         process = self.CC(future, end_callback=future.set_result(None))
-        process.run()
+        process.start()
         process.stop()
         assert future.done() and future.result() is None
 
     def test_sync(self):
         process = self.CC(future=True)
-        assert process.run() == process.result == True
+        assert process.start() == process.result == True
 
 
 class Test_streams:
@@ -113,7 +113,7 @@ class Test_threads:
         def func():
             return "hello world"
 
-        assert await to_thread(lambda: func()) == "hello world"
+        assert await to_thread(func) == "hello world"
 
     @pytest.mark.asyncio
     async def test_awaitable(self):
