@@ -36,7 +36,7 @@ Documentation can be found [**here**](http://synchronizing.github.io/toolbox/).
 ### `asyncio`
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.to_thread"><code>to_thread</code></a> — Run a synchronous function in a seperate thread.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.to_thread"><code>to_thread</code></a> — Run a synchronous function in a seperate thread.</summary><br>
   
 ```python
 from toolbox import to_thread
@@ -55,7 +55,7 @@ asyncio.run(main())
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.awaitable"><code>awaitable</code></a> — Convert synchronous function to an async function via thread.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.awaitable"><code>awaitable</code></a> — Convert synchronous function to an async function via thread.</summary><br>
   
 Leverages the `to_thread` function above.
 
@@ -77,7 +77,7 @@ asyncio.run(func())
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.streams.tls_handshake"><code>tls_handshake</code></a> — Perform TLS handshake with a stream reader & writer.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.streams.tls_handshake"><code>tls_handshake</code></a> — Perform TLS handshake with a stream reader & writer.</summary><br>
 
 ```python
 from toolbox import tls_handshake
@@ -94,7 +94,7 @@ asyncio.run(client())
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.pattern.CoroutineClass"><code>CoroutineClass</code></a> — Class pattern for implementing object-based coroutines. </summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.pattern.CoroutineClass"><code>CoroutineClass</code></a> — Class pattern for implementing object-based coroutines. </summary><br>
   
 Pattern for creating a coroutine-like class that has multiple ways to start it.
 
@@ -155,7 +155,7 @@ async def aiomain():
 ### `builtins`
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/builtins.html#toolbox.builtins.property.classproperty"><code>classproperty</code></a> — Decorator for defining a method as a property and classmethod.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/builtins.html#toolbox.builtins.property.classproperty"><code>classproperty</code></a> — Decorator for defining a method as a property and classmethod.</summary><br>
 
 Allows access to computed class attributes.
 
@@ -174,7 +174,7 @@ print(Animal.dog) #  'whoof!'
 ### `collections`
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.item.Item"><code>Item</code></a> — An interface for type-agnostic operations between different types.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.item.Item"><code>Item</code></a> — An interface for type-agnostic operations between different types.</summary><br>
 
 ```python
 from toolbox import Item
@@ -185,7 +185,7 @@ print(item == b"100" == "100" == 100) #  True
 </details>
 
 <details>
-  <summary><a href="(https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.nestednamedtuple"><code>nestednamedtuple</code></a> — Creates a nested <code>namedtuple</code>.</summary>
+  <summary><a href="(https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.nestednamedtuple"><code>nestednamedtuple</code></a> — Creates a nested <code>namedtuple</code>.</summary><br>
 
 ```python
 from toolbox import nestednamedtuple
@@ -197,7 +197,7 @@ print(nt.hello.ola) #  mundo
 </details>
 
 <details>
-  <summary><a href="(https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.nestednamedtuple"><code>fdict</code></a> — Forces <code>nestednamedtuple</code> to not convert <code>dict</code> to <code>namedtuple</code>. </summary>
+  <summary><a href="(https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.namedtuple.nestednamedtuple"><code>fdict</code></a> — Forces <code>nestednamedtuple</code> to not convert <code>dict</code> to <code>namedtuple</code>. </summary><br>
 
 ```python
 from toolbox import nestednamedtuple, fdict
@@ -211,7 +211,7 @@ print(nt.forced)    #  {'hello': 'world'}
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.item.Item"><code>BidirectionalDict</code></a> — Dictionary with two-way capabilities.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.item.Item"><code>BidirectionalDict</code></a> — Dictionary with two-way capabilities.</summary><br>
 
 ```python
 from toolbox import BidirectionalDict
@@ -222,7 +222,7 @@ print(d) #  {'hello': 'world', 'world': 'hello'}
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.ObjectDict"><code>ObjectDict</code></a> — Dictionary that can be accessed as though it was an object.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.ObjectDict"><code>ObjectDict</code></a> — Dictionary that can be accessed as though it was an object.</summary><br>
 
 ```python
 from toolbox import ObjectDict
@@ -233,7 +233,7 @@ print(d.hello) #  'world'
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.OverloadedDict"><code>OverloadedDict</code></a> — Dictionary that can be added or subtracted to.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.OverloadedDict"><code>OverloadedDict</code></a> — Dictionary that can be added or subtracted to.</summary><br>
 
 ```python
 from toolbox import OverloadedDict
@@ -250,7 +250,7 @@ print(d1) #  {'hello': 'world'}
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.UnderscoreAccessDict"><code>UnderscoreAccessDict</code></a> — Dictionary with underscore access.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.UnderscoreAccessDict"><code>UnderscoreAccessDict</code></a> — Dictionary with underscore access.</summary><br>
 
 ```python
 from toolbox import OverloadedDict
@@ -267,7 +267,7 @@ print(d1) #  {'hello': 'world'}
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.FrozenDict"><code>FrozenDict</code></a> — Dictionary that is frozen.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.FrozenDict"><code>FrozenDict</code></a> — Dictionary that is frozen.</summary><br>
 
 ```python
 from toolbox import OverloadedDict
@@ -284,7 +284,7 @@ print(d1) #  {'hello': 'world'}
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.ItemDict"><code>ItemDict</code></a> — Dictionary that utilizes <a href="#Item"><code>Item</code></a> for key and values.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.ItemDict"><code>ItemDict</code></a> — Dictionary that utilizes <a href="#Item"><code>Item</code></a> for key and values.</summary><br>
 
 ```python
 from toolbox import ItemDict, Item
@@ -301,7 +301,7 @@ All `*Dict` types above can be combined together (as mixins) to create unique di
 ### `config`
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/config.html#toolbox.config.globalconfig.make_config"><code>make_config</code></a> — Stores configuration dictionary in-memory.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/config.html#toolbox.config.globalconfig.make_config"><code>make_config</code></a> — Stores configuration dictionary in-memory.</summary><br>
 
 Creates a global configuration that can be accessed by other portions of the code via `conf` or `config` function calls. Minimizes the need to create `Config` objects and pass them around different modules, classes, functions, etc.
 
@@ -313,7 +313,7 @@ make_config(hello="world")
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/config.html#toolbox.config.globalconfig.config"><code>config</code></a> — Access in-memory configuration as dictionary.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/config.html#toolbox.config.globalconfig.config"><code>config</code></a> — Access in-memory configuration as dictionary.</summary><br>
 
 ```python
 from toolbox import config
@@ -323,7 +323,7 @@ print(config()['hello']) #  'world'
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/config.html#toolbox.config.globalconfig.conf"><code>conf</code></a> — Access in-memory configuration as <code>nestednametuple</code>.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/config.html#toolbox.config.globalconfig.conf"><code>conf</code></a> — Access in-memory configuration as <code>nestednametuple</code>.</summary><br>
 
 ```python
 from toolbox import conf
@@ -335,7 +335,7 @@ print(conf().hello) #  'world'
 ### `functools`
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/functools.html#toolbox.functools.timeout.timeout"><code>timeout</code></a> — Decorator to add timeout for synchronous and asychronous functions.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/functools.html#toolbox.functools.timeout.timeout"><code>timeout</code></a> — Decorator to add timeout for synchronous and asychronous functions.</summary><br>
 
 Decorator that adds support for synchronous and asynchronous function timeout. Quits function after an amount of time passes.
 
@@ -357,7 +357,7 @@ async def func():
 ## pdb
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/pdb.html#toolbox.pdb.sprinke.sprinkle"><code>sprinkle</code></a> —  Prints the line and file that this function was just called from.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/pdb.html#toolbox.pdb.sprinke.sprinkle"><code>sprinkle</code></a> —  Prints the line and file that this function was just called from.</summary><br>
 
 ```python
 from toolbox.pdb.sprinkle import sprinkle
@@ -371,7 +371,7 @@ sprinkle("hello", "world") # >>> 4 this_file.py hello world
 ### `pkgutil`
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/pkgutil.html#toolbox.pkgutil.package.search_package"><code>search_package</code></a> — Searches for packages installed in the system.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/pkgutil.html#toolbox.pkgutil.package.search_package"><code>search_package</code></a> — Searches for packages installed in the system.</summary><br>
 
 Decorator that adds support for synchronous and asynchronous function timeout. Quits function after an amount of time passes.
 
@@ -386,7 +386,7 @@ print(search_package("toolbox", method="is"))
 ### `sockets`
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/sockets.html#toolbox.sockets.ip.is_ip"><code>is_ip</code></a> — Checks if a string is an IP address.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/sockets.html#toolbox.sockets.ip.is_ip"><code>is_ip</code></a> — Checks if a string is an IP address.</summary><br>
 
 ```python
 from toolbox import is_ip
@@ -399,7 +399,7 @@ print(is_ip('localhost'))  # False
 ### `string`
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/string.html#color">ANSI Formatting</a> — Color formatting.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/string.html#color">ANSI Formatting</a> — Color formatting.</summary><br>
 
 Check documentation [here](https://synchronizing.github.io/toolbox/module/string.html#color) for further information on all built-in formats.
 
@@ -412,7 +412,7 @@ print(bold("This text is bolded!"))
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Format"><code>Format</code></a> — Persistent ANSI formatter that takes a custom ANSI code.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Format"><code>Format</code></a> — Persistent ANSI formatter that takes a custom ANSI code.</summary><br>
 
 ```python
 from toolbox import Format
@@ -423,7 +423,7 @@ print(bold("hello world"))
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Style"><code>Style</code></a> — Persistent ANSI formatter that allows multiple ANSI codes.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.Style"><code>Style</code></a> — Persistent ANSI formatter that allows multiple ANSI codes.</summary><br>
 
 ```python
 from toolbox import Style, red, bold
@@ -434,7 +434,7 @@ print(error("This is red & bolded error."))
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.supports_color"><code>supports_color</code></a> — Check's if the user's terminal supports color.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.supports_color"><code>supports_color</code></a> — Check's if the user's terminal supports color.</summary><br>
 
 ```python
 from toolbox import Style, red, bold
@@ -445,7 +445,7 @@ print(error("This is red & bolded error."))
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.strip_ansi"><code>strip_ansi</code></a> — Removes ANSI codes from string.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.strip_ansi"><code>strip_ansi</code></a> — Removes ANSI codes from string.</summary><br>
 
 ```python
 from toolbox import strip_ansi
@@ -457,7 +457,7 @@ print(strip_ansi("\x1b[1mhello world\x1b[0m")) #  hello world
 ### `textwrap`
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/textwrap.html#toolbox.textwrap.text.unindent"><code>unindent</code></a> — Removes indent and white-space from docstrings.</summary>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/textwrap.html#toolbox.textwrap.text.unindent"><code>unindent</code></a> — Removes indent and white-space from docstrings.</summary><br>
 
 ```python
 from toolbox import unindent
