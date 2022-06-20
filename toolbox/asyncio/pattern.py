@@ -99,7 +99,7 @@ class CoroutineClass(ABC):
         self.result = None
 
         if run:
-            self.run()
+            self.start()
 
     async def entry(self):
         """
@@ -107,7 +107,7 @@ class CoroutineClass(ABC):
         """
         raise NotImplementedError  # pragma: no cover
 
-    def run(self):
+    def start(self):
         """
         Starts the task without blocking.
 
@@ -138,6 +138,9 @@ class CoroutineClass(ABC):
         """
         Stops the task without blocking.
 
+        Args:
+            result: The result to return when the task is stopped.
+
         Notes:
             This function is attached as a callback to the task.
         """
@@ -166,7 +169,7 @@ class CoroutineClass(ABC):
         """
         Enter the async context manager.
         """
-        self.run()
+        self.start()
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb) -> bool:
@@ -180,5 +183,5 @@ class CoroutineClass(ABC):
         Await the task.
         """
         if not self._task:
-            self.run()
+            self.start()
         return self._task.__await__()

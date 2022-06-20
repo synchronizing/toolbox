@@ -3,6 +3,7 @@ from .builtins import *
 from .collections import *
 from .config import *
 from .functools import *
+from .pdb import *
 from .pkgutil import *
 from .sockets import *
 from .string import *

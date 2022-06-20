@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional
 
 from .item import Item, ItemType
 
@@ -42,7 +42,8 @@ class BidirectionalDict(BaseDict):
             print(d) # >>> <BidirectionalDict {'hello': 'world', 'world': 'hello'}>
     """
 
-    def __init__(self, dictionary: dict = {}, **kwargs) -> dict:
+    def __init__(self, dictionary: Optional[dict] = None, **kwargs) -> dict:
+        dictionary = dictionary or {}
         super(BidirectionalDict, self).__init__(
             {
                 **dictionary,
@@ -56,7 +57,8 @@ class BidirectionalDict(BaseDict):
         super(BidirectionalDict, self).__setitem__(key, value)
         super(BidirectionalDict, self).__setitem__(value, key)
 
-    def update(self, dictionary: dict = {}, **kwargs):
+    def update(self, dictionary: dict = Optional[dict], **kwargs):
+        dictionary = dictionary or {}
         super(BidirectionalDict, self).update(
             {
                 **dictionary,
@@ -166,9 +168,33 @@ class FrozenDict(BaseDict):
         err = "Cannot set key and value because this is a frozen dictionary."
         raise KeyError(err)
 
-    def update(self, dictionary: dict = {}, **kwargs):
+    def update(self, dictionary: Optional[dict] = None, **kwargs):
         err = "Cannot set key and value because this is a frozen dictionary."
         raise KeyError(err)
+
+
+class MultiEntryDict(BaseDict):
+    """Dictionary that can have multiple entries for the same key.
+
+    .. code-block:: python
+
+        from toolbox.collections.mapping import MultiEntryDict
+
+        d = MultiEntryDict({"hello": "world", "hello": "mundo"})
+        print(d) # >>> <MultiEntryDict {'hello': ['world', 'mundo']}>
+
+        d['hello'] = 'globo'
+        print(d) # >>> <MultiEntryDict {'hello': ['world', 'mundo', 'globo']}>
+    """
+
+    def __setitem__(self, key, value):
+        if key in self:
+            if isinstance(self[key], list):
+                self[key].append(value)
+            else:
+                self[key] = [self[key], value]
+        else:
+            super(MultiEntryDict, self).__setitem__(key, value)
 
 
 class ItemDict(BaseDict):
@@ -187,7 +213,8 @@ class ItemDict(BaseDict):
             print(d["100"] == d[100] == d[b"100"]) # >>> True
     """
 
-    def __init__(self, dictionary: dict = {}, **kwargs):
+    def __init__(self, dictionary: Optional[dict] = None, **kwargs):
+        dictionary = dictionary or {}
         super(ItemDict, self).__init__(
             {
                 **{Item(k): Item(v) for k, v in dictionary.items()},
@@ -207,7 +234,8 @@ class ItemDict(BaseDict):
     def __contains__(self, key: ItemType):
         return super(ItemDict, self).__contains__(Item(key))
 
-    def update(self, dictionary: dict = {}, **kwargs):
+    def update(self, dictionary: Optional[dict] = None, **kwargs):
+        dictionary = dictionary or {}
         super(ItemDict, self).update(
             {
                 **{Item(k): Item(v) for k, v in dictionary.items()},

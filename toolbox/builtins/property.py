@@ -3,7 +3,8 @@ from typing import Type
 
 
 class classproperty(property):
-    """Decorator to set a class method as a class property.
+    """
+    Decorator to set a class method as a class property.
 
     Combines a property and a classmethod into one, creating a class property. Allows
     access to computed class attributes.

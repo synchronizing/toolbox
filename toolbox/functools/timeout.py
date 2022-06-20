@@ -13,7 +13,8 @@ def timeout(
     seconds: int = 0,
     error: bool = False,
 ) -> Union[Callable, Awaitable]:
-    """Wait for *time* before quitting *func* run and returning None.
+    """
+    Wait for *time* before quitting *func* run and returning None.
 
     This decorator works with both asynchronous and synchronous functions. Note,
     however, that with synchronous function the *signal* module is used and

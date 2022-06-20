@@ -1,9 +1,10 @@
 from collections import namedtuple
+from typing import Optional
 
 from ..collections.namedtuple import nestednamedtuple
 
 
-def make_config(dictionary: dict = {}, **kwargs) -> None:
+def make_config(dictionary: Optional[dict] = None, **kwargs) -> None:
     """Creates a global configuration that can be accessed anywhere during runtime.
 
     This function is a useful replacement to passing configuration classes between classes.
@@ -22,7 +23,7 @@ def make_config(dictionary: dict = {}, **kwargs) -> None:
 
             make_config(hello="world")
     """
-
+    dictionary = dictionary or {}
     globals()["gconf"] = {**dictionary, **kwargs}
 
 
