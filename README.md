@@ -373,8 +373,6 @@ sprinkle("hello", "world") # >>> 4 this_file.py hello world
 <details>
   <summary><a href="https://synchronizing.github.io/toolbox/module/pkgutil.html#toolbox.pkgutil.package.search_package"><code>search_package</code></a> — Searches for packages installed in the system.</summary><br>
 
-Decorator that adds support for synchronous and asynchronous function timeout. Quits function after an amount of time passes.
-
 ```python
 from toolbox import search_package
 
@@ -392,7 +390,7 @@ print(search_package("toolbox", method="is"))
 from toolbox import is_ip
 
 print(is_ip('127.0.0.1')) # True
-print(is_ip('localhost'))  # False
+print(is_ip('localhost')) # False
 ```
 </details>
 
@@ -437,10 +435,9 @@ print(error("This is red & bolded error."))
   <summary><a href="https://synchronizing.github.io/toolbox/module/string.html#toolbox.string.color.supports_color"><code>supports_color</code></a> — Check's if the user's terminal supports color.</summary><br>
 
 ```python
-from toolbox import Style, red, bold
-
-error = Style(red, bold)
-print(error("This is red & bolded error."))
+from toolbox import supports_color
+  
+print(supports_color()) # True
 ```
 </details>
 
