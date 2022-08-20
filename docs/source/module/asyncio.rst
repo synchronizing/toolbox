@@ -2,6 +2,18 @@
 asyncio
 #######
 
+*****
+cache
+*****
+
+.. code-block:: python
+
+    from toolbox.asyncio import future_lru_cache
+
+.. autofunction:: toolbox.asyncio.future_lru_cache
+
+----
+
 *******
 pattern
 *******

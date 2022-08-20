@@ -36,8 +36,27 @@ Documentation can be found [**here**](http://synchronizing.github.io/toolbox/).
 ### `asyncio`
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.to_thread"><code>to_thread</code></a> — Run a synchronous function in a seperate thread.</summary><br>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.cache.future_lru_cache"><code>future_lru_cache</code></a> — <code>lru_cache</code> for async functions.</summary><br>
   
+```python
+from toolbox import future_lru_cache
+import asyncio
+
+async def func():
+    await asyncio.sleep(10)
+    return 42
+
+async def main():
+    await func() # Runs once.
+    await func() # Returns cached value.
+
+asyncio.run(main())
+````
+</details>
+
+<details>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/asyncio.html#toolbox.asyncio.threads.to_thread"><code>to_thread</code></a> — Run a synchronous function in a separate thread.</summary><br>
+
 ```python
 from toolbox import to_thread
 import asyncio
@@ -51,7 +70,8 @@ async def main():
     await to_thread(func)
 
 asyncio.run(main())
-```
+````
+
 </details>
 
 <details>
@@ -149,7 +169,6 @@ async def aiomain():
         result = await coro
     print(result)  # Hello World
 ```
-
 </details>
 
 ### `builtins`
@@ -297,7 +316,6 @@ print(d[100] == d['100'] == d[b'100'] == d[Item(100)]) #  True
 
 All `*Dict` types above can be combined together (as mixins) to create unique dictionary types.
 
-
 ### `config`
 
 <details>
@@ -367,7 +385,6 @@ sprinkle("hello", "world") # >>> 4 this_file.py hello world
 ```
 </details>
 
-
 ### `pkgutil`
 
 <details>
@@ -436,7 +453,7 @@ print(error("This is red & bolded error."))
 
 ```python
 from toolbox import supports_color
-  
+
 print(supports_color()) # True
 ```
 </details>
