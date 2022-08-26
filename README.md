@@ -42,6 +42,7 @@ Documentation can be found [**here**](http://synchronizing.github.io/toolbox/).
 from toolbox import future_lru_cache
 import asyncio
 
+@future_lru_cache
 async def func():
     await asyncio.sleep(10)
     return 42
