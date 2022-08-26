@@ -2,7 +2,25 @@ import asyncio
 from typing import Callable, Optional
 
 import pytest
-from toolbox import CoroutineClass, awaitable, tls_handshake, to_thread
+from toolbox import (
+    CoroutineClass,
+    awaitable,
+    future_lru_cache,
+    tls_handshake,
+    to_thread,
+)
+
+
+class Test_cache:
+    @pytest.mark.asyncio
+    async def test_future_lru_cache(self):
+        @future_lru_cache
+        async def func():
+            await asyncio.sleep(2)
+            return 42
+
+        await asyncio.wait_for(func(), timeout=3)
+        await asyncio.wait_for(func(), timeout=1)
 
 
 class Test_patterns:  # pylint: disable=protected-access
@@ -28,7 +46,7 @@ class Test_patterns:  # pylint: disable=protected-access
             return self.future
 
     @pytest.mark.asyncio
-    async def test_start(self):
+    async def test_run(self):
         loop = asyncio.get_event_loop()
         future = loop.create_future()
 
@@ -70,20 +88,20 @@ class Test_patterns:  # pylint: disable=protected-access
 
         # Start callback
         process = self.CC(future, run=future.set_result(None))
-        process.start()
+        process.run()
         assert future.done() and future.result() is None
         process.stop()
 
         # End callback.
         future = loop.create_future()
         process = self.CC(future, end_callback=future.set_result(None))
-        process.start()
+        process.run()
         process.stop()
         assert future.done() and future.result() is None
 
     def test_sync(self):
         process = self.CC(future=True)
-        assert process.start() == process.result == True
+        assert process.run() == process.result == True
 
 
 class Test_streams:
