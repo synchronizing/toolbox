@@ -8,6 +8,7 @@ from toolbox import (
     UnderscoreAccessDict,
     FrozenDict,
     ItemDict,
+    MultiEntryDict,
     fdict,
     nestednamedtuple,
 )
@@ -229,6 +230,14 @@ class Test_mapping:
 
             with pytest.raises(KeyError):
                 d.update({"ola": "mundo"})
+
+    class Test_collection_multi:
+        def test_multi_init(self):
+            d = MultiEntryDict({"hello": "world", "hello": "mundo"})
+            assert d["hello"] == "mundo"
+
+            d["hello"] = "globo"
+            assert d["hello"] == ["mundo", "globo"]
 
     class Test_collection_item:
         def test_item_init(self):
