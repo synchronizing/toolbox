@@ -168,13 +168,7 @@ class Item:
         return self.string
 
     def __repr__(self) -> str:
-        return "Item(bytes={}, str='{}', int={}, bool={}, original_type={})".format(
-            self.raw,
-            self.string,
-            self.integer,
-            self.boolean,
-            self._type.__name__,
-        )
+        return str(self.original)
 
     @staticmethod
     def byte_item(item: ItemType) -> "Item":
