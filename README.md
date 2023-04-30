@@ -231,7 +231,7 @@ print(nt.forced)    #  {'hello': 'world'}
 </details>
 
 <details>
-  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.item.Item"><code>BidirectionalDict</code></a> — Dictionary with two-way capabilities.</summary><br>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.BidirectionalDict"><code>BidirectionalDict</code></a> — Dictionary with two-way capabilities.</summary><br>
 
 ```python
 from toolbox import BidirectionalDict
@@ -273,16 +273,10 @@ print(d1) #  {'hello': 'world'}
   <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.UnderscoreAccessDict"><code>UnderscoreAccessDict</code></a> — Dictionary with underscore access.</summary><br>
 
 ```python
-from toolbox import OverloadedDict
+from toolbox import UnderscoreAccessDict
 
-d1 = OverloadedDict({"hello": "world"})
-d2 = OverloadedDict({"ola": "mundo"})
-
-d1 += d2
-print(d1) #  {'hello': 'world', 'ola': 'mundo'}
-
-d1 -= d2
-print(d1) #  {'hello': 'world'}
+d = UnderscoreAccessDict({"hello": "world"})
+print(d.hello) #  'world'
 ```
 </details>
 
@@ -290,16 +284,22 @@ print(d1) #  {'hello': 'world'}
   <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.FrozenDict"><code>FrozenDict</code></a> — Dictionary that is frozen.</summary><br>
 
 ```python
-from toolbox import OverloadedDict
+from toolbox import FrozenDict
 
-d1 = OverloadedDict({"hello": "world"})
-d2 = OverloadedDict({"ola": "mundo"})
+d = FrozenDict({"hello": "world"})
+d["hello"] = "mundo" # KeyError: Cannot set key and value because this is a frozen dictionary.
+```
+</details>
 
-d1 += d2
-print(d1) #  {'hello': 'world', 'ola': 'mundo'}
+<details>
+  <summary><a href="https://synchronizing.github.io/toolbox/module/collections.html#toolbox.collections.mapping.MultiEntryDict"><code>MultiEntryDict</code></a> — Dictionary that can have multiple entries for the same key.</summary><br>
 
-d1 -= d2
-print(d1) #  {'hello': 'world'}
+```python
+from toolbox import MultiEntryDict
+
+d = MultiEntryDict({"hello": "world"})
+d["hello"] = "mundo"
+print(d) #  {'hello': ['world', 'mundo']}
 ```
 </details>
 

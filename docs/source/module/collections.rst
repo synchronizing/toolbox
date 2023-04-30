@@ -155,6 +155,7 @@ Note that :py:class:`*Dict` types below can be combined together (as mixins) to 
 .. autoclass:: toolbox.collections.mapping.OverloadedDict(BaseDict)
 .. autoclass:: toolbox.collections.mapping.UnderscoreAccessDict(BaseDict)
 .. autoclass:: toolbox.collections.mapping.FrozenDict(BaseDict)
+.. autoclass:: toolbox.collections.mapping.MultiEntryDict(BaseDict)
 .. autoclass:: toolbox.collections.mapping.ItemDict(BaseDict)
 
 ----
