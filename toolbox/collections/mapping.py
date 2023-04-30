@@ -219,7 +219,7 @@ class ItemDict(BaseDict):
 
             d = ItemDict({"100": "one hundred"})
             print(d)
-            # >>> <ItemDict {Item(bytes=b'100', str='100', int=100, bool=True, original_type=str): Item(bytes=b'one hundred', str='one hundred', int=None, bool=True, original_type=str)}>
+            # >>> <ItemDict {100: one hundred}>
 
             print(d["100"] == d[100] == d[b"100"]) # >>> True
     """
@@ -242,7 +242,10 @@ class ItemDict(BaseDict):
         return super(ItemDict, self).__getitem__(Item(key))
 
     def __setitem__(self, key: ItemType, value: ItemType):
-        super(ItemDict, self).__setitem__(Item(key), Item(value))
+        if isinstance(value, list):
+            super(ItemDict, self).__setitem__(Item(key), [Item(i) for i in value])
+        else:
+            super(ItemDict, self).__setitem__(Item(key), Item(value))
 
     def __delitem__(self, key: ItemType):
         super(ItemDict, self).__delitem__(Item(key))

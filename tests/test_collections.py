@@ -240,6 +240,9 @@ class Test_mapping:
             d[100] = "one hundred"
             assert d["100"] == d[b"100"] == d[100] == d[Item(100)]
 
+            d[200] = [1, 2, 3]
+            assert d["200"] == d[b"200"] == d[200] == d[Item(200)]
+
         def test_item_delitem(self):
             d = ItemDict()
             d[100] = "one hundred"
