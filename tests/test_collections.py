@@ -8,6 +8,7 @@ from toolbox import (
     UnderscoreAccessDict,
     FrozenDict,
     ItemDict,
+    MultiEntryDict,
     fdict,
     nestednamedtuple,
 )
@@ -109,22 +110,10 @@ class Test_item:
         assert str(item) == item.string
 
     def test_item_repr(self):
-        assert (
-            repr(Item(100))
-            == "Item(bytes=b'100', str='100', int=100, bool=True, original_type=int)"
-        )
-        assert (
-            repr(Item(None))
-            == "Item(bytes=b'', str='', int=None, bool=False, original_type=NoneType)"
-        )
-        assert (
-            repr(Item(True))
-            == "Item(bytes=b'1', str='1', int=1, bool=True, original_type=bool)"
-        )
-        assert (
-            repr(Item("hello"))
-            == "Item(bytes=b'hello', str='hello', int=None, bool=True, original_type=str)"
-        )
+        assert repr(Item(100)) == "100"
+        assert repr(Item(None)) == "None"
+        assert repr(Item(True)) == "True"
+        assert repr(Item("hello")) == "hello"
 
     def test_item_byte_item_err(self):
         with pytest.raises(TypeError):
@@ -166,6 +155,11 @@ class Test_mapping:
         def test_object_dict_data(self):
             d = ObjectDict({"hello": "world"})
             assert d.hello == "world"
+
+        def test_object_dict_setattr(self):
+            d = ObjectDict({"hello": "world"})
+            d.ola = "mundo"
+            assert d.ola == "mundo"
 
     class Test_collection_overloaded:
         def test_overloaded_dict_type(self):
@@ -210,6 +204,20 @@ class Test_mapping:
             assert d["key"] == "value"
             assert d["_100"] == "one hundred"
 
+        def test_underscore_access_bytes(self):
+            d = UnderscoreAccessDict(
+                {
+                    b"hello world": "ola mundo",
+                    b"ola_mundo": "hello world",
+                    b"key": "value",
+                    b"100": "one hundred",
+                }
+            )
+            assert d[b"hello_world"] == "ola mundo"
+            assert d[b"ola_mundo"] == "hello world"
+            assert d[b"key"] == "value"
+            assert d[b"_100"] == "one hundred"
+
     class Test_collection_frozen:
         def test_frozen_init(self):
             d = FrozenDict({"hello": "world"})
@@ -223,6 +231,14 @@ class Test_mapping:
             with pytest.raises(KeyError):
                 d.update({"ola": "mundo"})
 
+    class Test_collection_multi:
+        def test_multi_init(self):
+            d = MultiEntryDict({"hello": "world", "hello": "mundo"})
+            assert d["hello"] == "mundo"
+
+            d["hello"] = "globo"
+            assert d["hello"] == ["mundo", "globo"]
+
     class Test_collection_item:
         def test_item_init(self):
             d = ItemDict({"100": "one hundred"})
@@ -232,6 +248,9 @@ class Test_mapping:
             d = ItemDict()
             d[100] = "one hundred"
             assert d["100"] == d[b"100"] == d[100] == d[Item(100)]
+
+            d[200] = [1, 2, 3]
+            assert d["200"] == d[b"200"] == d[200] == d[Item(200)]
 
         def test_item_delitem(self):
             d = ItemDict()
