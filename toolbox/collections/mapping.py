@@ -70,7 +70,7 @@ class BidirectionalDict(BaseDict):
 
 
 class ObjectDict(BaseDict):
-    """Dictionary that can be accessed as though it was an object.
+    """Dictionary that can be accessed and set as though it was an object.
 
     Example:
 
@@ -82,10 +82,16 @@ class ObjectDict(BaseDict):
             print(d) # >>> <ObjectDict {'hello': 'world'}>
 
             print(d.hello) # >>> 'world'
+
+            d.hello = "mundo"
+            print(d.hello) # >>> 'mundo'
     """
 
     def __getattr__(self, key: Any) -> Any:
         return self.__getitem__(key)
+
+    def __setattr__(self, key: str, value: Any):
+        return self.__setitem__(key, value)
 
 
 class OverloadedDict(BaseDict):
@@ -140,8 +146,13 @@ class UnderscoreAccessDict(BaseDict):
     """
 
     def __getitem__(self, key: Any) -> Any:
-        utw = key.replace("_", " ")
-        wtu = key.replace("_", "")
+        if isinstance(key, bytes):
+            utw = key.replace(b"_", b" ")
+            wtu = key.replace(b"_", b"")
+        else:
+            utw = key.replace("_", " ")
+            wtu = key.replace("_", "")
+
         if utw in self:
             return super(UnderscoreAccessDict, self).__getitem__(utw)
         elif wtu in self:
@@ -192,7 +203,7 @@ class MultiEntryDict(BaseDict):
             if isinstance(self[key], list):
                 self[key].append(value)
             else:
-                self[key] = [self[key], value]
+                super().__setitem__(key, [self[key], value])
         else:
             super(MultiEntryDict, self).__setitem__(key, value)
 
@@ -215,12 +226,17 @@ class ItemDict(BaseDict):
 
     def __init__(self, dictionary: Optional[dict] = None, **kwargs):
         dictionary = dictionary or {}
-        super(ItemDict, self).__init__(
-            {
-                **{Item(k): Item(v) for k, v in dictionary.items()},
-                **{Item(k): Item(v) for k, v in kwargs.items()},
-            }
-        )
+        kwargs = kwargs or {}
+        dictionary = {**dictionary, **kwargs}
+
+        new = {}
+        for k, v in dictionary.items():
+            if isinstance(v, list):
+                new[Item(k)] = [Item(i) for i in v]
+            else:
+                new[Item(k)] = Item(v)
+
+        return super(ItemDict, self).__init__(new)
 
     def __getitem__(self, key: ItemType):
         return super(ItemDict, self).__getitem__(Item(key))
