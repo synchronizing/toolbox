@@ -1,0 +1,5 @@
+#######
+Content
+#######
+
+.. include:: contents.rst

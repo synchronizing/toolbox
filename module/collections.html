@@ -1,0 +1,773 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="config" href="config.html" /><link rel="prev" title="builtins" href="builtins.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>collections - 🧰 toolbox</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">🧰 toolbox</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">🧰 toolbox</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Content</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Packages</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="asyncio.html">asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="builtins.html">builtins</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experimental.html">experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functools.html">functools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdb.html">pdb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pkgutil.html">pkgutil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sockets.html">sockets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="string.html">string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="textwrap.html">textwrap</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="collections">
+<h1>collections<a class="headerlink" href="#collections" title="Link to this heading">#</a></h1>
+<section id="item">
+<h2>item<a class="headerlink" href="#item" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections</span> <span class="kn">import</span> <span class="n">item</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Item</span></span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item" title="Link to this definition">#</a></dt>
+<dd><dl class="simple">
+<dt>An interface for type-agnostic operations between <code class="docutils literal notranslate"><span class="pre">bytes</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>,</dt><dd><p><code class="docutils literal notranslate"><span class="pre">bool</span></code>, and <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+</dl>
+<p>Internally, the passed <code class="docutils literal notranslate"><span class="pre">item</span></code> object is stored as its <code class="docutils literal notranslate"><span class="pre">bytes</span></code>
+representation. Any operation or modification to the new <code class="docutils literal notranslate"><span class="pre">Item</span></code> instance is
+done to the internal <code class="docutils literal notranslate"><span class="pre">bytes</span></code> object. The true usefulness of this container is
+for type-agnostic operations such as equality checks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>item</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>, <a class="reference internal" href="#toolbox.collections.item.Item" title="toolbox.collections.item.Item"><code class="xref py py-class docutils literal notranslate"><span class="pre">Item</span></code></a>]) – Input to be stored.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.item</span> <span class="kn">import</span> <span class="n">Item</span>
+
+<span class="n">item</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="sa">b</span><span class="s2">&quot; world&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+    <span class="n">item</span> <span class="o">-=</span> <span class="s2">&quot; world&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
+<span class="c1"># &gt;&gt;&gt; b&#39;hello&#39; hello</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+<span class="c1"># &gt;&gt;&gt; Item(bytes=b&#39;hello&#39;, str=&#39;hello&#39;, int=None, bool=True, original_type=str)</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.raw">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">raw</span></span><a class="headerlink" href="#toolbox.collections.item.Item.raw" title="Link to this definition">#</a></dt>
+<dd><p>Bytes representation of the passed item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.string">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">string</span></span><a class="headerlink" href="#toolbox.collections.item.Item.string" title="Link to this definition">#</a></dt>
+<dd><p>String representation of the passed item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.integer">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">integer</span></span><a class="headerlink" href="#toolbox.collections.item.Item.integer" title="Link to this definition">#</a></dt>
+<dd><p>Integer representation of the passed item.</p>
+<p>If passed item is not a sub class of type int or str.isdigit() this property
+returns None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.boolean">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">boolean</span></span><a class="headerlink" href="#toolbox.collections.item.Item.boolean" title="Link to this definition">#</a></dt>
+<dd><p>Boolean representation of the passed item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.original">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">original</span></span><a class="headerlink" href="#toolbox.collections.item.Item.original" title="Link to this definition">#</a></dt>
+<dd><p>Original representation of the passed item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>, <a class="reference internal" href="#toolbox.collections.item.Item" title="toolbox.collections.item.Item"><code class="xref py py-class docutils literal notranslate"><span class="pre">Item</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>The following special operators are included:</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__pos__">
+<span class="sig-name descname"><span class="pre">__pos__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__pos__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__pos__" title="Link to this definition">#</a></dt>
+<dd><p>Returns the string representation of the object.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.item</span> <span class="kn">import</span> <span class="n">Item</span>
+
+<span class="n">item</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">+</span><span class="n">item</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="o">+</span><span class="n">item</span><span class="p">))</span> <span class="c1"># &gt;&gt;&gt; 100 &lt;class &#39;str&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__neg__">
+<span class="sig-name descname"><span class="pre">__neg__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__neg__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__neg__" title="Link to this definition">#</a></dt>
+<dd><p>Returns the integer representation of the object.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.item</span> <span class="kn">import</span> <span class="n">Item</span>
+
+<span class="n">item</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">-</span><span class="n">item</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="o">-</span><span class="n">item</span><span class="p">))</span> <span class="c1"># &gt;&gt;&gt; 100 &lt;class &#39;int&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>The following operations are also included:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__contains__">
+<span class="sig-name descname"><span class="pre">__contains__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__contains__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__contains__" title="Link to this definition">#</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sa">b</span><span class="s2">&quot;hello&quot;</span> <span class="ow">in</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__eq__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__eq__" title="Link to this definition">#</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Item</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="n">Item</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;100&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;100&#39;</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__add__">
+<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__add__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__add__" title="Link to this definition">#</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Item</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;helloworld&quot;</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__iadd__">
+<span class="sig-name descname"><span class="pre">__iadd__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__iadd__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__iadd__" title="Link to this definition">#</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">+=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">==</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;helloworld&quot;</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__sub__">
+<span class="sig-name descname"><span class="pre">__sub__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__sub__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__sub__" title="Link to this definition">#</a></dt>
+<dd><p>Uses <code class="docutils literal notranslate"><span class="pre">bytes.replace</span></code> to remove item.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Item</span><span class="p">(</span><span class="s2">&quot;helloworld&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__isub__">
+<span class="sig-name descname"><span class="pre">__isub__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__isub__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__isub__" title="Link to this definition">#</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;helloworld&quot;</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">-=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">==</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__iter__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__iter__" title="Link to this definition">#</a></dt>
+<dd><p>Returns string version of the item for iteration.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="c1"># &gt;&gt;&gt; h</span>
+<span class="c1"># &gt;&gt;&gt; e</span>
+<span class="c1"># &gt;&gt;&gt; ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__hash__">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__hash__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__hash__" title="Link to this definition">#</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">hash</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span> <span class="o">==</span> <span class="nb">hash</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;100&quot;</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__len__" title="Link to this definition">#</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="mi">11</span> <span class="c1"># &gt;&gt;&gt; True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__bool__">
+<span class="sig-name descname"><span class="pre">__bool__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__bool__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__bool__" title="Link to this definition">#</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">False</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="kc">False</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span> <span class="c1"># &gt;&gt;&gt; True</span>
+<span class="kc">True</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;hello&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span> <span class="c1"># &gt;&gt;&gt; True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__str__" title="Link to this definition">#</a></dt>
+<dd><p>Equivalent to the <a class="reference internal" href="#toolbox.collections.item.Item.string" title="toolbox.collections.item.Item.string"><code class="xref py py-attr docutils literal notranslate"><span class="pre">string</span></code></a> property.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.__repr__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.__repr__" title="Link to this definition">#</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">repr</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span> <span class="c1"># &gt;&gt;&gt; Item(bytes=b&#39;100&#39;, str=&#39;100&#39;, int=100, bool=True, original_type=int)</span>
+<span class="nb">repr</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span> <span class="c1"># &gt;&gt;&gt; Item(bytes=b&#39;1&#39;, str=&#39;1&#39;, int=1, bool=True, original_type=bool)</span>
+<span class="nb">repr</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">))</span> <span class="c1"># &gt;&gt;&gt; Item(bytes=b&#39;hello&#39;, str=&#39;hello&#39;, int=None, bool=True, original_type=str)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>The following functions are included:</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toolbox.collections.item.Item.replace">
+<span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/item.html#Item.replace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.item.Item.replace" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">bytes.replace()</span></code> functionality on item.</p>
+<p>See Python <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html?highlight=replace#bytes.replace">docs</a> for more info.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<hr class="docutils" />
+<section id="mapping">
+<h2>mapping<a class="headerlink" href="#mapping" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections</span> <span class="kn">import</span> <span class="n">mapping</span>
+</pre></div>
+</div>
+<p>Since the mappings below are children class to <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, they may all be initialized in three different ways:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">ObjectDict</span>
+
+<span class="n">ObjectDict</span><span class="p">(</span><span class="n">hello</span><span class="o">=</span><span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="n">ola</span><span class="o">=</span><span class="s2">&quot;mundo&quot;</span><span class="p">)</span>
+<span class="n">ObjectDict</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span><span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="s2">&quot;ola&quot;</span><span class="p">:</span> <span class="s2">&quot;mundo&quot;</span><span class="p">})</span>
+<span class="n">ObjectDict</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span><span class="s2">&quot;world&quot;</span><span class="p">},</span> <span class="n">ola</span><span class="o">=</span><span class="s2">&quot;mundo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that <code class="xref py py-class docutils literal notranslate"><span class="pre">*Dict</span></code> types below can be combined together (as mixins) to create unique dictionary types.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">ObjectDict</span><span class="p">,</span> <span class="n">UnderscoreAccessDict</span><span class="p">,</span> <span class="n">FrozenDict</span>
+
+<span class="k">class</span> <span class="nc">Dict</span><span class="p">(</span><span class="n">ObjectDict</span><span class="p">,</span> <span class="n">UnderscoreAccessDict</span><span class="p">,</span> <span class="n">FrozenDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Frozen dictionary that allows object access with underscore access. &quot;&quot;&quot;</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">({</span><span class="s2">&quot;hello world&quot;</span><span class="p">:</span> <span class="s2">&quot;ola mundo&quot;</span><span class="p">,</span> <span class="s2">&quot;100&quot;</span><span class="p">:</span> <span class="s2">&quot;one hundred&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>                <span class="c1"># &gt;&gt;&gt; &lt;Dict {&#39;hello world&#39;: &#39;ola mundo&#39;, &#39;100&#39;: &#39;one hundred&#39;}&gt;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">hello_world</span><span class="p">)</span>    <span class="c1"># &gt;&gt;&gt; ola mundo</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">_100</span><span class="p">)</span>           <span class="c1"># &gt;&gt;&gt; one hundred</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="toolbox.collections.mapping.BaseDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BaseDict</span></span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#BaseDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.mapping.BaseDict" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary with pretty <code class="xref py py-func docutils literal notranslate"><span class="pre">__repr__()</span></code> output.</p>
+<p>Base class that all other dictionaries in this file inherit from. <code class="xref py py-func docutils literal notranslate"><span class="pre">__repr__()</span></code> is
+replaced with <code class="docutils literal notranslate"><span class="pre">&lt;{class_name}</span> <span class="pre">{dictionary</span> <span class="pre">data}&gt;</span></code> output style for implicit inferences.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">BaseDict</span>
+
+<span class="k">class</span> <span class="nc">NewDict</span><span class="p">(</span><span class="n">BaseDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;New dictionary example.&#39;&#39;&#39;</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">NewDict</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;NewDict {&#39;hello&#39;: &#39;world&#39;}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toolbox.collections.mapping.BidirectionalDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BidirectionalDict</span></span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#BidirectionalDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.mapping.BidirectionalDict" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary with two-way capabilities.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">BidirectionalDict</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">BidirectionalDict</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;BidirectionalDict {&#39;hello&#39;: &#39;world&#39;, &#39;world&#39;: &#39;hello&#39;}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toolbox.collections.mapping.ObjectDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ObjectDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BaseDict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#ObjectDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.mapping.ObjectDict" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary that can be accessed and set as though it was an object.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">ObjectDict</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">ObjectDict</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;ObjectDict {&#39;hello&#39;: &#39;world&#39;}&gt;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">hello</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &#39;world&#39;</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">hello</span> <span class="o">=</span> <span class="s2">&quot;mundo&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">hello</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &#39;mundo&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toolbox.collections.mapping.OverloadedDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OverloadedDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BaseDict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#OverloadedDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.mapping.OverloadedDict" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary that can be added or subtracted.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">OverloadedDict</span>
+
+<span class="n">d1</span> <span class="o">=</span> <span class="n">OverloadedDict</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ola&quot;</span><span class="p">:</span> <span class="s2">&quot;mundo&quot;</span><span class="p">}</span>
+
+<span class="n">d1</span> <span class="o">+=</span> <span class="n">d2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;OverloadedDict {&#39;hello&#39;: &#39;world&#39;, &#39;ola&#39;: &#39;mundo&#39;}&gt;</span>
+
+<span class="n">d1</span> <span class="o">-=</span> <span class="n">d2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;OverloadedDict {&#39;hello&#39;: &#39;world&#39;}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toolbox.collections.mapping.UnderscoreAccessDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">UnderscoreAccessDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BaseDict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#UnderscoreAccessDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.mapping.UnderscoreAccessDict" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary that doesn’t distinct keys with empty spaces and underscores.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">UnderscoreAccessDict</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">UnderscoreAccessDict</span><span class="p">({</span><span class="s2">&quot;hello world&quot;</span><span class="p">:</span> <span class="s2">&quot;ola mundo&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;UnderscoreAccessDict {&#39;hello world&#39;: &#39;ola mundo&#39;}&gt;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;hello_world&#39;</span><span class="p">])</span> <span class="c1"># &gt;&gt;&gt; &#39;ola mundo&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toolbox.collections.mapping.FrozenDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FrozenDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BaseDict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#FrozenDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.mapping.FrozenDict" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary that is frozen.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">FrozenDict</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">FrozenDict</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;FrozenDict {&#39;hello&#39;: &#39;world&#39;}&gt;</span>
+
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;ola&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mundo&#39;</span>
+<span class="c1"># &gt;&gt;&gt; KeyError: &#39;Cannot set key and value because this is a frozen dictionary.&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toolbox.collections.mapping.MultiEntryDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultiEntryDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BaseDict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#MultiEntryDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.mapping.MultiEntryDict" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary that can have multiple entries for the same key.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">MultiEntryDict</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">MultiEntryDict</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;mundo&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;MultiEntryDict {&#39;hello&#39;: [&#39;world&#39;, &#39;mundo&#39;]}&gt;</span>
+
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;globo&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; &lt;MultiEntryDict {&#39;hello&#39;: [&#39;world&#39;, &#39;mundo&#39;, &#39;globo&#39;]}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toolbox.collections.mapping.ItemDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ItemDict</span></span><a class="reference internal" href="../_modules/toolbox/collections/mapping.html#ItemDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.mapping.ItemDict" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary composed of <a class="reference internal" href="#toolbox.collections.item.Item" title="toolbox.collections.item.Item"><code class="xref py py-class docutils literal notranslate"><span class="pre">toolbox.collections.item.Item</span></code></a> key and values.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.mapping</span> <span class="kn">import</span> <span class="n">ItemDict</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">ItemDict</span><span class="p">({</span><span class="s2">&quot;100&quot;</span><span class="p">:</span> <span class="s2">&quot;one hundred&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="c1"># &gt;&gt;&gt; &lt;ItemDict {100: one hundred}&gt;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;100&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">d</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">==</span> <span class="n">d</span><span class="p">[</span><span class="sa">b</span><span class="s2">&quot;100&quot;</span><span class="p">])</span> <span class="c1"># &gt;&gt;&gt; True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<hr class="docutils" />
+<section id="namedtuple">
+<h2>namedtuple<a class="headerlink" href="#namedtuple" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+</pre></div>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="toolbox.collections.namedtuple.nestednamedtuple">
+<span class="sig-name descname"><span class="pre">nestednamedtuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/toolbox/collections/namedtuple.html#nestednamedtuple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.namedtuple.nestednamedtuple" title="Link to this definition">#</a></dt>
+<dd><p>Converts dictionary to a nested namedtuple recursively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dictionary</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary to convert into a nested namedtuple.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.namedtuple</span> <span class="kn">import</span> <span class="n">nestednamedtuple</span>
+
+<span class="n">nt</span> <span class="o">=</span> <span class="n">nestednamedtuple</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;ola&quot;</span><span class="p">:</span> <span class="s2">&quot;mundo&quot;</span><span class="p">}})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span> <span class="c1"># &gt;&gt;&gt; namedtupled(hello=namedtupled(ola=&#39;mundo&#39;))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">namedtuple</span></code></p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="toolbox.collections.namedtuple.fdict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fdict</span></span><a class="reference internal" href="../_modules/toolbox/collections/namedtuple.html#fdict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toolbox.collections.namedtuple.fdict" title="Link to this definition">#</a></dt>
+<dd><p>Forced dictionary. Prevents dictionary from becoming a nested namedtuple.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolbox.collections.namedtuple</span> <span class="kn">import</span> <span class="n">nestednamedtuple</span><span class="p">,</span> <span class="n">fdict</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">}</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="n">nestednamedtuple</span><span class="p">({</span><span class="s2">&quot;forced&quot;</span><span class="p">:</span> <span class="n">fdict</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="s2">&quot;notforced&quot;</span><span class="p">:</span> <span class="n">d</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nt</span><span class="o">.</span><span class="n">notforced</span><span class="p">)</span>    <span class="c1"># &gt;&gt;&gt; namedtupled(hello=&#39;world&#39;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nt</span><span class="o">.</span><span class="n">forced</span><span class="p">)</span>       <span class="c1"># &gt;&gt;&gt; {&#39;hello&#39;: &#39;world&#39;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="config.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">config</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="builtins.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">builtins</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2021, Felipe Faria
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">collections</a><ul>
+<li><a class="reference internal" href="#item">item</a><ul>
+<li><a class="reference internal" href="#toolbox.collections.item.Item"><code class="docutils literal notranslate"><span class="pre">Item</span></code></a><ul>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.raw"><code class="docutils literal notranslate"><span class="pre">Item.raw</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.string"><code class="docutils literal notranslate"><span class="pre">Item.string</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.integer"><code class="docutils literal notranslate"><span class="pre">Item.integer</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.boolean"><code class="docutils literal notranslate"><span class="pre">Item.boolean</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.original"><code class="docutils literal notranslate"><span class="pre">Item.original</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__pos__"><code class="docutils literal notranslate"><span class="pre">Item.__pos__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__neg__"><code class="docutils literal notranslate"><span class="pre">Item.__neg__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__contains__"><code class="docutils literal notranslate"><span class="pre">Item.__contains__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__eq__"><code class="docutils literal notranslate"><span class="pre">Item.__eq__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__add__"><code class="docutils literal notranslate"><span class="pre">Item.__add__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__iadd__"><code class="docutils literal notranslate"><span class="pre">Item.__iadd__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__sub__"><code class="docutils literal notranslate"><span class="pre">Item.__sub__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__isub__"><code class="docutils literal notranslate"><span class="pre">Item.__isub__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__iter__"><code class="docutils literal notranslate"><span class="pre">Item.__iter__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__hash__"><code class="docutils literal notranslate"><span class="pre">Item.__hash__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__len__"><code class="docutils literal notranslate"><span class="pre">Item.__len__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__bool__"><code class="docutils literal notranslate"><span class="pre">Item.__bool__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__str__"><code class="docutils literal notranslate"><span class="pre">Item.__str__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.__repr__"><code class="docutils literal notranslate"><span class="pre">Item.__repr__()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.item.Item.replace"><code class="docutils literal notranslate"><span class="pre">Item.replace()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mapping">mapping</a><ul>
+<li><a class="reference internal" href="#toolbox.collections.mapping.BaseDict"><code class="docutils literal notranslate"><span class="pre">BaseDict</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.mapping.BidirectionalDict"><code class="docutils literal notranslate"><span class="pre">BidirectionalDict</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.mapping.ObjectDict"><code class="docutils literal notranslate"><span class="pre">ObjectDict</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.mapping.OverloadedDict"><code class="docutils literal notranslate"><span class="pre">OverloadedDict</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.mapping.UnderscoreAccessDict"><code class="docutils literal notranslate"><span class="pre">UnderscoreAccessDict</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.mapping.FrozenDict"><code class="docutils literal notranslate"><span class="pre">FrozenDict</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.mapping.MultiEntryDict"><code class="docutils literal notranslate"><span class="pre">MultiEntryDict</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.mapping.ItemDict"><code class="docutils literal notranslate"><span class="pre">ItemDict</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#namedtuple">namedtuple</a><ul>
+<li><a class="reference internal" href="#toolbox.collections.namedtuple.nestednamedtuple"><code class="docutils literal notranslate"><span class="pre">nestednamedtuple()</span></code></a></li>
+<li><a class="reference internal" href="#toolbox.collections.namedtuple.fdict"><code class="docutils literal notranslate"><span class="pre">fdict</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>
