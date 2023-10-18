@@ -2,11 +2,15 @@
 
 <p align="center">
 
+  <a href="https://www.pepy.tech/projects/toolbox">
+    <img src="https://static.pepy.tech/badge/toolbox">
+  </a>
+
   <a href="https://github.com/synchronizing/toolbox/actions?query=workflow%3ABuild">
     <img src="https://github.com/synchronizing/toolbox/workflows/Build/badge.svg?branch=master&event=push">
   </a>
 
-<a href="https://synchronizing.github.io/toolbox/">
+  <a href="https://synchronizing.github.io/toolbox/">
     <img src="https://github.com/synchronizing/toolbox/workflows/Docs/badge.svg?branch=master&event=push">
   </a>
 
